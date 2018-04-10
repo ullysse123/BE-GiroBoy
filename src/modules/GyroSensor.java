@@ -7,8 +7,6 @@ import lejos.robotics.SampleProvider;
 public class GyroSensor {
 	
 	EV3GyroSensor sensor;
-	SampleProvider sample;
-	float [] res = new float [sample.sampleSize()];
 	
 	public GyroSensor(){
 		sensor = new EV3GyroSensor(SensorPort.S2);
