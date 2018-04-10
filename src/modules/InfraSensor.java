@@ -13,11 +13,15 @@ public class InfraSensor {
 		
 	}
 	
-	float getColor(){
+	public float getColor(){
 		SampleProvider sample = sensor.getColorIDMode();
 		float [] res = new float [sample.sampleSize()];
 		sample.fetchSample(res, 0);
 		return res[0];
+	}
+	
+	public void close() {
+		sensor.close();
 	}
 	
 }

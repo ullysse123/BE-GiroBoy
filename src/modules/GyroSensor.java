@@ -13,18 +13,22 @@ public class GyroSensor {
 		sensor.reset();
 	}
 	
-	float getAngle(){
+	public float getAngle(){
 		SampleProvider sample= sensor.getAngleMode();
 		float [] res = new float [sample.sampleSize()];
 		sample.fetchSample(res, 0);
 		return res[0];
 	}
 	
-	float getAngularSpeed(){
+	public float getAngularSpeed(){
 		SampleProvider sample= sensor.getRateMode();
 		float [] res = new float [sample.sampleSize()];
 		sample.fetchSample(res,0);
 		return res[0];
+	}
+	
+	public void close() {
+		sensor.close();
 	}
 	
 }
