@@ -45,6 +45,10 @@ public class LegMotor {
 		motor.rotate(angle,true);
 	}
 	
+	public int getRotationSpeed() {
+		return motor.getRotationSpeed();
+	}
+	
 	public void stop() {
 		motor.setSpeed(0);
 	}
