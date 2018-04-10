@@ -21,6 +21,10 @@ public class UnregulatedLegMotor {
 		return motor.getPower();
 	}
 	
+	public int getTacho() {
+		return motor.getTachoCount();
+	}
+	
 	public void reset() {
 		motor.resetTachoCount();
 	}
