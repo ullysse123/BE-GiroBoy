@@ -74,6 +74,9 @@ public class Equilibre {
 			angleMoteur = angleMoteur-vitesse;
 			
 			//Mise a jour de la puissance
+			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (18 * angle);
+			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (17 * angle);
+			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (15 * angle);
 			puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (18 * angle);
 			if (puissance > 100){
 				puissance = 100;
@@ -89,6 +92,7 @@ public class Equilibre {
 			}
 			
 			//Mise a jour des compteurs
+			//Delay.msDelay(10);
 			Delay.msDelay(10);
 			compteur = compteur + 1;
 			if (compteur == 10 ){
