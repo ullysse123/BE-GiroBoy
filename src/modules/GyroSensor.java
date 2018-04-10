@@ -9,7 +9,7 @@ public class GyroSensor {
 	EV3GyroSensor sensor;
 	
 	public GyroSensor(){
-		sensor = new EV3GyroSensor(SensorPort.S2);
+		sensor = new EV3GyroSensor(SensorPort.S3);
 		sensor.reset();
 	}
 	
