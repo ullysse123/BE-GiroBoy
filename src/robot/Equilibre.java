@@ -31,8 +31,8 @@ public class Equilibre {
 		double deriveMoteur2 = 0;
 		double deriveMoteur3 = 0;
 		//Variable temporelles
-		double chrono = 0;
-		double dernierChrono = 0;
+		long chrono = 0;
+		long dernierChrono = 0;
 		double delta = 0;
 		double compteur = 0;
 		//Booleen autorisant la maj des moteur
