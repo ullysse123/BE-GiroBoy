@@ -8,7 +8,7 @@ import lejos.utility.Delay;
 public class Equilibre {
 
 	//Vitesse et direction ( sera utilisé plus tard )
-	static double vitesse = 0; //[-100;100]
+	static double vitesse = 10; //[-100;100]//5,10
 	static double direction = 0; //[-50;50]
 	//Modules utilisées pour maintenir le robot en equilibre
 	static GyroSensor gyro;
@@ -45,7 +45,8 @@ public class Equilibre {
 		gauche.reset();
 		gyro =  new GyroSensor();
 		dernierChrono = System.nanoTime();
-		angle = -0.25;
+		//0.5,0.65
+		angle = -0.65;
 		
 		//Signal sonor indiquant que les données sont initialisées
 		Sound.beepSequenceUp();
@@ -77,7 +78,9 @@ public class Equilibre {
 			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (18 * angle);
 			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (17 * angle);
 			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (15 * angle);
-			puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (18 * angle);
+			puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.85 * vitesseAngulaire) + (20
+					* angle);
+			/*0.6 vitesse moteur// 25;23;21;20;16;19;  angle//0.7;0.9 vitesseAngulaire// 0.11 angleMoteur*/
 			if (puissance > 100){
 				puissance = 100;
 			}
@@ -89,10 +92,12 @@ public class Equilibre {
 			if(pret){
 				droite.setPower((int)(puissance-direction));
 				gauche.setPower((int)(puissance+direction));
+				//Mise a jour des données sur l'angle du robot
+				vitesseAngulaire = -gyro.getAngularSpeed();
+				angle = angle + (vitesseAngulaire*delta);
 			}
 			
 			//Mise a jour des compteurs
-			//Delay.msDelay(10);
 			Delay.msDelay(10);
 			compteur = compteur + 1;
 			if (compteur == 10 ){
