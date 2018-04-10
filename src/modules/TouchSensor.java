@@ -9,7 +9,7 @@ public class TouchSensor {
 	EV3TouchSensor sensor;
 	
 	public TouchSensor(){
-		sensor = new EV3TouchSensor(SensorPort.S3);
+		sensor = new EV3TouchSensor(SensorPort.S2);
 	}
 	
 	
