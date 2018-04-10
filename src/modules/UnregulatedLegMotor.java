@@ -28,4 +28,8 @@ public class UnregulatedLegMotor {
 	public void reset() {
 		motor.resetTachoCount();
 	}
+	
+	public void close(){
+		motor.close();
+	}
 }
