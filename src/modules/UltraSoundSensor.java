@@ -9,7 +9,7 @@ public class UltraSoundSensor {
 	EV3UltrasonicSensor sensor;
 	
 	public UltraSoundSensor(){
-		sensor = new EV3UltrasonicSensor(SensorPort.S3);
+		sensor = new EV3UltrasonicSensor(SensorPort.S2);
 	}
 	
 }
