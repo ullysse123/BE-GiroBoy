@@ -6,7 +6,7 @@ import lejos.hardware.Sound;
 //import lejos.robotics.SampleProvider;
 import lejos.utility.Delay;
 
-public class Equilibre {
+public class Equilibre extends Thread{
 
 	//Vitesse et direction ( sera utilisé plus tard )
 	static double vitesse = 0; //[-100;100]//5,10
@@ -18,7 +18,19 @@ public class Equilibre {
 	static UnregulatedLegMotor gauche = new UnregulatedLegMotor(1);
 	static UnregulatedLegMotor droite = new UnregulatedLegMotor(0);
 	
-	public static void main(String[] args) {
+	public void setAngleLimite(int angle){
+		Equilibre.angleLimite = angle;
+	}
+	
+	public void setVitesse(int x){
+		Equilibre.vitesse = x;
+	}
+	
+	public void setDirection (int x){
+		Equilibre.direction = x;
+	}
+	
+	public void run() {
 		
 		//Ensemble des variables utilisées
 		//Variables des angles
@@ -57,6 +69,9 @@ public class Equilibre {
 		
 		//Signal sonore indiquant que les données sont initialisées
 		Sound.beepSequenceUp();
+		
+		//On donne la priorité maximum a ce thread ( systeme vitale a notre fonctionnement )
+		Thread.currentThread().setPriority(MAX_PRIORITY);
 		
 		//Debut de notre boucle de maintien de l'equilibre
 		while(!Button.ESCAPE.isDown() && gyro.getAngle()<angleLimite && gyro.getAngle()>-angleLimite){
@@ -147,4 +162,15 @@ public class Equilibre {
 		
 	}
 
+	
+	static void main(String[] args){
+		
+		Equilibre test = new Equilibre();
+		test.start();
+		test.setVitesse(10);
+		Delay.msDelay(5);
+		test.setDirection(5);
+		
+	}
+	
 }
