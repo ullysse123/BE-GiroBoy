@@ -164,7 +164,7 @@ public class Equilibre extends Thread{
 	}
 
 	
-	static void main(String[] args){
+	public static void main(String[] args){
 		
 		Equilibre test = new Equilibre();
 		test.start();
