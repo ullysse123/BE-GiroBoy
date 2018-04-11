@@ -168,7 +168,7 @@ public class Equilibre extends Thread{
 		
 		Equilibre test = new Equilibre();
 		test.start();
-		test.setVitesse(10);
+		test.setVitesse(5);
 		Delay.msDelay(5);
 		test.setDirection(5);
 		
