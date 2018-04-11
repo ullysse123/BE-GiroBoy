@@ -167,10 +167,38 @@ public class Equilibre extends Thread{
 	public static void main(String[] args){
 		
 		Equilibre test = new Equilibre();
+		//test.start();
+		//test.setVitesse(5);
+		//Delay.msDelay(5);
+		//test.setDirection(5);
+		
+		//Programmation d'un parcours de test pour le programme
 		test.start();
-		test.setVitesse(5);
 		Delay.msDelay(5);
+		System.out.println("ETAPE 1 : Vitesse = 3\n");
+		test.setVitesse(3);
+		Delay.msDelay(2000);
+		System.out.println("ETAPE 2 : Virage = 5\n");
 		test.setDirection(5);
+		Delay.msDelay(5000);
+		System.out.println("ETAPE 3 : Vitesse = 5\n");
+		test.setVitesse(5);
+		Delay.msDelay(3000);
+		System.out.println("ETAPE 4 : Virage = -10\n");
+		test.setDirection(-10);
+		Delay.msDelay(5000);
+		System.out.println("ETAPE 5 : Vitesse = 0");
+		test.setVitesse(0);
+		Delay.msDelay(2000);
+		System.out.println("ETAPE 6 : Virage = 3");
+		test.setDirection(3);
+		Delay.msDelay(2000);
+		System.out.println("ETAPE 7 : Vitesse = -5");
+		test.setVitesse(-5);
+		Delay.msDelay(200);
+		System.out.println("FIN EXECUTION");
+		
+		
 		
 	}
 	
