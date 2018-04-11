@@ -82,22 +82,40 @@ public class Equilibre {
 			deriveMoteur1 = deriveMoteur;
 			angleMoteur = angleMoteur-vitesse;
 			
-			//Mise a jour de la puissance
-			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (18 * angle);
-			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (17 * angle);
+			//Mise a jour de la puissance(avec test)
 			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (15 * angle);
+			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (16 * angle);
+			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (17 * angle);
+			//puissance = (0.06 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (18 * angle);
 			//puissance = (0.08 * vitesseMoteur) + (0.11 * angleMoteur) + (0.8 * vitesseAngulaire) + (18 * angle);
 			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.7 * vitesseAngulaire) + (18 * angle);
+			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (18 * angle);//reference base
 			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.9 * vitesseAngulaire) + (18 * angle);
-			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (25 * angle);
-			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (23 * angle);
-			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (21 * angle);
-			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (20 * angle);
-			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (16 * angle);
 			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (19 * angle);
-			//puissance = (0.06 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (18 * angle);
-			puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (15
-					* angle);//<
+			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (20 * angle);
+			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (21 * angle);
+			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (23 * angle);
+			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (25 * angle);
+			
+			
+			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (15 * angle);
+			//puissance = (0.09 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (15 * angle);//<
+			//puissance = (0.1 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (15 * angle);
+			//puissance = (0.07 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (15 * angle);
+			//puissance = (0.06 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (15 * angle);
+			//puissance = (0.08 * vitesseMoteur) + (0.11 * angleMoteur) + (0.8 * vitesseAngulaire) + (15 * angle);//<
+			//puissance = (0.08 * vitesseMoteur) + (0.1 * angleMoteur) + (0.8 * vitesseAngulaire) + (15 * angle);
+			//puissance = (0.08 * vitesseMoteur) + (0.13 * angleMoteur) + (0.8 * vitesseAngulaire) + (15 * angle);
+			//puissance = (0.08 * vitesseMoteur) + (0.14 * angleMoteur) + (0.8 * vitesseAngulaire) + (15 * angle);
+			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.75 * vitesseAngulaire) + (15 * angle);//<
+			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.7 * vitesseAngulaire) + (15 * angle);
+			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.85 * vitesseAngulaire) + (15 * angle);
+			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.9 * vitesseAngulaire) + (15 * angle);
+			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (15.5 * angle);
+			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (16 * angle);//<
+			//puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (14.5 * angle);
+			puissance = (0.08 * vitesseMoteur) + (0.12 * angleMoteur) + (0.8 * vitesseAngulaire) + (14 * angle);
+			
 			if (puissance > 100){
 				puissance = 100;
 			}
