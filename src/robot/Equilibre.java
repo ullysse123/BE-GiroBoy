@@ -74,7 +74,7 @@ public class Equilibre extends Thread{
 		Thread.currentThread().setPriority(MAX_PRIORITY);
 		
 		//Debut de notre boucle de maintien de l'equilibre
-		while(!Button.ESCAPE.isDown() && gyro.getAngle()<angleLimite && gyro.getAngle()>-angleLimite){
+		while(!Button.ESCAPE.isDown()) {// gyro.getAngle()<angleLimite && gyro.getAngle()>-angleLimite){
 			
 			//Mise a jour de nos infos temporelles
 			chrono = System.nanoTime();
@@ -167,13 +167,13 @@ public class Equilibre extends Thread{
 	public static void main(String[] args){
 		
 		Equilibre test = new Equilibre();
-		//test.start();
-		//test.setVitesse(5);
-		//Delay.msDelay(5);
-		//test.setDirection(5);
+		test.start();
+		test.setVitesse(5);
+		Delay.msDelay(5);
+		test.setDirection(5);
 		
 		//Programmation d'un parcours de test pour le programme
-		test.start();
+		/*test.start();
 		Delay.msDelay(5);
 		System.out.println("ETAPE 1 : Vitesse = 3\n");
 		test.setVitesse(3);
@@ -197,7 +197,7 @@ public class Equilibre extends Thread{
 		test.setVitesse(-5);
 		Delay.msDelay(200);
 		System.out.println("FIN EXECUTION");
-		
+		*/
 		
 		
 	}
