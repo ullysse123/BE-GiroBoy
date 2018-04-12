@@ -28,4 +28,8 @@ public class LightSensor {
 	public void allumerLedReflexion(boolean onOff){
 		sensor.setFloodlight(onOff);
 	}
+	
+	public void close() {
+		sensor.close();
+	}
 }
