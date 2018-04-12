@@ -2,6 +2,7 @@ package robot;
 
 import modules.*;
 import lejos.hardware.Button;
+import lejos.hardware.Sound;
 //import lejos.robotics.SampleProvider;
 import lejos.utility.Delay;
 
@@ -30,10 +31,6 @@ public class Equilibre extends Thread{
 	}
 	
 	public void run() {
-		
-		//Thread gerant les sons en parallèle 
-		Sons son = new Sons();
-		son.start();
 		
 		//Ensemble des variables utilisées
 		//Variables des angles
@@ -71,7 +68,7 @@ public class Equilibre extends Thread{
 		
 		
 		//Signal sonore indiquant que les données sont initialisées
-		son.banzai();
+		Sound.beepSequenceUp();
 		
 		//On donne la priorité maximum a ce thread ( systeme vitale a notre fonctionnement )
 		Thread.currentThread().setPriority(MAX_PRIORITY);
@@ -158,10 +155,6 @@ public class Equilibre extends Thread{
 				pret = true;
 			}
 			
-			//Ajout d'un son signalant que notre angle est superieur a 45° ou inferieur a 45°
-			if (angle > 45 || angle < -45){
-				son.laboulette();
-			}
 		}
 		
 		//On libere les ressources
