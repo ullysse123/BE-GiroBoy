@@ -12,7 +12,15 @@ public class Robot {
 	static int vitesse = 5;
 	static int ralenti = 2;
 	static int nul = 0;
+	//static float minColor = 0.075f;
+	//static float minColor = 0.080f;
+	//static float minColor = 0.090f;
+	//static float minColor = 0.095f;
 	static float minColor = 0.085f;
+	//static float minLight = 0.35f;
+	//static float minLight = 0.30f;
+	//static float minLight = 0.45f;
+	//static float minLight = 0.50f;
 	static float minLight = 0.4f;
 	
 
@@ -56,14 +64,14 @@ public class Robot {
 			
 			Delay.msDelay(100);
 		}
+		colorSensor.close();
+		lightSensor.close();
 	}
 	
 	public static void main(String[] args) {
 		Equilibre eq=new Equilibre();
 		eq.run();
 		lignFollowerRun(eq);
-		colorSensor.close();
-		lightSensor.close();
 	}
 
 }
