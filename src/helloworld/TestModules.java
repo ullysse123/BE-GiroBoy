@@ -43,7 +43,7 @@ public class TestModules {
 	public static void main(String[] args) {
 		LegMotor moteur0=new LegMotor(0);
 		LegMotor moteur1=new LegMotor(1);
-		InfraSensor infra= new InfraSensor();
+		ColorSensor infra= new ColorSensor();
 		GyroSensor gyro=new GyroSensor();
 		int number=0;
 		while(!Button.ESCAPE.isDown()) {
