@@ -12,12 +12,12 @@ public class Robot2 {
 	static LightSensor light;
 	
 	public static boolean lightSurLigne(){
-		float seuil = 0.05f;
+		float seuil = 0.4f;
 		return seuil<light.getModeRouge();
 	}
 	
 	public static boolean colorSurLigne(){
-		float seuil = 0.385f;
+		float seuil = 0.0385f;
 		return seuil<color.getRedMode();
 	}
 	
@@ -61,19 +61,26 @@ public class Robot2 {
 				
 				case 0: //Case ou aucun des capteur ne capte la ligne on avance
 						//Remise a 0 des compteur et de la direction
+						System.out.println("0");
 						nbPassageVirageDroite = 0;
 						nbPassageVirageGauche = 0;
 						direction = 0;
+						//Vitesse fixé a 4 au depart
+						if(nbPassageLigneDroite == 0) {
+							vitesse = 4;
+						}
 						//Vitesse incrémentale pour augmenter la fluidité du déplacement
 						nbPassageLigneDroite++;
 						if(nbPassageLigneDroite<=7){
 							vitesse++;
 						}
 						eq.setVitesse(vitesse);
-						eq.setDirection(direction);;
+						Delay.msDelay(15);
+						eq.setDirection(direction);
 						break;
 				case 1: //Cas ou seul le capteur gauche capte la ligne
 						//Remise a 0 des compteur
+						System.out.println("1");
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
 						//Vitesse fixé a 4 pour les virages et direction a 3
@@ -93,6 +100,7 @@ public class Robot2 {
 						
 				case 2: //Cas ou seul le capteur droite capte la ligne 
 						//Remise a 0 des compteur
+						System.out.println("2");
 						nbPassageVirageGauche = 0;
 						nbPassageLigneDroite = 0;
 						//Vitesse fixé a 4 pour les virage et direction a 3
@@ -111,6 +119,7 @@ public class Robot2 {
 						break;
 						
 				case 3: //Cas ou es deux capteur captent la ligne on s'arrette
+						System.out.println("3");	
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
 						nbPassageVirageGauche = 0;
@@ -122,6 +131,7 @@ public class Robot2 {
 						break;
 						
 				default : //Ne sortira jamais de [0;3] mais si c'est le cas alors stop vitesse/direction et beep sonore
+						System.out.println("Others");
 						  eq.setVitesse(0);
 						  Delay.msDelay(15);
 						  eq.setDirection(0);
@@ -130,13 +140,11 @@ public class Robot2 {
 						  Sound.beepSequenceUp();
 						  Delay.msDelay(50);
 						  Sound.beepSequenceUp();
-						  Delay.msDelay(50);
-						break; 
-			
+						  Delay.msDelay(50); 
 			}
 			
 			//Frequence d'échantillonage fixé pour les capteurs
-			Delay.msDelay(100);
+			Delay.msDelay(75);
 		}
 		
 	}
