@@ -53,7 +53,7 @@ public class Robot2 {
 		
 		//Lancement de l'équilibre avec une vitesse initiale pour démarrer le circuit
 		eq.start();
-		eq.setVitesse(5);
+		eq.setVitesse(3);
 		
 		while(!Button.ESCAPE.isDown()){
 			
@@ -124,7 +124,7 @@ public class Robot2 {
 						nbPassageVirageDroite = 0;
 						nbPassageVirageGauche = 0;
 						vitesse = 0;
-						direction = 0;
+						direction = 3;
 						eq.setVitesse(vitesse);
 						Delay.msDelay(15);
 						eq.setDirection(direction);
