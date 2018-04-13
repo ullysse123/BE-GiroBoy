@@ -4,3 +4,6 @@ Jour 2 : Implementation de l'algorithme PID, installation des plugins/firmware n
 
 Jour 3 : Test et calibrage des coefficients PID. Le robot tiens debout !
 
+Jour 4 : Premier tentative d'algorithme suiveur de ligne
+
+Jour 5 : Test de nouveau algorithmes suiveur de ligne + calibrage 
