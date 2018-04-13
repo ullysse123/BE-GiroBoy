@@ -39,7 +39,7 @@ public class Robot {
 	
 	public static void lignFollowerRun(Equilibre eq) {
 		int result;
-		eq.setVitesse(ralenti);
+		eq.setVitesse(vitesse);
 		while(!Button.ESCAPE.isDown()) {
 			result=lignFollower();
 			switch(result) {

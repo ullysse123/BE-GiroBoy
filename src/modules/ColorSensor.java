@@ -13,6 +13,13 @@ public class ColorSensor {
 		
 	}
 	
+	public float getRedMode(){
+		SampleProvider sample = sensor.getRedMode();
+		float [] res = new float [sample.sampleSize()];
+		sample.fetchSample(res, 0);
+		return res[0];
+	}
+	
 	public float getColor(){
 		SampleProvider sample = sensor.getColorIDMode();
 		float [] res = new float [sample.sampleSize()];
