@@ -86,7 +86,7 @@ public class Robot2 {
 						//Vitesse fixé a 4 pour les virages et direction a 3
 						vitesse = 3;
 						if(nbPassageVirageGauche == 0){
-							direction = 2;
+							direction = 3;
 						}
 						//Augmentation incrémentale de la direction
 						nbPassageVirageGauche++;
@@ -106,7 +106,7 @@ public class Robot2 {
 						//Vitesse fixé a 4 pour les virage et direction a 3
 						vitesse = 3;
 						if(nbPassageVirageDroite == 0){
-							direction = 2;
+							direction = 3;
 						}
 						//Augmentation incrémentale de la direction
 						nbPassageVirageDroite++;
@@ -128,6 +128,7 @@ public class Robot2 {
 						eq.setVitesse(vitesse);
 						Delay.msDelay(15);
 						eq.setDirection(direction);
+						Sound.buzz();
 						break;
 						
 				default : //Ne sortira jamais de [0;3] mais si c'est le cas alors stop vitesse/direction et beep sonore
