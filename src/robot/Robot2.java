@@ -61,17 +61,17 @@ public class Robot2 {
 				
 				case 0: //Case ou aucun des capteur ne capte la ligne on avance
 						//Remise a 0 des compteur et de la direction
-						System.out.println("0");
+						System.out.println("Entre les lignes");
 						nbPassageVirageDroite = 0;
 						nbPassageVirageGauche = 0;
 						direction = 0;
 						//Vitesse fixé a 4 au depart
 						if(nbPassageLigneDroite == 0) {
-							vitesse = 4;
+							vitesse = 3;
 						}
 						//Vitesse incrémentale pour augmenter la fluidité du déplacement
 						nbPassageLigneDroite++;
-						if(nbPassageLigneDroite<=7){
+						if(nbPassageLigneDroite<=5){
 							vitesse++;
 						}
 						eq.setVitesse(vitesse);
@@ -80,17 +80,17 @@ public class Robot2 {
 						break;
 				case 1: //Cas ou seul le capteur gauche capte la ligne
 						//Remise a 0 des compteur
-						System.out.println("1");
+						System.out.println("Gauche sur la ligne");
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
 						//Vitesse fixé a 4 pour les virages et direction a 3
-						vitesse = 4;
+						vitesse = 3;
 						if(nbPassageVirageGauche == 0){
-							direction = 3;
+							direction = 2;
 						}
 						//Augmentation incrémentale de la direction
 						nbPassageVirageGauche++;
-						if(nbPassageVirageGauche<=7){
+						if(nbPassageVirageGauche<=5){
 							direction++;
 						}
 						eq.setVitesse(vitesse);
@@ -100,17 +100,17 @@ public class Robot2 {
 						
 				case 2: //Cas ou seul le capteur droite capte la ligne 
 						//Remise a 0 des compteur
-						System.out.println("2");
+						System.out.println("Droit sur la ligne");
 						nbPassageVirageGauche = 0;
 						nbPassageLigneDroite = 0;
 						//Vitesse fixé a 4 pour les virage et direction a 3
-						vitesse = 4;
+						vitesse = 3;
 						if(nbPassageVirageDroite == 0){
-							direction = 3;
+							direction = 2;
 						}
 						//Augmentation incrémentale de la direction
 						nbPassageVirageDroite++;
-						if(nbPassageVirageDroite<=7){
+						if(nbPassageVirageDroite<=5){
 							direction++;
 						}
 						eq.setVitesse(vitesse);
@@ -119,7 +119,7 @@ public class Robot2 {
 						break;
 						
 				case 3: //Cas ou es deux capteur captent la ligne on s'arrette
-						System.out.println("3");	
+						System.out.println("Deux sur la ligne");	
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
 						nbPassageVirageGauche = 0;
@@ -144,7 +144,7 @@ public class Robot2 {
 			}
 			
 			//Frequence d'échantillonage fixé pour les capteurs
-			Delay.msDelay(75);
+			Delay.msDelay(100);
 		}
 		
 	}
