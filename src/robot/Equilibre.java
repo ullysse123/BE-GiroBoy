@@ -23,11 +23,27 @@ public class Equilibre extends Thread{
 	}
 	
 	public void setVitesse(int x){
-		Equilibre.vitesse = x;
+		if (x<=10 && x>=-10){
+			Equilibre.vitesse = x;
+		}else{
+			if(x<-10){
+				Equilibre.vitesse = -10;
+			}else{
+				Equilibre.vitesse = 10;
+			}
+		}
 	}
 	
 	public void setDirection (int x){
-		Equilibre.direction = x;
+		if (x<=50 && x>=-50){
+			Equilibre.vitesse = x;
+		}else{
+			if(x<-50){
+				Equilibre.vitesse = -50;
+			}else{
+				Equilibre.vitesse = 50;
+			}
+		}
 	}
 	
 	public void run() {
