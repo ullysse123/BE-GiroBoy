@@ -28,14 +28,45 @@ public class Robot2 {
 		if(lightSurLigne()){
 			i++;
 		}
-		
 		if(colorSurLigne()){
 			i+=2;
 		}
+		return i;	
+	}
+	
+	public static boolean finCarrefour(){
+		return ( lightSurLigne() && colorSurLigne() );
+	}
+	
+	//x = 1 prendre la branche droite du carrefourc || x = 0 brandre la branche gauche du carrefour
+	public static void carrefour(int x){
 		
-		return i;
+		long tInit = System.nanoTime()/1000000000;
+		long t = 0;
+		long timeLimit = 3000;
+		
+		if (x==0 || x==1){
+			//Tant que on n'est pas sur la double ligne de fin et que x milisecondes ne sont pas passées
+			while(!finCarrefour() && (t-tInit)<=timeLimit){
+				//Passage d'un carrefour
+				if(x==1){
+					//Passage a droite
+					//TODO Implementer passage à droite. Utiliser un seul capteur et zigzaguer sur la ligne
+				}else{
+					//Passage a gauche
+					//TODO Implementer passage a gauche. Utiliser un seul capteur et zigzaguer sur la ligne 
+				}
+				t = System.nanoTime()/1000000000;
+			}
+		}else{
+			Sound.playTone(800, 10, 10);
+			System.out.println("/!\\ ERREUR CARREFOUR /!\\ \n\n\n");
+		}
 		
 	}
+	
+	//TODO Passage a niveau : Si jamais on a deux double lignes, passage a niveau est appelé via carefour et il faut choisir ce qu'on fait.
+	//Aller tout droit ou eviter un robot
 	
 	public static void suiveurDeLigne(){
 		
@@ -84,7 +115,7 @@ public class Robot2 {
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
 						//Vitesse fixé a 4 pour les virages et direction a 3
-						vitesse = 2.6;
+						vitesse = 2.2;
 						if(nbPassageVirageGauche == 0){
 							direction = 5;
 						}
@@ -104,7 +135,7 @@ public class Robot2 {
 						nbPassageVirageGauche = 0;
 						nbPassageLigneDroite = 0;
 						//Vitesse fixé a 4 pour les virage et direction a 3
-						vitesse = 2.6;
+						vitesse = 2.2;
 						if(nbPassageVirageDroite == 0){
 							direction = 5;
 						}
