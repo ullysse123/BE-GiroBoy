@@ -84,13 +84,13 @@ public class Robot2 {
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
 						//Vitesse fixé a 4 pour les virages et direction a 3
-						vitesse = 3;
+						vitesse = 2;
 						if(nbPassageVirageGauche == 0){
-							direction = 3;
+							direction = 5;
 						}
 						//Augmentation incrémentale de la direction
 						nbPassageVirageGauche++;
-						if(nbPassageVirageGauche<=5){
+						if(nbPassageVirageGauche<=10){
 							direction++;
 						}
 						eq.setVitesse(vitesse);
@@ -104,13 +104,13 @@ public class Robot2 {
 						nbPassageVirageGauche = 0;
 						nbPassageLigneDroite = 0;
 						//Vitesse fixé a 4 pour les virage et direction a 3
-						vitesse = 3;
+						vitesse = 2;
 						if(nbPassageVirageDroite == 0){
-							direction = 3;
+							direction = 5;
 						}
 						//Augmentation incrémentale de la direction
 						nbPassageVirageDroite++;
-						if(nbPassageVirageDroite<=5){
+						if(nbPassageVirageDroite<=10){
 							direction++;
 						}
 						eq.setVitesse(vitesse);
