@@ -45,8 +45,8 @@ public class Robot2 {
 		light = new LightSensor();
 		
 		//Ensemble de nos variables permettant de fixer la vitesse et la direction 
-		int vitesse = 3;
-		int direction = 0;
+		double vitesse = 3;
+		double direction = 0;
 		int nbPassageVirageDroite = 0;
 		int nbPassageVirageGauche = 0;
 		int nbPassageLigneDroite = 0;
@@ -61,7 +61,7 @@ public class Robot2 {
 				
 				case 0: //Case ou aucun des capteur ne capte la ligne on avance
 						//Remise a 0 des compteur et de la direction
-						System.out.println("Entre les lignes");
+						//System.out.println("Entre les lignes");
 						nbPassageVirageDroite = 0;
 						nbPassageVirageGauche = 0;
 						direction = 0;
@@ -80,7 +80,7 @@ public class Robot2 {
 						break;
 				case 1: //Cas ou seul le capteur gauche capte la ligne
 						//Remise a 0 des compteur
-						System.out.println("Gauche sur la ligne");
+						//System.out.println("Gauche sur la ligne");
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
 						//Vitesse fixé a 4 pour les virages et direction a 3
@@ -100,7 +100,7 @@ public class Robot2 {
 						
 				case 2: //Cas ou seul le capteur droite capte la ligne 
 						//Remise a 0 des compteur
-						System.out.println("Droit sur la ligne");
+						//System.out.println("Droit sur la ligne");
 						nbPassageVirageGauche = 0;
 						nbPassageLigneDroite = 0;
 						//Vitesse fixé a 4 pour les virage et direction a 3
@@ -119,7 +119,7 @@ public class Robot2 {
 						break;
 						
 				case 3: //Cas ou es deux capteur captent la ligne on s'arrette
-						System.out.println("Deux sur la ligne");	
+						//System.out.println("Deux sur la ligne");	
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
 						nbPassageVirageGauche = 0;
@@ -132,7 +132,7 @@ public class Robot2 {
 						break;
 						
 				default : //Ne sortira jamais de [0;3] mais si c'est le cas alors stop vitesse/direction et beep sonore
-						System.out.println("Others");
+						//System.out.println("Others");
 						  eq.setVitesse(0);
 						  Delay.msDelay(15);
 						  eq.setDirection(0);

@@ -22,7 +22,7 @@ public class Equilibre extends Thread{
 		Equilibre.angleLimite = angle;
 	}
 	
-	public void setVitesse(int x){
+	public void setVitesse(double x){
 		if (x<=10 && x>=-10){
 			Equilibre.vitesse = x;
 		}else{
@@ -34,7 +34,7 @@ public class Equilibre extends Thread{
 		}
 	}
 	
-	public void setDirection (int x){
+	public void setDirection (double x){
 		if (x<=50 && x>=-50){
 			Equilibre.direction = x;
 		}else{
@@ -157,7 +157,6 @@ public class Equilibre extends Thread{
 				puissance = -100;
 			}
 			
-			System.out.println("Angle Moteur * 0.12 =" + 0.12 * angleMoteur);
 			
 			
 			//Application de la puissance aux moteurs
@@ -187,7 +186,7 @@ public class Equilibre extends Thread{
 		
 		Equilibre test = new Equilibre();
 		test.start();
-		test.setVitesse(3);
+		//test.setVitesse(3);
 		//Delay.msDelay(5);
 		//test.setDirection(5);
 		
