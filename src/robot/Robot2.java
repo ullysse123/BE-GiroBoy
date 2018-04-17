@@ -67,7 +67,7 @@ public class Robot2 {
 						direction = 0;
 						//Vitesse fixé a 4 au depart
 						if(nbPassageLigneDroite == 0) {
-							vitesse = 3;
+							vitesse = 4;
 						}
 						//Vitesse incrémentale pour augmenter la fluidité du déplacement
 						nbPassageLigneDroite++;
@@ -84,7 +84,7 @@ public class Robot2 {
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
 						//Vitesse fixé a 4 pour les virages et direction a 3
-						vitesse = 2;
+						vitesse = 3;
 						if(nbPassageVirageGauche == 0){
 							direction = 5;
 						}
@@ -104,7 +104,7 @@ public class Robot2 {
 						nbPassageVirageGauche = 0;
 						nbPassageLigneDroite = 0;
 						//Vitesse fixé a 4 pour les virage et direction a 3
-						vitesse = 2;
+						vitesse = 3;
 						if(nbPassageVirageDroite == 0){
 							direction = 5;
 						}
@@ -145,7 +145,7 @@ public class Robot2 {
 			}
 			
 			//Frequence d'échantillonage fixé pour les capteurs
-			Delay.msDelay(100);
+			Delay.msDelay(75);
 		}
 		
 	}
