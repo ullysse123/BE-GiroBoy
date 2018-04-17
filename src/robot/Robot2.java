@@ -67,12 +67,12 @@ public class Robot2 {
 						direction = 0;
 						//Vitesse fixé a 4 au depart
 						if(nbPassageLigneDroite == 0) {
-							vitesse = 4;
+							vitesse = 3.4;
 						}
 						//Vitesse incrémentale pour augmenter la fluidité du déplacement
 						nbPassageLigneDroite++;
-						if(nbPassageLigneDroite<=5){
-							vitesse++;
+						if(nbPassageLigneDroite<=10){
+							vitesse+=0.2;
 						}
 						eq.setVitesse(vitesse);
 						Delay.msDelay(15);
@@ -123,8 +123,8 @@ public class Robot2 {
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
 						nbPassageVirageGauche = 0;
-						vitesse = 0;
-						direction = 3;
+						vitesse = 3;
+						direction = 25;
 						eq.setVitesse(vitesse);
 						Delay.msDelay(15);
 						eq.setDirection(direction);
