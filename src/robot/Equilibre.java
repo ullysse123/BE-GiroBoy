@@ -36,12 +36,12 @@ public class Equilibre extends Thread{
 	
 	public void setDirection (int x){
 		if (x<=50 && x>=-50){
-			Equilibre.vitesse = x;
+			Equilibre.direction = x;
 		}else{
 			if(x<-50){
-				Equilibre.vitesse = -50;
+				Equilibre.direction = -50;
 			}else{
-				Equilibre.vitesse = 50;
+				Equilibre.direction = 50;
 			}
 		}
 	}
