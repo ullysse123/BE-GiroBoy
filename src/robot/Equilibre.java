@@ -9,7 +9,7 @@ import lejos.utility.Delay;
 public class Equilibre extends Thread{
 
 	//Vitesse et direction ( sera utilisé plus tard )
-	static double vitesse = 0; //[-100;100]//5,10
+	static double vitesse = 0; //[-10;10]//5,10
 	static double direction = 0; //[-50;50]
 	//Angle limite 
 	static int angleLimite=45;
@@ -89,12 +89,14 @@ public class Equilibre extends Thread{
 			//Mise a jour des données moteur
 			oldSumMoteur = sumMoteur;
 			sumMoteur = gauche.getTacho() + droite.getTacho();
-			deriveMoteur = sumMoteur - oldSumMoteur;
+			deriveMoteur = sumMoteur - oldSumMoteur;//error
 			angleMoteur = angleMoteur + deriveMoteur;
 			vitesseMoteur = ((deriveMoteur + deriveMoteur1 + deriveMoteur2 + deriveMoteur3)/4.0)/delta;
 			deriveMoteur3 = deriveMoteur2;
 			deriveMoteur2 = deriveMoteur1;
 			deriveMoteur1 = deriveMoteur;
+			
+			
 			angleMoteur = angleMoteur-vitesse;
 			
 			//Mise a jour de la puissance(avec test)
@@ -139,13 +141,13 @@ public class Equilibre extends Thread{
 				puissance = -100;
 			}
 			
+			System.out.println("Angle Moteur * 0.12 =" + 0.12 * angleMoteur);
+			
+			
 			//Application de la puissance aux moteurs
 			if(pret){
 				droite.setPower((int)(puissance-direction));
 				gauche.setPower((int)(puissance+direction));
-				//Mise a jour des données sur l'angle du robot
-				//vitesseAngulaire = -gyro.getAngularSpeed();
-				//angle = angle + (vitesseAngulaire*delta);
 			}
 			
 			//Mise a jour des compteurs
@@ -169,9 +171,9 @@ public class Equilibre extends Thread{
 		
 		Equilibre test = new Equilibre();
 		test.start();
-		test.setVitesse(5);
-		Delay.msDelay(5);
-		test.setDirection(5);
+		test.setVitesse(3);
+		//Delay.msDelay(5);
+		//test.setDirection(5);
 		
 		//Programmation d'un parcours de test pour le programme
 		/*test.start();
