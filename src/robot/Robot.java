@@ -8,15 +8,15 @@ import modules.LightSensor;
 public class Robot {
 	static ColorSensor colorSensor=new ColorSensor();
 	static LightSensor lightSensor=new LightSensor();
-	static int direction = 5;
-	static int vitesse = 5;
-	static int ralenti = 2;
+	static int direction = 6;
+	static int vitesse = 2;
+	static int ralenti = 1;
 	static int nul = 0;
 	//static float minColor = 0.075f;
 	//static float minColor = 0.080f;
 	//static float minColor = 0.090f;
 	//static float minColor = 0.095f;
-	static float minColor = 0.085f;
+	static float minColor = 0.0385f;
 	//static float minLight = 0.35f;
 	//static float minLight = 0.30f;
 	//static float minLight = 0.45f;
@@ -27,7 +27,7 @@ public class Robot {
 	public static int lignFollower() {
 		int result = 0;
 		//Detecte la ligne à droite 
-		if(colorSensor.getColor()>minColor) {
+		if(colorSensor.getRedMode()>minColor) {
 			result++;
 		}
 		//Detecte la ligne à gauche
@@ -37,21 +37,31 @@ public class Robot {
 		return result;
 	}
 	
-	public static void lignFollowerRun(Equilibre eq) {
-		int result;
+	public static void lignFollowerRun() {
+		Equilibre eq=new Equilibre();
+		eq.start();
 		eq.setVitesse(vitesse);
+		int result;
 		while(!Button.ESCAPE.isDown()) {
 			result=lignFollower();
 			switch(result) {
 				//Rectifie à droite
-				case 1:eq.setVitesse(ralenti);
+				case 1:eq.setVitesse(nul);
 					Delay.msDelay(5);
 					eq.setDirection(direction);
+					Delay.msDelay(100);
+					while(lignFollower()!=2)
+						Delay.msDelay(100);
+					eq.setDirection(-direction);
 					break;
 				//Rectifie à gauche
-				case 2:eq.setVitesse(ralenti);
+				case 2:eq.setVitesse(nul);
 					Delay.msDelay(5);
 					eq.setDirection(-direction);
+					Delay.msDelay(100);
+					while(lignFollower()!=1)
+						Delay.msDelay(100);
+					eq.setDirection(direction);
 					break;
 				//S'arrete puis reflechit
 				case 3:eq.setVitesse(nul);
@@ -69,9 +79,7 @@ public class Robot {
 	}
 	
 	public static void main(String[] args) {
-		Equilibre eq=new Equilibre();
-		eq.run();
-		lignFollowerRun(eq);
+		lignFollowerRun();
 	}
 
 }
