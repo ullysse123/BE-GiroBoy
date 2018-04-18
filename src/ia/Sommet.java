@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Sommet {
 
-	private String nom;
+	private int nom;
 	private int gh;
 	private List <Sommet> filsList= new ArrayList <Sommet>();
-	private List <Integer> listDirection;
+	private List <Integer> listDirection=new ArrayList <Integer>();
 	private int direction;
 	
-	public Sommet(String nom, int gh, int direction) {
+	public Sommet(int nom, int gh, int direction) {
 		this.nom = nom;
 		this.gh = gh;
 		this.direction=direction;
@@ -52,7 +52,7 @@ public class Sommet {
 
 
 
-	public String getNom() {
+	public int getNom() {
 		return nom;
 	}
 
