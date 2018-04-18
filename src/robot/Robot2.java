@@ -44,6 +44,13 @@ public class Robot2 {
 	//TODO : demi-tour
 	//Objectif de la fonction : Envoyer la suite de sequence permettant au robot de faire
 	//un demi tour.
+	/* Sequence permettant de faire un demi tour :
+	 * test.setVitesse(0);
+		Delay.msDelay(20);
+		test.setDirection(50);
+		Delay.msDelay(880);
+		test.setDirection(0);
+	 */
 	
 	//Attention : fort risque d'erreur. Si carrefour marche pas revoir cette fonction
 	public static boolean sortieCarrefour(int nbPassage, int prev, int cour){
@@ -56,7 +63,7 @@ public class Robot2 {
 	public static void carrefour(int x, Equilibre eq){
 		
 		//On fixe la vitesse a 3.5 et la direction a 0
-		eq.setVitesse(3.5);
+		eq.setVitesse(4.3);
 		eq.setDirection(0);
 		
 		//Etat noir = 0 || Etat blanc = 1
@@ -116,8 +123,11 @@ public class Robot2 {
 				Delay.msDelay(100);
 			}
 			
+			//Bip sonnor indiquant la sortie d'un carrefour
+			Sound.playTone(600, 10, 10);
+			
 			//Une fois sur l'embranchement final on laisse avancer le robot pour qu'il sorte de la double ligne
-			Delay.msDelay(1000);
+			Delay.msDelay(750);
 			
 		}else{
 			Sound.playTone(800, 10, 10);
