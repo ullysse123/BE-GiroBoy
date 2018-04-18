@@ -34,29 +34,30 @@ public class Robot2 {
 		return i;	
 	}
 	
-	public static boolean finCarrefour(){
-		return ( lightSurLigne() && colorSurLigne() );
+	//Attention : fort risque d'erreur. Si carrefour marche pas revoir cette fonction
+	public static boolean sortieCarrefour(int nbPassage, int prev, int cour){
+		boolean retour = false;
+		retour = (nbPassage == 6) && (prev == 0) && (cour == 1);
+		return retour;
 	}
 	
-	//x = 1 prendre la branche droite du carrefourc || x = 0 brandre la branche gauche du carrefour
+	//x = 1 prendre la branche droite du carrefour || x = 0 brandre la branche gauche du carrefour
 	public static void carrefour(int x){
 		
-		long tInit = System.nanoTime()/1000000000;
-		long t = 0;
-		long timeLimit = 3000;
+		//Etat noir = 0 || Etat blanc = 1
+		int etatPrev = -1;
+		int etatCour = -1;
+		int nbPassage = 0;
 		
 		if (x==0 || x==1){
-			//Tant que on n'est pas sur la double ligne de fin et que x milisecondes ne sont pas passées
-			while(!finCarrefour() && (t-tInit)<=timeLimit){
-				//Passage d'un carrefour
-				if(x==1){
-					//Passage a droite
-					//TODO Implementer passage à droite. Utiliser un seul capteur et zigzaguer sur la ligne
+			while(!sortieCarrefour(nbPassage,etatPrev,etatCour)){
+				if (x==0){
+					//Si on tourne a gauche
+					
 				}else{
-					//Passage a gauche
-					//TODO Implementer passage a gauche. Utiliser un seul capteur et zigzaguer sur la ligne 
+					//Si on tourne a droite
+					
 				}
-				t = System.nanoTime()/1000000000;
 			}
 		}else{
 			Sound.playTone(800, 10, 10);
