@@ -1,27 +1,43 @@
 package ia;
 
+import java.util.List;
+
 public class Sommet {
 
 	private String nom;
-	private int h;
-	private Sommet[] voisinList;
+	private int gh;
+	private List <Sommet> filsList;
+	private int [] direction;
 	
-	public Sommet(String nom, int h, Sommet[] voisinList) {
+	public Sommet(String nom, int gh, List <Sommet> filsList, int [] direction) {
 		this.nom = nom;
-		this.h = h;
-		this.voisinList = voisinList;
+		this.gh = gh;
+		this.filsList = filsList;
+		this.direction=direction;
+	}
+	
+	
+
+	public void setDirection(int[] direction) {
+		this.direction = direction;
+	}
+
+
+
+	public int [] getDirection() {
+		return direction;
 	}
 
 	public String getNom() {
 		return nom;
 	}
 
-	public int getH() {
-		return h;
+	public int getGH() {
+		return gh;
 	}
 
-	public Sommet[] getVoisinList() {
-		return voisinList;
+	public List <Sommet> getFilsList() {
+		return filsList;
 	}
 	
 	
