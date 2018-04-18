@@ -72,8 +72,8 @@ public class Robot2 {
 		int coul = -1;
 		int nbPassage = 0;
 		
-		//Correction appliqué pour la direcction
-		double direction = 6.5;
+		//Correction appliqué pour la direction
+		double direction = 4;
 		
 		if (x==0 || x==1){
 			while(!sortieCarrefour(nbPassage,etatPrev,etatCour)){
