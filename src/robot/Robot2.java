@@ -55,7 +55,7 @@ public class Robot2 {
 	//Attention : fort risque d'erreur. Si carrefour marche pas revoir cette fonction
 	public static boolean sortieCarrefour(int nbPassage, int prev, int cour){
 		boolean retour = false;
-		retour = (nbPassage == 6) && (prev == 0) && (cour == 1);
+		retour = (nbPassage >= 6) && (prev == 0) && (cour == 1);
 		return retour;
 	}
 	
@@ -73,7 +73,7 @@ public class Robot2 {
 		int nbPassage = 0;
 		
 		//Correction appliqué pour la direcction
-		double direction = 5;
+		double direction = 6.5;
 		
 		if (x==0 || x==1){
 			while(!sortieCarrefour(nbPassage,etatPrev,etatCour)){
@@ -229,8 +229,9 @@ public class Robot2 {
 						direction = 25;
 						eq.setVitesse(vitesse);
 						Delay.msDelay(15);
-						eq.setDirection(direction);
-						Sound.buzz();*/
+						eq.setDirection(direction);*/
+						//Marqueur sonor pour indiqué l'entrée dans un carrefour
+						Sound.buzz();
 						carrefour(1,eq);
 						break;
 						
