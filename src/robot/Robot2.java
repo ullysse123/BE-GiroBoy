@@ -42,23 +42,72 @@ public class Robot2 {
 	}
 	
 	//x = 1 prendre la branche droite du carrefour || x = 0 brandre la branche gauche du carrefour
-	public static void carrefour(int x){
+	public static void carrefour(int x, Equilibre eq){
+		
+		//On fixe la vitesse a 3.5 et la direction a 0
+		eq.setVitesse(3.5);
+		eq.setDirection(0);
 		
 		//Etat noir = 0 || Etat blanc = 1
 		int etatPrev = -1;
 		int etatCour = -1;
+		int coul = -1;
 		int nbPassage = 0;
+		
+		//Correction appliqué pour la direcction
+		double direction = 5;
 		
 		if (x==0 || x==1){
 			while(!sortieCarrefour(nbPassage,etatPrev,etatCour)){
+				
 				if (x==0){
 					//Si on tourne a gauche
-					
+					//On regarde sur quel couleur est notre capteur droit
+					if(colorSurLigne()){
+						coul = 1;
+					}else{
+						coul = 0;
+					}
+					//Si la couleur capté est differente de la couleur courante alors on met a jour
+					if(coul != etatCour && nbPassage <6){
+						nbPassage++;
+						etatPrev = etatCour;
+						etatCour = coul;
+						//On fait maintenant les correctif de suivie de ligne
+						if(lightSurLigne()){
+							eq.setDirection(-direction);
+						}else{
+							eq.setDirection(0);
+						}
+					}
 				}else{
 					//Si on tourne a droite
+					//On regarde sur quel couleur est notre capteur gauche
+					if(lightSurLigne()){
+						coul = 1;
+					}else{
+						coul = 0;
+					}
+					//Si  la couleur capté est différente de la couleur courante alors on met a jour
+					if(coul != etatCour && nbPassage <6){
+						nbPassage++;
+						etatPrev = etatCour;
+						etatCour = coul;
+						//On fait maintenant les correctif de suivie de ligne
+						if(colorSurLigne()){
+							eq.setDirection(direction);
+						}else{
+							eq.setDirection(0);
+						}
+					}
 					
 				}
+				Delay.msDelay(100);
 			}
+			
+			//Une fois sur l'embranchement final on laisse avancer le robot pour qu'il sorte de la double ligne
+			Delay.msDelay(1000);
+			
 		}else{
 			Sound.playTone(800, 10, 10);
 			System.out.println("/!\\ ERREUR CARREFOUR /!\\ \n\n\n");
@@ -155,12 +204,13 @@ public class Robot2 {
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
 						nbPassageVirageGauche = 0;
-						vitesse = 3;
+						/*vitesse = 3;
 						direction = 25;
 						eq.setVitesse(vitesse);
 						Delay.msDelay(15);
 						eq.setDirection(direction);
-						Sound.buzz();
+						Sound.buzz();*/
+						carrefour(1,eq);
 						break;
 						
 				default : //Ne sortira jamais de [0;3] mais si c'est le cas alors stop vitesse/direction et beep sonore
