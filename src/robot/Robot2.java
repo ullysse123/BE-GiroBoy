@@ -34,6 +34,17 @@ public class Robot2 {
 		return i;	
 	}
 	
+	//TODO : Fonction marqueSol
+	//Objectif de la fonction : Definir si la marque est simple, double ou pleine
+	//pour ensuite lancer le carrefour, l'arret/demi-tour ou le depacement.
+	
+	//TODO : Fonction depacement
+	//Objectif de la fonction : faire emprunter les axes de depacement par le robot
+	
+	//TODO : demi-tour
+	//Objectif de la fonction : Envoyer la suite de sequence permettant au robot de faire
+	//un demi tour.
+	
 	//Attention : fort risque d'erreur. Si carrefour marche pas revoir cette fonction
 	public static boolean sortieCarrefour(int nbPassage, int prev, int cour){
 		boolean retour = false;

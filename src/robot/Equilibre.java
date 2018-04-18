@@ -184,8 +184,22 @@ public class Equilibre extends Thread{
 	
 	public static void main(String[] args){
 		
+		int tps = 500;
+		
 		Equilibre test = new Equilibre();
 		test.start();
+		
+		//Test de la sequence pour demis tour
+		test.setVitesse(3.5);
+		Delay.msDelay(4000);
+		test.setVitesse(0);
+		Delay.msDelay(20);
+		test.setDirection(50);
+		Delay.msDelay(tps);
+		test.setDirection(0);
+		Delay.msDelay(20);
+		test.setVitesse(4);
+		
 		//test.setVitesse(3);
 		//Delay.msDelay(5);
 		//test.setDirection(5);
