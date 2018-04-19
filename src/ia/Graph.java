@@ -7,7 +7,7 @@ public class Graph {
 	
 	public List<Integer> voisin(int i) {
 		List<Integer>v=new ArrayList<Integer>();
-		switch (i) {
+		switch (i) {//1er 0d, 2nd 1g
 			case 1:v.add(2);
 			v.add(3);
 			break;

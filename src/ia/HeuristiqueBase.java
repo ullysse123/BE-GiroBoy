@@ -9,10 +9,10 @@ public class HeuristiqueBase implements Heuristique {
 		int h=0;
 		if(nom>=2 && nom<=6)
 			h++;
-		if(nom>=3 && nom<=5){
-			h++;
+		if(nom==2 || nom==5){
+			h+=5;
 		}
-		if(nom==3)h++;
+		if(nom==2)h+=10;
 		
 		return gh+h;
 	}

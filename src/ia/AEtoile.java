@@ -7,23 +7,25 @@ import java.util.List;
 public class AEtoile {
 	static Graph graph=new Graph();
 	
-	private static List <Sommet> insererLesFils (List <Sommet> listAttentePrec, List <Sommet> listFils) {
+	private static List <Sommet> insererLesFils (List <Sommet> listAttentePrec, List <Sommet> listFils, List<Sommet> listVu) {
 		List <Sommet> listAttente= listAttentePrec;
 		Iterator<Sommet>filsIterator=listFils.iterator();
 		//Parcours des fils
 		while(filsIterator.hasNext()) {
 			Sommet filsATraiter=filsIterator.next();
 			Boolean find=false;
-			//Parcours de la liste d'attente à trier
-			for(int i=0;i<listAttente.size() && !find; i++) {
-				Sommet attenteATraiter=listAttente.get(i);
-				//si on a trouvé la place pour le fils
-				if(find = filsATraiter.getGH()<attenteATraiter.getGH()) {
-					listAttente.add(i, filsATraiter);
+			if(!listVu.contains(filsATraiter)) {
+				//Parcours de la liste d'attente à trier
+				for(int i=0;i<listAttente.size() && !find; i++) {
+					Sommet attenteATraiter=listAttente.get(i);
+					//si on a trouvé la place pour le fils
+					if(find = filsATraiter.getGH()<attenteATraiter.getGH()) {
+						listAttente.add(i, filsATraiter);
+					}
 				}
-			}
-			if(!find) {
-				listAttente.add(filsATraiter);
+				if(!find) {
+					listAttente.add(filsATraiter);
+				}
 			}
 		}
 		return listAttente;
@@ -54,10 +56,12 @@ public class AEtoile {
 	public static List<Integer> fonction (Sommet sommetDepart,int cout,int but,Heuristique heur) {
 		//Initialisation du A*
 		List <Integer> directionList=new ArrayList<Integer>();
+		List <Sommet> listVu=new ArrayList<Sommet>();
 		Boolean estBut=false;
 		List <Sommet> listAttente=new ArrayList <Sommet>();
 		Sommet pereActuelle=creationFils(sommetDepart,cout,heur);
-		listAttente=insererLesFils(listAttente , pereActuelle.getFilsList());
+		listAttente=insererLesFils(listAttente , pereActuelle.getFilsList(),listVu);
+		listVu.addAll(pereActuelle.getFilsList());
 		//Parcours de la liste d'attente
 		while(!listAttente.isEmpty() && !estBut) {
 			estBut=pereActuelle.getNom()==but;
@@ -67,8 +71,13 @@ public class AEtoile {
 			//Sinon continue de parcourir
 			}else {
 				pereActuelle=creationFils(listAttente.get(0),cout,heur);
+				//System.out.println(pereActuelle.getNom());
+				for(Sommet somFils:pereActuelle.getFilsList()) {
+					if(!listVu.contains(somFils))
+						listVu.add(somFils);
+				}
 				listAttente.remove(0);
-				listAttente=insererLesFils(listAttente , pereActuelle.getFilsList());
+				listAttente=insererLesFils(listAttente , pereActuelle.getFilsList(),listVu);
 			}
 		}
 		return directionList;
@@ -84,7 +93,9 @@ public class AEtoile {
 			j++;
 		}
 		depart.setFilsList(sommetPetitFils);
+		//System.out.println("List Sommet traité:");
 		List <Integer> list=fonction(depart,1,7,hb);
+		System.out.println("List direction:");
 		for(int i:list) {
 			System.out.println(i);
 		}
