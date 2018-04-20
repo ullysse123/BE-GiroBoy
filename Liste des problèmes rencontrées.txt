@@ -10,3 +10,4 @@ Carrefour qui refuse de se terminer du a une sortie de circuit ->
 	-> Cause : Robot incapable d'aller parfaitement droit
 
 Robot qui ne peut pas se deplacer parfaitement en ligne droite ->
+	-> Cause : Leger decallage lorsque la puissance est donnée au moteur
