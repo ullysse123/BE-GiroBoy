@@ -76,7 +76,7 @@ public class Robot2 {
 		double direction = 4;
 		
 		if (x==0 || x==1){
-			while(!sortieCarrefour(nbPassage,etatPrev,etatCour)){
+			while(!sortieCarrefour(nbPassage,etatPrev,etatCour) && !Button.ENTER.isDown()){
 				
 				if (x==0){
 					//Si on tourne a gauche
