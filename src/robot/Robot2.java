@@ -62,8 +62,10 @@ public class Robot2 {
 	//x = 1 prendre la branche droite du carrefour || x = 0 brandre la branche gauche du carrefour
 	public static void carrefour(int x, Equilibre eq){
 		
+		//Tentative avec uniquement des micro corrections
+		
 		//On fixe la vitesse a 3.5 et la direction a 0
-		eq.setVitesse(4.3);
+		eq.setVitesse(3.5);
 		eq.setDirection(0);
 		
 		//Etat noir = 0 || Etat blanc = 1
@@ -73,7 +75,7 @@ public class Robot2 {
 		int nbPassage = 0;
 		
 		//Correction appliqué pour la direction
-		double direction = 4;
+		double direction = 2;
 		
 		if (x==0 || x==1){
 			while(!sortieCarrefour(nbPassage,etatPrev,etatCour) && !Button.ENTER.isDown()){
