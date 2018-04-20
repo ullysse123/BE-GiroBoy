@@ -11,3 +11,9 @@ Jour 5 : Test de nouveau algorithmes suiveur de ligne + calibrage
 Jour 6 : Test sur l'equilibrage du robot à l'aide de la vitesse + remontage du robot
 
 Jour 7 : Optimisation de l'équilibre + résolution des problèmes du suivie de ligne + debut d'implémentation des carrefour
+
+Jour 8 : Test de resolution des problème carrefour + Implementation algorithme A*
+
+Jour 9 : Tentative de resolutions de bug pour carrefour
+
+Jour 10 : Réecriture du carrefour, tentative d'implémentation différente.
