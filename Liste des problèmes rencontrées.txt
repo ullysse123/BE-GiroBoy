@@ -1,0 +1,12 @@
+Problème -> Solution apportée
+
+Robot non equilibré -> Remontage de façon plus equilibré du robot
+
+Equilibre qui ne tiens que quelques secondes -> Ajustement des coefficient PID
+
+Suiveur de ligne qui sort lors des virages -> Ajustement de la vitesse et de la puissance de rotation
+
+Carrefour qui refuse de se terminer du a une sortie de circuit ->
+	-> Cause : Robot incapable d'aller parfaitement droit
+
+Robot qui ne peut pas se deplacer parfaitement en ligne droite ->
