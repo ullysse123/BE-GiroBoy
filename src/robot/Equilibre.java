@@ -61,6 +61,7 @@ public class Equilibre extends Thread{
 		double deriveMoteur1 = 0;
 		double deriveMoteur2 = 0;
 		double deriveMoteur3 = 0;
+		double directionC;
 		//Variable temporelles
 		long chrono = 0;
 		long dernierChrono = 0;
@@ -89,6 +90,7 @@ public class Equilibre extends Thread{
 		//On donne la priorité maximum a ce thread ( systeme vitale a notre fonctionnement )
 		Thread.currentThread().setPriority(MAX_PRIORITY);
 		
+		//int differenceGlob=droite.getTacho()-gauche.getTacho();
 		//Debut de notre boucle de maintien de l'equilibre
 		while(!Button.ESCAPE.isDown()) {// gyro.getAngle()<angleLimite && gyro.getAngle()>-angleLimite){
 			
@@ -156,13 +158,20 @@ public class Equilibre extends Thread{
 			if (puissance<-100){
 				puissance = -100;
 			}
-			
-			
-			
+			int differenceCourante=droite.getTacho()-gauche.getTacho();
+			/*if(droite.getTacho()!=gauche.getTacho()) {
+				System.out.println("Differents="+differenceCourante);
+				differenceGlob=differenceCourante;
+			}*/
 			//Application de la puissance aux moteurs
+			//direction pour decalage a faire
 			if(pret){
-				droite.setPower((int)(puissance-direction));
-				gauche.setPower((int)(puissance+direction));
+				if(differenceCourante<0 && compteur%2==0)
+					directionC=direction-2;
+				else
+					directionC=direction;
+				droite.setPower((int)(puissance-directionC));
+				gauche.setPower((int)(puissance+directionC));
 			}
 			
 			//Mise a jour des compteurs
@@ -184,22 +193,24 @@ public class Equilibre extends Thread{
 	
 	public static void main(String[] args){
 		
-		//int tps = 880;
+		//int tps = 500;
 		
 		Equilibre test = new Equilibre();
 		test.start();
 		
+		test.setVitesse(3.5);
+		/*
 		//Test de la sequence pour demis tour
-		/*test.setVitesse(3.5);
+		test.setVitesse(3.5);
 		Delay.msDelay(4000);
 		test.setVitesse(0);
 		Delay.msDelay(20);
 		test.setDirection(50);
-		Delay.msDelay(880);
+		Delay.msDelay(tps);
 		test.setDirection(0);
 		Delay.msDelay(20);
-		test.setVitesse(4);*/
-		
+		test.setVitesse(4);
+		*/
 		//test.setVitesse(3);
 		//Delay.msDelay(5);
 		//test.setDirection(5);
