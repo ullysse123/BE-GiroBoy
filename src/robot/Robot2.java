@@ -55,14 +55,12 @@ public class Robot2 {
 	//Attention : fort risque d'erreur. Si carrefour marche pas revoir cette fonction
 	public static boolean sortieCarrefour(int nbPassage, int prev, int cour){
 		boolean retour = false;
-		retour = (nbPassage >= 6) && (prev == 0) && (cour == 1);
+		retour = (nbPassage >= 5) && (prev == 0) && (cour == 1);
 		return retour;
 	}
 	
 	//x = 1 prendre la branche droite du carrefour || x = 0 brandre la branche gauche du carrefour
 	public static void carrefour(int x, Equilibre eq){
-		
-		//Tentative avec uniquement des micro corrections
 		
 		//On fixe la vitesse a 3.5 et la direction a 0
 		eq.setVitesse(3.5);
@@ -75,7 +73,8 @@ public class Robot2 {
 		int nbPassage = 0;
 		
 		//Correction appliqué pour la direction
-		double direction = 2;
+		double direction = 5;
+		double directionR = 4;
 		
 		if (x==0 || x==1){
 			while(!sortieCarrefour(nbPassage,etatPrev,etatCour) && !Button.ENTER.isDown()){
@@ -89,16 +88,26 @@ public class Robot2 {
 						coul = 0;
 					}
 					//Si la couleur capté est differente de la couleur courante alors on met a jour
-					if(coul != etatCour && nbPassage <6){
+					if(coul != etatCour) {// && nbPassage <6){
 						nbPassage++;
 						etatPrev = etatCour;
 						etatCour = coul;
-						//On fait maintenant les correctif de suivie de ligne
-						if(lightSurLigne()){
+						/*if(lightSurLigne()){
 							eq.setDirection(-direction);
 						}else{
+							//eq.setDirection(0);
 							eq.setDirection(0);
-						}
+						}*/
+					}
+					//On fait maintenant les correctif de suivie de ligne
+					if(lightSurLigne()){
+						eq.setDirection(-direction);
+					}else{
+						//eq.setDirection(0);
+						if(colorSurLigne())
+							eq.setDirection(directionR);
+						else
+							eq.setDirection(0);
 					}
 				}else{
 					//Si on tourne a droite
@@ -109,16 +118,26 @@ public class Robot2 {
 						coul = 0;
 					}
 					//Si  la couleur capté est différente de la couleur courante alors on met a jour
-					if(coul != etatCour && nbPassage <6){
+					if(coul != etatCour) {// && nbPassage <6){
 						nbPassage++;
 						etatPrev = etatCour;
 						etatCour = coul;
-						//On fait maintenant les correctif de suivie de ligne
-						if(colorSurLigne()){
+						/*if(colorSurLigne()){
 							eq.setDirection(direction);
 						}else{
+							//eq.setDirection(0);
 							eq.setDirection(0);
-						}
+						}*/
+					}
+					//On fait maintenant les correctif de suivie de ligne
+					if(colorSurLigne()){
+						eq.setDirection(direction);
+					}else{
+						//eq.setDirection(0);
+						if(lightSurLigne())
+							eq.setDirection(-directionR);
+						else
+							eq.setDirection(0);
 					}
 					
 				}
@@ -126,7 +145,7 @@ public class Robot2 {
 			}
 			
 			//Bip sonnor indiquant la sortie d'un carrefour
-			Sound.playTone(600, 10, 10);
+			//Sound.playTone(600, 10, 10);
 			
 			//Une fois sur l'embranchement final on laisse avancer le robot pour qu'il sorte de la double ligne
 			Delay.msDelay(750);
@@ -187,7 +206,7 @@ public class Robot2 {
 						//System.out.println("Gauche sur la ligne");
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
-						//Vitesse fixé a 4 pour les virages et direction a 3
+						//Vitesse fixé a 2.2 pour les virages et direction a 5
 						vitesse = 2.2;
 						if(nbPassageVirageGauche == 0){
 							direction = 5;
@@ -207,7 +226,7 @@ public class Robot2 {
 						//System.out.println("Droit sur la ligne");
 						nbPassageVirageGauche = 0;
 						nbPassageLigneDroite = 0;
-						//Vitesse fixé a 4 pour les virage et direction a 3
+						//Vitesse fixé a 2.2 pour les virage et direction a 5
 						vitesse = 2.2;
 						if(nbPassageVirageDroite == 0){
 							direction = 5;
@@ -235,6 +254,7 @@ public class Robot2 {
 						//Marqueur sonor pour indiqué l'entrée dans un carrefour
 						Sound.buzz();
 						carrefour(1,eq);
+						Sound.buzz();
 						break;
 						
 				default : //Ne sortira jamais de [0;3] mais si c'est le cas alors stop vitesse/direction et beep sonore
@@ -255,6 +275,7 @@ public class Robot2 {
 		}
 		
 	}
+	
 	
 	public static void main(String[] args) {
 		
