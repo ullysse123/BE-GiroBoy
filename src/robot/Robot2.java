@@ -63,7 +63,7 @@ public class Robot2 {
 	public static void carrefour(int x, Equilibre eq){
 		
 		//On fixe la vitesse a 3.5 et la direction a 0
-		eq.setVitesse(3.5);
+		eq.setVitesse(4);
 		eq.setDirection(0);
 		
 		//Etat noir = 0 || Etat blanc = 1
@@ -73,11 +73,11 @@ public class Robot2 {
 		int nbPassage = 0;
 		
 		//Correction appliqué pour la direction
-		double direction = 5;
-		double directionR = 4;
+		int direction = 9;
+		int directionR = 4;
 		
 		if (x==0 || x==1){
-			while(!sortieCarrefour(nbPassage,etatPrev,etatCour) && !Button.ENTER.isDown()){
+			while(!(sortieCarrefour(nbPassage,etatPrev,etatCour)) && !Button.ENTER.isDown()){
 				
 				if (x==0){
 					//Si on tourne a gauche
@@ -169,7 +169,7 @@ public class Robot2 {
 		
 		//Ensemble de nos variables permettant de fixer la vitesse et la direction 
 		double vitesse = 3;
-		double direction = 0;
+		int direction = 0;
 		int nbPassageVirageDroite = 0;
 		int nbPassageVirageGauche = 0;
 		int nbPassageLigneDroite = 0;
@@ -187,7 +187,7 @@ public class Robot2 {
 						//System.out.println("Entre les lignes");
 						nbPassageVirageDroite = 0;
 						nbPassageVirageGauche = 0;
-						direction = 0;
+						direction=0;
 						//Vitesse fixé a 4 au depart
 						if(nbPassageLigneDroite == 0) {
 							vitesse = 3.4;
@@ -209,7 +209,7 @@ public class Robot2 {
 						//Vitesse fixé a 2.2 pour les virages et direction a 5
 						vitesse = 2.2;
 						if(nbPassageVirageGauche == 0){
-							direction = 5;
+							direction = 8;
 						}
 						//Augmentation incrémentale de la direction
 						nbPassageVirageGauche++;
@@ -229,7 +229,7 @@ public class Robot2 {
 						//Vitesse fixé a 2.2 pour les virage et direction a 5
 						vitesse = 2.2;
 						if(nbPassageVirageDroite == 0){
-							direction = 5;
+							direction = 8;
 						}
 						//Augmentation incrémentale de la direction
 						nbPassageVirageDroite++;
