@@ -40,6 +40,32 @@ public class Robot2 {
 	
 	//TODO : Fonction depacement
 	//Objectif de la fonction : faire emprunter les axes de depacement par le robot
+	public static boolean finDepacement(int type){
+		//TODO Doit permettre de determiner quand on sort d'un depacement
+		return false;
+	}
+	
+	public static void depacement(int x, Equilibre eq){
+		//x = 0 on ne cherche pas a depacer, ligne droite
+		//x = 1 on depace
+		if(x == 0){
+			//On ne cherche pas a depacer
+			eq.setVitesse(5);
+			while(!finDepacement(x)){
+				Delay.msDelay(100);
+			}
+		}else{
+			if (x == 1){
+				//On cherche a depacer par la droite. --> Meme problematique que pour tourner a droite sur une intersection
+				eq.setVitesse(5);
+				while(!finDepacement(x)){
+					Delay.msDelay(100);
+				}
+			}
+		}
+		
+		
+	}
 	
 	//TODO : demi-tour
 	//Objectif de la fonction : Envoyer la suite de sequence permettant au robot de faire
@@ -51,6 +77,14 @@ public class Robot2 {
 		Delay.msDelay(880);
 		test.setDirection(0);
 	 */
+	public static void demiTour(Equilibre eq){
+		eq.setVitesse(0);
+		Delay.msDelay(20);
+		eq.setDirection(50);
+		Delay.msDelay(800);
+		eq.setDirection(0);
+	}
+	
 	
 	//Attention : fort risque d'erreur. Si carrefour marche pas revoir cette fonction
 	public static boolean sortieCarrefour(int nbPassage, int prev, int cour){
@@ -72,7 +106,7 @@ public class Robot2 {
 		int coul = -1;
 		int nbPassage = 0;
 		
-		//Correction appliqué pour la direction
+		//Correction appliquÃ© pour la direction
 		int direction = 9;
 		int directionR = 4;
 		
@@ -87,7 +121,7 @@ public class Robot2 {
 					}else{
 						coul = 0;
 					}
-					//Si la couleur capté est differente de la couleur courante alors on met a jour
+					//Si la couleur captÃ© est differente de la couleur courante alors on met a jour
 					if(coul != etatCour) {// && nbPassage <6){
 						nbPassage++;
 						etatPrev = etatCour;
@@ -117,7 +151,7 @@ public class Robot2 {
 					}else{
 						coul = 0;
 					}
-					//Si  la couleur capté est différente de la couleur courante alors on met a jour
+					//Si  la couleur captÃ© est diffÃ©rente de la couleur courante alors on met a jour
 					if(coul != etatCour) {// && nbPassage <6){
 						nbPassage++;
 						etatPrev = etatCour;
@@ -157,7 +191,7 @@ public class Robot2 {
 		
 	}
 	
-	//TODO Passage a niveau : Si jamais on a deux double lignes, passage a niveau est appelé via carefour et il faut choisir ce qu'on fait.
+	//TODO Passage a niveau : Si jamais on a deux double lignes, passage a niveau est appelÃ© via carefour et il faut choisir ce qu'on fait.
 	//Aller tout droit ou eviter un robot
 	
 	public static void suiveurDeLigne(){
@@ -174,7 +208,7 @@ public class Robot2 {
 		int nbPassageVirageGauche = 0;
 		int nbPassageLigneDroite = 0;
 		
-		//Lancement de l'équilibre avec une vitesse initiale pour démarrer le circuit
+		//Lancement de l'Ã©quilibre avec une vitesse initiale pour dÃ©marrer le circuit
 		eq.start();
 		eq.setVitesse(3);
 		
@@ -188,11 +222,11 @@ public class Robot2 {
 						nbPassageVirageDroite = 0;
 						nbPassageVirageGauche = 0;
 						direction=0;
-						//Vitesse fixé a 4 au depart
+						//Vitesse fixÃ© a 4 au depart
 						if(nbPassageLigneDroite == 0) {
 							vitesse = 3.4;
 						}
-						//Vitesse incrémentale pour augmenter la fluidité du déplacement
+						//Vitesse incrÃ©mentale pour augmenter la fluiditÃ© du dÃ©placement
 						nbPassageLigneDroite++;
 						if(nbPassageLigneDroite<=10){
 							vitesse+=0.2;
@@ -206,12 +240,12 @@ public class Robot2 {
 						//System.out.println("Gauche sur la ligne");
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
-						//Vitesse fixé a 2.2 pour les virages et direction a 5
+						//Vitesse fixÃ© a 2.2 pour les virages et direction a 5
 						vitesse = 2.2;
 						if(nbPassageVirageGauche == 0){
 							direction = 8;
 						}
-						//Augmentation incrémentale de la direction
+						//Augmentation incrÃ©mentale de la direction
 						nbPassageVirageGauche++;
 						if(nbPassageVirageGauche<=10){
 							direction++;
@@ -226,12 +260,12 @@ public class Robot2 {
 						//System.out.println("Droit sur la ligne");
 						nbPassageVirageGauche = 0;
 						nbPassageLigneDroite = 0;
-						//Vitesse fixé a 2.2 pour les virage et direction a 5
+						//Vitesse fixÃ© a 2.2 pour les virage et direction a 5
 						vitesse = 2.2;
 						if(nbPassageVirageDroite == 0){
 							direction = 8;
 						}
-						//Augmentation incrémentale de la direction
+						//Augmentation incrÃ©mentale de la direction
 						nbPassageVirageDroite++;
 						if(nbPassageVirageDroite<=10){
 							direction++;
@@ -251,7 +285,7 @@ public class Robot2 {
 						eq.setVitesse(vitesse);
 						Delay.msDelay(15);
 						eq.setDirection(direction);*/
-						//Marqueur sonor pour indiqué l'entrée dans un carrefour
+						//Marqueur sonor pour indiquÃ© l'entrÃ©e dans un carrefour
 						Sound.buzz();
 						carrefour(1,eq);
 						Sound.buzz();
@@ -270,7 +304,7 @@ public class Robot2 {
 						  Delay.msDelay(50); 
 			}
 			
-			//Frequence d'échantillonage fixé pour les capteurs
+			//Frequence d'Ã©chantillonage fixÃ© pour les capteurs
 			Delay.msDelay(75);
 		}
 		
