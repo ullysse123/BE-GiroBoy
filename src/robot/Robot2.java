@@ -48,10 +48,21 @@ public class Robot2 {
 	public static void depacement(int x, Equilibre eq){
 		//x = 0 on ne cherche pas a depacer, ligne droite
 		//x = 1 on depace
+		int nbPassage = 0;
+		int nbIterations = 0;
+		int coul = -1;
+		int etatCour = -1;
+		int etatPrev = -1;
+		
+		//Correction appliqué pour la direction
+		int direction = 9;
+		int directionR = 4;
+		
 		if(x == 0){
 			//On ne cherche pas a depacer
 			eq.setVitesse(5);
 			while(!finDepacement(x)){
+				
 				Delay.msDelay(100);
 			}
 		}else{
@@ -59,6 +70,39 @@ public class Robot2 {
 				//On cherche a depacer par la droite. --> Meme problematique que pour tourner a droite sur une intersection
 				eq.setVitesse(5);
 				while(!finDepacement(x)){
+					//On regarde sur quel couleur est notre capteur gauche
+					if(lightSurLigne()){
+						coul = 1;
+					}else{
+						coul = 0;
+					}
+					//Si  la couleur capté est différente de la couleur courante alors on met a jour
+					if(coul != etatCour && nbPassage <=6){
+						if(nbIterations >= 3 && nbPassage <=4){
+							nbPassage++;
+							etatPrev = etatCour;
+							etatCour = coul;
+							nbIterations = 0;
+						}else{
+							if(nbIterations >= 1){
+								nbPassage++;
+								etatPrev = etatCour;
+								etatCour = coul;
+								nbIterations = 0;
+							}else{
+								nbIterations++;
+							}
+						}
+					}
+					//On fait maintenant les correctif de suivie de ligne
+					if(colorSurLigne()){
+						eq.setDirection(direction);
+					}else{
+						if(lightSurLigne())
+							eq.setDirection(-directionR);
+						else
+							eq.setDirection(0);
+					}
 					Delay.msDelay(100);
 				}
 			}
@@ -122,9 +166,9 @@ public class Robot2 {
 						coul = 0;
 					}
 					//Si la couleur capté est differente de la couleur courante alors on met a jour
-					if(coul != etatCour && nbPassage <6){
+					if(coul != etatCour && nbPassage <=6){
 						//nbIteration limiteur pour eviter de prendre en compte les corrections de trajetoire comme changement d'etat
-						if(nbIterations >=3 && nbPassage<=4){
+						if(nbIterations >=3 && nbPassage<=5){
 							nbPassage++;
 							etatPrev = etatCour;
 							etatCour = coul;
@@ -158,8 +202,8 @@ public class Robot2 {
 						coul = 0;
 					}
 					//Si  la couleur capté est différente de la couleur courante alors on met a jour
-					if(coul != etatCour && nbPassage <6){
-						if(nbIterations >= 3 && nbPassage <=4){
+					if(coul != etatCour && nbPassage <=6){
+						if(nbIterations >= 3 && nbPassage <=5){
 							nbPassage++;
 							etatPrev = etatCour;
 							etatCour = coul;
