@@ -11,16 +11,19 @@ public class Robot2 {
 	static ColorSensor color;
 	static LightSensor light;
 	
+	//Fonction permettant de savoir si le capteur de lumière est sur la ligne
 	public static boolean lightSurLigne(){
 		float seuil = 0.4f;
 		return seuil<light.getModeRouge();
 	}
 	
+	//Fonction permettant de savoir si le capteur de couleur est sur la ligne
 	public static boolean colorSurLigne(){
 		float seuil = 0.0385f;
 		return seuil<color.getRedMode();
 	}
 	
+	//Fonction permettant de savoir si on capteur la ligne sur le capteur droit, ou gauche ou les deux
 	public static int sensLigne(){
 		
 		int i = 0;
@@ -204,12 +207,14 @@ public class Robot2 {
 	}
 	
 	//Attention : fort risque d'erreur. Si carrefour marche pas revoir cette fonction
+	//Fonction determinant si on sort oui ou non d'un carrefour
 	public static boolean sortieCarrefour(int nbPassage, int prev, int cour){
 		boolean retour = false;
 		retour = (nbPassage >= 5) && (prev == 1) && (cour == 0);
 		return retour;
 	}
 	
+	//Fonction permettant au robot de franchir un carrefour
 	//x = 1 prendre la branche droite du carrefour || x = 0 brandre la branche gauche du carrefour
 	public static void carrefour(int x, Equilibre eq){
 		
