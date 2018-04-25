@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Graph {
 	
-	public List<Integer> voisin(int i) {
+	public List<Integer> voisin(int i) {//Rajouter le grand père pour savoir de quel coté on vient TODO
 		List<Integer>v=new ArrayList<Integer>();
-		switch (i) {//1er 0d, 2nd 1g next->demi tour
+		switch (i) {//1er 0d, 2nd 1g 
 			case 1:v.add(4);
 			v.add(2);
 			v.add(3);
