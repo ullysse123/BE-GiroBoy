@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class AEtoile {
-	static Graph graph=new Graph();
 	
 	private static List <Sommet> insererLesFils (List <Sommet> listAttentePrec, List <Sommet> listFils, List<Sommet> listVu) {
 		List <Sommet> listAttente= listAttentePrec;
@@ -31,7 +30,7 @@ public class AEtoile {
 		return listAttente;
 	}
 	
-	private static Sommet creationFils (Sommet sommetPere,int cout,Heuristique heur) {
+	private static Sommet creationFils (Graph graph,Sommet sommetPere,int cout,Heuristique heur) {
 		Sommet pere=sommetPere;
 		List <Sommet> sommetFils=new ArrayList<Sommet>();
 		for(Sommet fils:pere.getFilsList()) {
@@ -53,13 +52,13 @@ public class AEtoile {
 	}
 	
 	//Fonction aetoile
-	public static List<Integer> fonction (Sommet sommetDepart,int cout,int but,Heuristique heur) {
+	public static List<Integer> fonction (Graph graph,Sommet sommetDepart,int cout,int but,Heuristique heur) {
 		//Initialisation du A*
 		List <Integer> directionList=new ArrayList<Integer>();
 		List <Sommet> listVu=new ArrayList<Sommet>();
 		Boolean estBut=false;
 		List <Sommet> listAttente=new ArrayList <Sommet>();
-		Sommet pereActuelle=creationFils(sommetDepart,cout,heur);
+		Sommet pereActuelle=creationFils(graph,sommetDepart,cout,heur);
 		listAttente=insererLesFils(listAttente , pereActuelle.getFilsList(),listVu);
 		listVu.addAll(pereActuelle.getFilsList());
 		//Parcours de la liste d'attente
@@ -70,7 +69,7 @@ public class AEtoile {
 				directionList=pereActuelle.getListDirection();
 			//Sinon continue de parcourir
 			}else {
-				pereActuelle=creationFils(listAttente.get(0),cout,heur);
+				pereActuelle=creationFils(graph,listAttente.get(0),cout,heur);
 				//System.out.println(pereActuelle.getNom());
 				for(Sommet somFils:pereActuelle.getFilsList()) {
 					if(!listVu.contains(somFils))
@@ -88,13 +87,14 @@ public class AEtoile {
 		HeuristiqueBase hb=new HeuristiqueBase();
 		List <Sommet> sommetPetitFils=new ArrayList<Sommet>();
 		int j=0;
+		Graph graph=new Graph();
 		for(int i:graph.voisin(depart.getNom())) {
 			sommetPetitFils.add(new Sommet(i,0,j));
 			j++;
 		}
 		depart.setFilsList(sommetPetitFils);
 		//System.out.println("List Sommet traité:");
-		List <Integer> list=fonction(depart,1,7,hb);
+		List <Integer> list=fonction(graph,depart,1,7,hb);
 		System.out.println("List direction:");
 		for(int i:list) {
 			System.out.println(i);
