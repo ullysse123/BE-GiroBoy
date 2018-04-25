@@ -37,65 +37,58 @@ public class Robot2 {
 	//TODO : Fonction marqueSol
 	//Objectif de la fonction : Definir si la marque est simple, double ou pleine
 	//pour ensuite lancer le carrefour, l'arret/demi-tour ou le depacement.
-	
+		
 	//TODO : Fonction depacement
 	//Objectif de la fonction : faire emprunter les axes de depacement par le robot
-	
-	//TODO : Fonction marqueSol
-		//Objectif de la fonction : Definir si la marque est simple, double ou pleine
-		//pour ensuite lancer le carrefour, l'arret/demi-tour ou le depacement.
+	public static boolean finDepacement(int type){
+		//TODO Doit permettre de determiner quand on sort d'un depacement
+		return false;
+	}
 		
-		//TODO : Fonction depacement
-		//Objectif de la fonction : faire emprunter les axes de depacement par le robot
-		public static boolean finDepacement(int type){
-			//TODO Doit permettre de determiner quand on sort d'un depacement
-			return false;
-		}
-		
-		public static void depacement(int x, Equilibre eq){
-			//x = 0 on ne cherche pas a depacer, ligne droite
-			//x = 1 on depace
-			if(x == 0){
-				//On ne cherche pas a depacer
+	public static void depacement(int x, Equilibre eq){
+		//x = 0 on ne cherche pas a depacer, ligne droite
+		//x = 1 on depace
+		if(x == 0){
+			//On ne cherche pas a depacer
+			eq.setVitesse(5);
+			while(!finDepacement(x)){
+				Delay.msDelay(100);
+			}
+		}else{
+			if (x == 1){
+				//On cherche a depacer par la droite. --> Meme problematique que pour tourner a droite sur une intersection
 				eq.setVitesse(5);
 				while(!finDepacement(x)){
 					Delay.msDelay(100);
 				}
-			}else{
-				if (x == 1){
-					//On cherche a depacer par la droite. --> Meme problematique que pour tourner a droite sur une intersection
-					eq.setVitesse(5);
-					while(!finDepacement(x)){
-						Delay.msDelay(100);
-					}
-				}
 			}
-			
-			
 		}
 		
-		//TODO : demi-tour
-		//Objectif de la fonction : Envoyer la suite de sequence permettant au robot de faire
-		//un demi tour.
-		/* Sequence permettant de faire un demi tour :
-		 * test.setVitesse(0);
-			Delay.msDelay(20);
-			test.setDirection(50);
-			Delay.msDelay(880);
-			test.setDirection(0);
-		 */
-		public static void demiTour(Equilibre eq){
-			eq.setVitesse(0);
-			Delay.msDelay(20);
-			eq.setDirection(50);
-			Delay.msDelay(800);
-			eq.setDirection(0);
-		}
+		
+	}
+		
+	//TODO : demi-tour
+	//Objectif de la fonction : Envoyer la suite de sequence permettant au robot de faire
+	//un demi tour.
+	/* Sequence permettant de faire un demi tour :
+	 * test.setVitesse(0);
+		Delay.msDelay(20);
+		test.setDirection(50);
+		Delay.msDelay(880);
+		test.setDirection(0);
+	 */
+	public static void demiTour(Equilibre eq){
+		eq.setVitesse(0);
+		Delay.msDelay(20);
+		eq.setDirection(50);
+		Delay.msDelay(800);
+		eq.setDirection(0);
+	}
 	
 	//Attention : fort risque d'erreur. Si carrefour marche pas revoir cette fonction
 	public static boolean sortieCarrefour(int nbPassage, int prev, int cour){
 		boolean retour = false;
-		retour = (nbPassage >= 4) && (prev == 0) && (cour == 1);
+		retour = (nbPassage >= 5) && (prev == 0) && (cour == 1);
 		return retour;
 	}
 	
@@ -111,6 +104,7 @@ public class Robot2 {
 		int etatCour = -1;
 		int coul = -1;
 		int nbPassage = 0;
+		int nbIterations = 0;
 		
 		//Correction appliqué pour la direction
 		int direction = 9;
@@ -129,9 +123,22 @@ public class Robot2 {
 					}
 					//Si la couleur capté est differente de la couleur courante alors on met a jour
 					if(coul != etatCour && nbPassage <6){
-						nbPassage++;
-						etatPrev = etatCour;
-						etatCour = coul;
+						//nbIteration limiteur pour eviter de prendre en compte les corrections de trajetoire comme changement d'etat
+						if(nbIterations >=3 && nbPassage<=4){
+							nbPassage++;
+							etatPrev = etatCour;
+							etatCour = coul;
+							nbIterations = 0;
+						}else{
+							if(nbIterations >= 1){
+								nbPassage++;
+								etatPrev = etatCour;
+								etatCour = coul;
+								nbIterations = 0;
+							}else{
+								nbIterations++;
+							}
+						}
 					}
 					//On fait maintenant les correctif de suivie de ligne
 					if(lightSurLigne()){
@@ -152,9 +159,21 @@ public class Robot2 {
 					}
 					//Si  la couleur capté est différente de la couleur courante alors on met a jour
 					if(coul != etatCour && nbPassage <6){
-						nbPassage++;
-						etatPrev = etatCour;
-						etatCour = coul;
+						if(nbIterations >= 3 && nbPassage <=4){
+							nbPassage++;
+							etatPrev = etatCour;
+							etatCour = coul;
+							nbIterations = 0;
+						}else{
+							if(nbIterations >= 1){
+								nbPassage++;
+								etatPrev = etatCour;
+								etatCour = coul;
+								nbIterations = 0;
+							}else{
+								nbIterations++;
+							}
+						}
 					}
 					//On fait maintenant les correctif de suivie de ligne
 					if(colorSurLigne()){
