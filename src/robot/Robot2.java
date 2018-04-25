@@ -202,7 +202,7 @@ public class Robot2 {
 		eq.setVitesse(0);
 		Delay.msDelay(20);
 		eq.setDirection(50);
-		Delay.msDelay(800);
+		Delay.msDelay(950);
 		eq.setDirection(0);
 	}
 	
