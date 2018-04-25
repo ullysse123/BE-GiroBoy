@@ -40,9 +40,11 @@ public class AEtoile {
 			fils.getListDirection().add(fils.getDirection());
 			List <Sommet> sommetPetitFils=new ArrayList<Sommet>();
 			int j=0;
+			//j pour la direction: 0 pour droite, 1 pour gauche, 2 pour demi-tour ( ou 2 et 3 pour dans le sens inverse, conversion de 2/3 en 0/1 avec modulo 2)
 			for(int i:graph.voisin(fils.getNom())) {
 				sommetPetitFils.add(new Sommet(i,cout,j));
 				j++;
+				if(j>2)j=2;
 			}
 			fils.setFilsList(sommetPetitFils);
 			sommetFils.add(fils);
