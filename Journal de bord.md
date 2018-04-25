@@ -21,3 +21,5 @@ Jour 10 : Réecriture du carrefour, tentative d'implémentation différente.
 Jour 11 : Debug de l'equilibre pour enlever l'erreur faisant que le robot parte à droite + Reecriture de carrefour
 
 Jour 12 : Ajout de la fonction de demi-tour et de depacement ( incomplete ) + Debug du virage dans le suivi de ligne + Tentative de debug de l'intersection (Problème de detection de fin)
+
+Jour 13 : Bug de carrefour enfin corrigé + Code de depacement fini
