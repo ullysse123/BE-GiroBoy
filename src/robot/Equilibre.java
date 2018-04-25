@@ -10,7 +10,7 @@ public class Equilibre extends Thread{
 
 	//Vitesse et direction ( sera utilisé plus tard )
 	static double vitesse = 0; //[-10;10]//5,10
-	static double direction = 0; //[-50;50]
+	static int direction = 0; //[-50;50]
 	//Angle limite 
 	static int angleLimite=45;
 	//Modules utilisées pour maintenir le robot en equilibre
@@ -34,7 +34,7 @@ public class Equilibre extends Thread{
 		}
 	}
 	
-	public void setDirection (double x){
+	public void setDirection (int x){
 		if (x<=50 && x>=-50){
 			Equilibre.direction = x;
 		}else{
@@ -61,7 +61,7 @@ public class Equilibre extends Thread{
 		double deriveMoteur1 = 0;
 		double deriveMoteur2 = 0;
 		double deriveMoteur3 = 0;
-		double directionC;
+		int directionC;
 		//Variable temporelles
 		long chrono = 0;
 		long dernierChrono = 0;
@@ -170,8 +170,8 @@ public class Equilibre extends Thread{
 					directionC=direction-2;
 				else
 					directionC=direction;
-				droite.setPower((int)(puissance-directionC));
-				gauche.setPower((int)(puissance+directionC));
+				droite.setPower((int)(puissance)-directionC);
+				gauche.setPower((int)(puissance)+directionC);
 			}
 			
 			//Mise a jour des compteurs
