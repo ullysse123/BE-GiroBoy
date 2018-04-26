@@ -5,11 +5,16 @@ import lejos.hardware.Sound;
 import lejos.utility.Delay;
 import modules.ColorSensor;
 import modules.LightSensor;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Robot2 {
 
 	static ColorSensor color;
 	static LightSensor light;
+	
+	//liste d'entier indiquant les direction a prendre
+	static List<Integer> listDirection;
 	
 	//Fonction permettant de savoir si le capteur de lumière est sur la ligne
 	public static boolean lightSurLigne(){
@@ -342,11 +347,18 @@ public class Robot2 {
 		int nbPassageVirageGauche = 0;
 		int nbPassageLigneDroite = 0;
 		
+		//Variable pour le carrefour
+		int leftright = -1;
+		int par = 0;
+		
+		//Booleen d'arret
+		boolean onContinu = true;
+		
 		//Lancement de l'équilibre avec une vitesse initiale pour démarrer le circuit
 		eq.start();
 		eq.setVitesse(3);
 		
-		while(!Button.ESCAPE.isDown()){
+		while(!Button.ESCAPE.isDown() && onContinu){
 			
 			switch(sensLigne()){
 				
@@ -414,15 +426,19 @@ public class Robot2 {
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
 						nbPassageVirageGauche = 0;
-						/*vitesse = 3;
-						direction = 25;
-						eq.setVitesse(vitesse);
-						Delay.msDelay(15);
-						eq.setDirection(direction);*/
-						//Marqueur sonor pour indiqué l'entrée dans un carrefour
-						Sound.buzz();
-						carrefour(1,eq);
-						Sound.buzz();
+						//Recuperation de la direction
+						leftright = listDirection.get(par).intValue();
+						par++;
+						if(leftright!=-1){
+							//Marqueur sonor pour indiqué l'entrée dans un carrefour
+							Sound.buzz();
+							carrefour(leftright,eq);
+							Sound.buzz();
+						}else{
+							eq.setVitesse(0);
+							eq.setDirection(0);
+							onContinu = false;
+						}
 						break;
 						
 				default : //Ne sortira jamais de [0;3] mais si c'est le cas alors stop vitesse/direction et beep sonore
@@ -444,9 +460,18 @@ public class Robot2 {
 		
 	}
 	
+	public static List<Integer> instanceListDirectionCompet(){
+		List<Integer> list = new ArrayList<>();
+		list.add(1);
+		list.add(0);
+		list.add(1);
+		list.add(0);
+		list.add(-1);
+		return list;
+	}
 	
 	public static void main(String[] args) {
-		
+		listDirection = instanceListDirectionCompet();
 		suiveurDeLigne();
 
 	}
