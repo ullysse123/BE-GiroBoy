@@ -6,6 +6,7 @@ import lejos.utility.Delay;
 import modules.ColorSensor;
 import modules.LightSensor;
 import java.util.List;
+import java.util.Random;
 import java.util.ArrayList;
 
 public class Robot2 {
@@ -460,12 +461,28 @@ public class Robot2 {
 		
 	}
 	
+	//Permet d'instancier la liste de direction servant a la premiere competition
 	public static List<Integer> instanceListDirectionCompet(){
 		List<Integer> list = new ArrayList<>();
 		list.add(1);
 		list.add(0);
 		list.add(1);
 		list.add(0);
+		list.add(-1);
+		return list;
+	}
+	
+	//Permet d'instancier une liste de direction aleatoire pour des tests
+	public static List<Integer> instanceListDirectionRandom(){
+		List<Integer> list = new ArrayList<>();
+		Random rand = new Random();
+		for(int i = 0;i<25;i++){
+			if(rand.nextInt(1) >= 0.5f){
+				list.add(1);
+			}else{
+				list.add(0);
+			}
+		}
 		list.add(-1);
 		return list;
 	}
