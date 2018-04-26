@@ -311,7 +311,7 @@ public class Robot2 {
 			}
 			
 			//Une fois sur l'embranchement final on laisse avancer le robot pour qu'il sorte de la double ligne
-			Delay.msDelay(750);
+			Delay.msDelay(500);
 			
 		}else{
 			Sound.playTone(800, 10, 10);
@@ -330,7 +330,7 @@ public class Robot2 {
 		color = new ColorSensor();
 		light = new LightSensor();
 		
-		//Ensemble de nos variables permettant de fixer la vitesse et la direction 
+		//Ensemble de nos variables permettant de fixer la vitesse et la direction
 		double vitesse = 3;
 		int direction = 0;
 		int nbPassageVirageDroite = 0;
@@ -375,9 +375,9 @@ public class Robot2 {
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
 						//Vitesse fixé a 2.2 pour les virages et direction a 8
-						vitesse = 2.2;
+						vitesse = 2.6;
 						if(nbPassageVirageGauche == 0){
-							direction = 8;
+							direction = 10;
 						}
 						//Augmentation incrémentale de la direction
 						nbPassageVirageGauche++;
@@ -394,9 +394,9 @@ public class Robot2 {
 						nbPassageVirageGauche = 0;
 						nbPassageLigneDroite = 0;
 						//Vitesse fixé a 2.2 pour les virage et direction a 8
-						vitesse = 2.2;
+						vitesse = 2.6;
 						if(nbPassageVirageDroite == 0){
-							direction = 8;
+							direction = 10;
 						}
 						//Augmentation incrémentale de la direction
 						nbPassageVirageDroite++;
@@ -475,7 +475,7 @@ public class Robot2 {
 	public static List<Integer> instanceAEtoile(){
 		AEtoile aetoile = new AEtoile();
 		List<Integer> list = new ArrayList<>();
-		list = aetoile.fonction(new Graph(), new Sommet(1,0,2), 1, 5, new HeuristiqueBase());
+		//list = aetoile.fonction(new Graph(), new Sommet(1,0,2), 1, 5, new HeuristiqueBase());
 		return list;
 	}
 	
