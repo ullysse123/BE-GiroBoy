@@ -1,0 +1,1 @@
+Ce dossier comprend les code encore commenté avec les tests et anciens morceau de code.

@@ -13,7 +13,6 @@ public class ColorSensor {
 		
 	}
 	
-	//Obtention de la valeur avec le mode red
 	public float getRedMode(){
 		SampleProvider sample = sensor.getRedMode();
 		float [] res = new float [sample.sampleSize()];
@@ -21,7 +20,6 @@ public class ColorSensor {
 		return res[0];
 	}
 	
-	//Obtention de la couleur
 	public float getColor(){
 		SampleProvider sample = sensor.getColorIDMode();
 		float [] res = new float [sample.sampleSize()];
@@ -29,7 +27,6 @@ public class ColorSensor {
 		return res[0];
 	}
 	
-	//Fermeture du capteur
 	public void close() {
 		sensor.close();
 	}

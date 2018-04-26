@@ -11,6 +11,5 @@ public class TouchSensor {
 		sensor = new EV3TouchSensor(SensorPort.S2);
 	}
 	
-	//Non utilisé pour le moment
 	
 }

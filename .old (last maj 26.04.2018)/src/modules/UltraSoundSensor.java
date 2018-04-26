@@ -10,5 +10,4 @@ public class UltraSoundSensor {
 		sensor = new EV3UltrasonicSensor(SensorPort.S2);
 	}
 	
-	//Non utilisé pour le moment
 }

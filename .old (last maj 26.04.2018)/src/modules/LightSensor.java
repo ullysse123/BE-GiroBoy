@@ -14,12 +14,10 @@ public class LightSensor {
 		
 	}
 	
-	//Obtention de la valeur de la lumière reflechis
 	public int getReflexionLumiere(){
 		return sensor.getFloodlight();
 	}
 	
-	//Obtention de la valeur via le red mode
 	public float getModeRouge(){
 		SampleProvider sample = sensor.getRedMode();
 		float [] res = new float [sample.sampleSize()];
@@ -27,12 +25,10 @@ public class LightSensor {
 		return res[0];
 	}
 	
-	//Allume la led pour la reflexion de la lumière
 	public void allumerLedReflexion(boolean onOff){
 		sensor.setFloodlight(onOff);
 	}
 	
-	//Ferme le capteur
 	public void close() {
 		sensor.close();
 	}
