@@ -35,16 +35,15 @@ public class AEtoile {
 		List <Sommet> sommetFils=new ArrayList<Sommet>();
 		for(Sommet fils:pere.getFilsList()) {
 			fils.setGh(heur.fonction(fils));
-			if(!pere.getListDirection().isEmpty())
+			if(!pere.getListDirection().isEmpty())//Permet de savoir le trajet à la fin
 				fils.getListDirection().addAll(pere.getListDirection());
 			fils.getListDirection().add(fils.getDirection());
 			List <Sommet> sommetPetitFils=new ArrayList<Sommet>();
 			int j=0;
-			//j pour la direction: 0 pour droite, 1 pour gauche, 2 pour demi-tour ( ou 2 et 3 pour dans le sens inverse, conversion de 2/3 en 0/1 avec modulo 2)
-			for(int i:graph.voisin(fils.getNom())) {
+			//1er j=0 droite, 2nd j=1 gauche, 3nd j=2 demi-tour (dans la liste)
+			for(int i:graph.voisin(fils.getNom(),graph.whereDoYouCome(pere.getNom(),fils.getNom()))) {
 				sommetPetitFils.add(new Sommet(i,cout,j));
 				j++;
-				if(j>2)j=2;
 			}
 			fils.setFilsList(sommetPetitFils);
 			sommetFils.add(fils);
@@ -60,6 +59,13 @@ public class AEtoile {
 		List <Sommet> listVu=new ArrayList<Sommet>();
 		Boolean estBut=false;
 		List <Sommet> listAttente=new ArrayList <Sommet>();
+		directionList = aEtoile(graph, sommetDepart, cout, but, heur, directionList, listVu, estBut, listAttente);
+		return directionList;
+	}
+
+	//Implementation de A*
+	private static List<Integer> aEtoile(Graph graph, Sommet sommetDepart, int cout, int but, Heuristique heur,
+			List<Integer> directionList, List<Sommet> listVu, Boolean estBut, List<Sommet> listAttente) {
 		Sommet pereActuelle=creationFils(graph,sommetDepart,cout,heur);
 		listAttente=insererLesFils(listAttente , pereActuelle.getFilsList(),listVu);
 		listVu.addAll(pereActuelle.getFilsList());
@@ -72,7 +78,7 @@ public class AEtoile {
 			//Sinon continue de parcourir
 			}else {
 				pereActuelle=creationFils(graph,listAttente.get(0),cout,heur);
-				//System.out.println(pereActuelle.getNom());
+				//System.out.println(pereActuelle.getNom());//Debug
 				for(Sommet somFils:pereActuelle.getFilsList()) {
 					if(!listVu.contains(somFils))
 						listVu.add(somFils);
@@ -90,7 +96,7 @@ public class AEtoile {
 		List <Sommet> sommetPetitFils=new ArrayList<Sommet>();
 		int j=0;
 		Graph graph=new Graph();
-		for(int i:graph.voisin(depart.getNom())) {
+		for(int i:graph.voisin(depart.getNom(),0)) {
 			sommetPetitFils.add(new Sommet(i,0,j));
 			j++;
 		}
