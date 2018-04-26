@@ -238,7 +238,6 @@ public class Robot2 {
 		
 		//Correction appliqué pour la direction
 		int direction = 12;
-		int directionR = 4;
 		
 		if (x==0 || x==1){
 			while(!(sortieCarrefour(nbPassage,etatPrev,etatCour)) && !Button.ENTER.isDown()){
@@ -274,10 +273,7 @@ public class Robot2 {
 					if(lightSurLigne()){
 						eq.setDirection(-direction);
 					}else{
-						if(colorSurLigne())
-							eq.setDirection(directionR);
-						else
-							eq.setDirection(0);
+						eq.setDirection(0);
 					}
 				}else{
 					//Si on tourne a droite
@@ -309,10 +305,7 @@ public class Robot2 {
 					if(colorSurLigne()){
 						eq.setDirection(direction);
 					}else{
-						if(lightSurLigne())
-							eq.setDirection(-directionR);
-						else
-							eq.setDirection(0);
+						eq.setDirection(0);
 					}
 					
 				}
@@ -484,7 +477,7 @@ public class Robot2 {
 	public static List<Integer> instanceAEtoile(){
 		AEtoile aetoile = new AEtoile();
 		List<Integer> list = new ArrayList<>();
-		list = aetoile.fonction(new Graph(), new Sommet(1,0,2), 1, 5, new HeuristiqueBase());
+		//list = aetoile.fonction(new Graph(), new Sommet(1,0,2), 1, 5, new HeuristiqueBase());
 		return list;
 	}
 	
