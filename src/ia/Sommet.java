@@ -10,14 +10,30 @@ public class Sommet {
 	private List <Sommet> filsList= new ArrayList <Sommet>();
 	private List <Integer> listDirection=new ArrayList <Integer>();
 	private int direction;
+	private int sens;
 	
-	public Sommet(int nom, int gh, int direction) {
+	public Sommet(int nom, int gh, int direction,int sens) {
 		this.nom = nom;
 		this.gh = gh;
 		this.direction=direction;
+		this.sens=sens;
 	}
 	
 	
+
+
+	public int getSens() {
+		return sens;
+	}
+
+
+
+
+	public void setSens(int sens) {
+		this.sens = sens;
+	}
+
+
 
 
 	public void setListDirection(List<Integer> listDirection) {

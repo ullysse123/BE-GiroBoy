@@ -19,7 +19,7 @@ public class AEtoile {
 				//Parcours de la liste d'attente à trier
 				for(int i=0;i<listAttente.size() && !find; i++) {
 					Sommet attenteATraiter=listAttente.get(i);
-					//si on a trouvé la place pour le fils
+					//si on a trouvé la place pour le fils, le placer dans la liste
 					if(find = filsATraiter.getGH()<attenteATraiter.getGH()) {
 						listAttente.add(i, filsATraiter);
 					}
@@ -43,10 +43,11 @@ public class AEtoile {
 			fils.getListDirection().add(fils.getDirection());
 			List <Sommet> sommetPetitFils=new ArrayList<Sommet>();
 			int j=1;
-			//1er j=1 droite, 2nd j=0 gauche, 3nd j=2 demi-tour (dans la liste)
+			//Creation des petits fils pour creer le fils
+			//Direction:1er j=1 droite, 2nd j=0 gauche, 3nd j=2 demi-tour (dans la liste)
 			dernierSens=graph.whereDoYouCome(pere.getNom(),fils.getNom());
 			for(int i:graph.voisin(fils.getNom(),dernierSens)) {
-				sommetPetitFils.add(new Sommet(i,cout,j));
+				sommetPetitFils.add(new Sommet(i,0,j,graph.whereDoYouCome(sommetPere.getNom(), i)));
 				j--;
 			}
 			fils.setFilsList(sommetPetitFils);
@@ -56,9 +57,8 @@ public class AEtoile {
 		return pere;
 	}
 	
-	//Fonction aetoile
-	public static List<Integer> fonction (Graph graph,Sommet sommetDepart,int cout,int but,Heuristique heur) {
-		//Initialisation du A*
+	//Fonction d'initialisation du A*
+	private static List<Integer> initAEtoile (Graph graph,Sommet sommetDepart,int cout,int but,Heuristique heur) {
 		List <Integer> directionList=new ArrayList<Integer>();
 		List <Sommet> listVu=new ArrayList<Sommet>();
 		Boolean estBut=false;
@@ -78,11 +78,12 @@ public class AEtoile {
 			estBut=pereActuelle.getNom()==but;
 			//si but alors chemin trouvé
 			if(estBut) {
-				directionList=pereActuelle.getListDirection();
+				directionList=pereActuelle.getListDirection();//rajouter la direction fin
+				dernierSens=pereActuelle.getSens();
 			//Sinon continue de parcourir
 			}else {
 				pereActuelle=creationFils(graph,listAttente.get(0),cout,heur);
-				//System.out.println(pereActuelle.getNom());//Debug
+				System.out.println(pereActuelle.getNom());//Debug
 				//System.out.println("\nList fils:");
 				if(!listVu.contains(pereActuelle))
 					listVu.add(pereActuelle);
@@ -94,19 +95,30 @@ public class AEtoile {
 		return directionList;
 	}
 	
-	public static void main(String[] args) {
-		Sommet depart=new Sommet(1,0,2);
-		HeuristiqueBase hb=new HeuristiqueBase();
+	public static List <Integer> mainProgram (int numDepart,int numFin,Graph graph, Heuristique hb){
+		//Initialisation necessaire pour l'initialisation de AEtoile
+		Sommet depart=new Sommet(numDepart,0,2,dernierSens);
 		List <Sommet> sommetPetitFils=new ArrayList<Sommet>();
 		int j=1;
-		Graph graph=new Graph();
 		for(int i:graph.voisin(depart.getNom(),dernierSens)) {
-			sommetPetitFils.add(new Sommet(i,0,j));
+			sommetPetitFils.add(new Sommet(i,0,j,graph.whereDoYouCome(depart.getNom(), i)));
 			j--;
 		}
 		depart.setFilsList(sommetPetitFils);
 		//System.out.println("List Sommet traité:");//Debug
-		List <Integer> list=fonction(graph,depart,1,6,hb);
+		return initAEtoile(graph,depart,numDepart,numFin,hb);
+	}
+	
+	//Fonction Test
+	public static void main(String[] args) {
+		
+		Heuristique hb=new HeuristiqueBase();
+		Heuristique hb2=new HeuristiqueBase2();
+		Graph graph=new Graph();
+		List <Integer> list=mainProgram(1,6,graph,hb);
+		List <Integer> list2=mainProgram(6,1,graph,hb2);;
+		list.addAll(list2);
+		list.add(-1);
 		System.out.println("List direction:");
 		for(int i:list) {
 			System.out.println(i);

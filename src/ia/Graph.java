@@ -6,28 +6,34 @@ import java.util.List;
 public class Graph {
 	
 	
-	//whereDoYouCome et voisin sont liée
+	//whereDoYouCome et voisin sont liées
 	public int whereDoYouCome (int numGrandPere, int numPere) {
 		int direction=0;
-		switch (numPere) {//Convention: 0 si Nord ou Ouest , 1 sinon (si confusion interpretation)
-		case 1:if(numGrandPere!=3 && numGrandPere != 5)
-			direction=1;
-		break;
-		case 2:if(numGrandPere!=3 && numGrandPere != 6)
-			direction=1;
-		break;
-		case 3:if(numGrandPere!=1 && numGrandPere != 5)
-			direction=1;
-		break;
-		case 4:if(numGrandPere!=6 && numGrandPere != 5)
-			direction=1;
-		break;
-		case 5:if(numGrandPere!=4 && numGrandPere != 6)
-			direction=1;
-		break;
-		default:if(numGrandPere!=4 && numGrandPere != 5)
-			direction=1;
-		break;
+		switch (numPere) {//Convention: 0 si Nord ou Ouest , 1 sinon (si confusion interpretation selon le chemin)
+		case 1:
+			if(numGrandPere!=3 && numGrandPere != 5)
+				direction=1;
+			break;
+		case 2:
+			if(numGrandPere!=3 && numGrandPere != 6)
+				direction=1;
+			break;
+		case 3:
+			if(numGrandPere!=1 && numGrandPere != 5)
+				direction=1;
+			break;
+		case 4:
+			if(numGrandPere!=6 && numGrandPere != 5)
+				direction=1;
+			break;
+		case 5:
+			if(numGrandPere!=4 && numGrandPere != 6)
+				direction=1;
+			break;
+		default:
+			if(numGrandPere!=4 && numGrandPere != 5)
+				direction=1;
+			break;
 	}
 		return direction;
 	}
