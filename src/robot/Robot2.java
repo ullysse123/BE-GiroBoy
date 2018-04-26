@@ -255,6 +255,7 @@ public class Robot2 {
 							etatCour = coul;
 							nbIterations = 0;
 						}else{
+							// /!\ LAST MODIF
 							if(nbIterations >= 1){
 								nbPassage++;
 								etatPrev = etatCour;
@@ -287,6 +288,7 @@ public class Robot2 {
 							etatCour = coul;
 							nbIterations = 0;
 						}else{
+							// /!\ LAST MODIF
 							if(nbIterations >= 1){
 								nbPassage++;
 								etatPrev = etatCour;
@@ -309,6 +311,8 @@ public class Robot2 {
 			}
 			
 			//Une fois sur l'embranchement final on laisse avancer le robot pour qu'il sorte de la double ligne
+			eq.setDirection(0);
+			eq.setVitesse(5);
 			Delay.msDelay(500);
 			
 		}else{
