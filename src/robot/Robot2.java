@@ -255,8 +255,7 @@ public class Robot2 {
 							etatCour = coul;
 							nbIterations = 0;
 						}else{
-							// /!\ LAST MODIF
-							if(nbIterations >= 2){
+							if(nbIterations >= 1){
 								nbPassage++;
 								etatPrev = etatCour;
 								etatCour = coul;
@@ -288,8 +287,7 @@ public class Robot2 {
 							etatCour = coul;
 							nbIterations = 0;
 						}else{
-							// /!\ LAST MODIF
-							if(nbIterations >= 2){
+							if(nbIterations >= 1){
 								nbPassage++;
 								etatPrev = etatCour;
 								etatCour = coul;
