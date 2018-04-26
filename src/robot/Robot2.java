@@ -20,14 +20,12 @@ public class Robot2 {
 	
 	//Fonction permettant de savoir si le capteur de lumière est sur la ligne
 	public static boolean lightSurLigne(){
-		float seuil = 0.4f;
-		return seuil<light.getModeRouge();
+		return 0.4f<light.getModeRouge();
 	}
 	
 	//Fonction permettant de savoir si le capteur de couleur est sur la ligne
 	public static boolean colorSurLigne(){
-		float seuil = 0.0385f;
-		return seuil<color.getRedMode();
+		return 0.0385f<color.getRedMode();
 	}
 	
 	//Fonction permettant de savoir si on capteur la ligne sur le capteur droit, ou gauche ou les deux
@@ -377,7 +375,7 @@ public class Robot2 {
 						//Vitesse fixé a 2.2 pour les virages et direction a 8
 						vitesse = 2.6;
 						if(nbPassageVirageGauche == 0){
-							direction = 10;
+							direction = 9;
 						}
 						//Augmentation incrémentale de la direction
 						nbPassageVirageGauche++;
@@ -396,7 +394,7 @@ public class Robot2 {
 						//Vitesse fixé a 2.2 pour les virage et direction a 8
 						vitesse = 2.6;
 						if(nbPassageVirageDroite == 0){
-							direction = 10;
+							direction = 9;
 						}
 						//Augmentation incrémentale de la direction
 						nbPassageVirageDroite++;
