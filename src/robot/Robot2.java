@@ -8,6 +8,7 @@ import modules.LightSensor;
 import java.util.List;
 import java.util.Random;
 import java.util.ArrayList;
+import ia.*;
 
 public class Robot2 {
 
@@ -484,6 +485,14 @@ public class Robot2 {
 			}
 		}
 		list.add(-1);
+		return list;
+	}
+	
+	//Permet d'instancier une liste de direction permettant de nous rendre de façon optimisé d'un point A a un point B
+	public static List<Integer> instanceAEtoile(){
+		AEtoile aetoile = new AEtoile();
+		List<Integer> list = new ArrayList<>();
+		list = aetoile.fonction(new Graph(), new Sommet(1,0,2), 1, 5, new HeuristiqueBase());
 		return list;
 	}
 	
