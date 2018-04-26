@@ -424,6 +424,10 @@ public class Robot2 {
 							eq.setVitesse(0);
 							eq.setDirection(0);
 							onContinu = false;
+							Sound.beepSequenceUp();
+							Delay.msDelay(100);
+							Sound.beepSequenceUp();
+							Delay.msDelay(100);
 						}
 						break;
 						
