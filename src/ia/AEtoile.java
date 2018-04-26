@@ -6,6 +6,8 @@ import java.util.List;
 
 public class AEtoile {
 	
+	private static int dernierSens=0;
+	
 	private static List <Sommet> insererLesFils (List <Sommet> listAttentePrec, List <Sommet> listFils, List<Sommet> listVu) {
 		List <Sommet> listAttente= listAttentePrec;
 		Iterator<Sommet>filsIterator=listFils.iterator();
@@ -37,13 +39,15 @@ public class AEtoile {
 			fils.setGh(heur.fonction(fils));
 			if(!pere.getListDirection().isEmpty())//Permet de savoir le trajet à la fin
 				fils.getListDirection().addAll(pere.getListDirection());
+			//System.out.println(fils.getDirection());
 			fils.getListDirection().add(fils.getDirection());
 			List <Sommet> sommetPetitFils=new ArrayList<Sommet>();
-			int j=0;
-			//1er j=0 droite, 2nd j=1 gauche, 3nd j=2 demi-tour (dans la liste)
-			for(int i:graph.voisin(fils.getNom(),graph.whereDoYouCome(pere.getNom(),fils.getNom()))) {
+			int j=1;
+			//1er j=1 droite, 2nd j=0 gauche, 3nd j=2 demi-tour (dans la liste)
+			dernierSens=graph.whereDoYouCome(pere.getNom(),fils.getNom());
+			for(int i:graph.voisin(fils.getNom(),dernierSens)) {
 				sommetPetitFils.add(new Sommet(i,cout,j));
-				j++;
+				j--;
 			}
 			fils.setFilsList(sommetPetitFils);
 			sommetFils.add(fils);
@@ -79,10 +83,10 @@ public class AEtoile {
 			}else {
 				pereActuelle=creationFils(graph,listAttente.get(0),cout,heur);
 				//System.out.println(pereActuelle.getNom());//Debug
-				for(Sommet somFils:pereActuelle.getFilsList()) {
-					if(!listVu.contains(somFils))
-						listVu.add(somFils);
-				}
+				//System.out.println("\nList fils:");
+				if(!listVu.contains(pereActuelle))
+					listVu.add(pereActuelle);
+				//System.out.println();
 				listAttente.remove(0);
 				listAttente=insererLesFils(listAttente , pereActuelle.getFilsList(),listVu);
 			}
@@ -94,15 +98,15 @@ public class AEtoile {
 		Sommet depart=new Sommet(1,0,2);
 		HeuristiqueBase hb=new HeuristiqueBase();
 		List <Sommet> sommetPetitFils=new ArrayList<Sommet>();
-		int j=0;
+		int j=1;
 		Graph graph=new Graph();
-		for(int i:graph.voisin(depart.getNom(),0)) {
+		for(int i:graph.voisin(depart.getNom(),dernierSens)) {
 			sommetPetitFils.add(new Sommet(i,0,j));
-			j++;
+			j--;
 		}
 		depart.setFilsList(sommetPetitFils);
-		//System.out.println("List Sommet traité:");
-		List <Integer> list=fonction(graph,depart,1,7,hb);
+		//System.out.println("List Sommet traité:");//Debug
+		List <Integer> list=fonction(graph,depart,1,6,hb);
 		System.out.println("List direction:");
 		for(int i:list) {
 			System.out.println(i);

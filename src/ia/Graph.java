@@ -63,7 +63,6 @@ public class Graph {
 			v.add(4);
 			v.add(5);
 		}
-		v.add(6);
 	}
 
 	private void voisinCase5(int direction, List<Integer> v) {
@@ -73,8 +72,7 @@ public class Graph {
 		}else {
 			v.add(6);
 			v.add(4);
-		}	
-		v.add(5);
+		}
 	}
 
 	private void voisinCase4(int direction, List<Integer> v) {
@@ -85,7 +83,6 @@ public class Graph {
 			v.add(5);
 			v.add(6);
 		}
-		v.add(4);
 	}
 
 	private void voisinCase3(int direction, List<Integer> v) {
@@ -96,7 +93,6 @@ public class Graph {
 			v.add(5);
 			v.add(1);
 		}
-		v.add(3);
 	}
 
 	private void voisinCase2(int direction, List<Integer> v) {
@@ -107,7 +103,6 @@ public class Graph {
 			v.add(6);
 			v.add(3);
 		}
-		v.add(2);
 	}
 
 	private void voisinCase1(int direction, List<Integer> v) {
@@ -118,6 +113,5 @@ public class Graph {
 			v.add(3);
 			v.add(5);
 		}
-		v.add(1);
 	}
 }
