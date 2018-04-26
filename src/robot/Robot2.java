@@ -216,9 +216,7 @@ public class Robot2 {
 	//Attention : fort risque d'erreur. Si carrefour marche pas revoir cette fonction
 	//Fonction determinant si on sort oui ou non d'un carrefour
 	public static boolean sortieCarrefour(int nbPassage, int prev, int cour){
-		boolean retour = false;
-		retour = (nbPassage >= 5) && (prev == 1) && (cour == 0);
-		return retour;
+		return (nbPassage >= 5) && (prev == 1) && (cour == 0);
 	}
 	
 	//Fonction permettant au robot de franchir un carrefour
@@ -359,7 +357,7 @@ public class Robot2 {
 						nbPassageVirageDroite = 0;
 						nbPassageVirageGauche = 0;
 						direction=0;
-						//Vitesse fixé a 4 au depart
+						//Vitesse fixé a 3.4 au depart
 						if(nbPassageLigneDroite == 0) {
 							vitesse = 3.4;
 						}
@@ -376,7 +374,7 @@ public class Robot2 {
 						//Remise a 0 des compteur
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
-						//Vitesse fixé a 2.2 pour les virages et direction a 5
+						//Vitesse fixé a 2.2 pour les virages et direction a 8
 						vitesse = 2.2;
 						if(nbPassageVirageGauche == 0){
 							direction = 8;
@@ -395,7 +393,7 @@ public class Robot2 {
 						//Remise a 0 des compteur
 						nbPassageVirageGauche = 0;
 						nbPassageLigneDroite = 0;
-						//Vitesse fixé a 2.2 pour les virage et direction a 5
+						//Vitesse fixé a 2.2 pour les virage et direction a 8
 						vitesse = 2.2;
 						if(nbPassageVirageDroite == 0){
 							direction = 8;
@@ -477,7 +475,7 @@ public class Robot2 {
 	public static List<Integer> instanceAEtoile(){
 		AEtoile aetoile = new AEtoile();
 		List<Integer> list = new ArrayList<>();
-		//list = aetoile.fonction(new Graph(), new Sommet(1,0,2), 1, 5, new HeuristiqueBase());
+		list = aetoile.fonction(new Graph(), new Sommet(1,0,2), 1, 5, new HeuristiqueBase());
 		return list;
 	}
 	
