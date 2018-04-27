@@ -6,6 +6,7 @@ import java.util.List;
 public class Sommet {
 
 	private int nom;
+	private int g=0;
 	private int gh;
 	private List <Sommet> filsList= new ArrayList <Sommet>();
 	private List <Integer> listDirection=new ArrayList <Integer>();
@@ -24,6 +25,21 @@ public class Sommet {
 
 	public int getSens() {
 		return sens;
+	}
+
+	
+
+
+
+	public int getG() {
+		return g;
+	}
+
+
+
+
+	public void setG(int g) {
+		this.g = g;
 	}
 
 

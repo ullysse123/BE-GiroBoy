@@ -15,7 +15,7 @@ public class AEtoile {
 		while(filsIterator.hasNext()) {
 			Sommet filsATraiter=filsIterator.next();
 			Boolean find=false;
-			if(!listVu.contains(filsATraiter)) {
+			if(!estPresent(filsATraiter,listVu)) {
 				//Parcours de la liste d'attente à trier
 				for(int i=0;i<listAttente.size() && !find; i++) {
 					Sommet attenteATraiter=listAttente.get(i);
@@ -36,10 +36,11 @@ public class AEtoile {
 		Sommet pere=sommetPere;
 		List <Sommet> sommetFils=new ArrayList<Sommet>();
 		for(Sommet fils:pere.getFilsList()) {
-			fils.setGh(heur.fonction(fils));
-			if(!pere.getListDirection().isEmpty())//Permet de savoir le trajet à la fin
+			fils.setG(pere.getG()+cout);
+			fils.setGh(heur.fonction(fils)+fils.getG());
+			//Permet de savoir le trajet à la fin
+			if(!pere.getListDirection().isEmpty())
 				fils.getListDirection().addAll(pere.getListDirection());
-			//System.out.println(fils.getDirection());
 			fils.getListDirection().add(fils.getDirection());
 			List <Sommet> sommetPetitFils=new ArrayList<Sommet>();
 			int j=1;
@@ -57,6 +58,15 @@ public class AEtoile {
 		return pere;
 	}
 	
+	private static Boolean estPresent (Sommet sommet, List <Sommet> listVu ) {
+		Boolean estPresent=false;
+		int i;
+		for(i=0;i<listVu.size() && !estPresent;i++) {
+			Sommet s=listVu.get(i);
+			estPresent=sommet.getNom()==s.getNom() && sommet.getGH()>s.getGH();
+		}
+		return estPresent;
+	}
 	//Fonction d'initialisation du A*
 	private static List<Integer> initAEtoile (Graph graph,Sommet sommetDepart,int cout,int but,Heuristique heur) {
 		List <Integer> directionList=new ArrayList<Integer>();
@@ -72,23 +82,20 @@ public class AEtoile {
 			List<Integer> directionList, List<Sommet> listVu, Boolean estBut, List<Sommet> listAttente) {
 		Sommet pereActuelle=creationFils(graph,sommetDepart,cout,heur);
 		listAttente=insererLesFils(listAttente , pereActuelle.getFilsList(),listVu);
-		listVu.addAll(pereActuelle.getFilsList());
+		listVu.add(pereActuelle);
 		//Parcours de la liste d'attente
 		while(!listAttente.isEmpty() && !estBut) {
 			estBut=pereActuelle.getNom()==but;
 			//si but alors chemin trouvé
 			if(estBut) {
-				directionList=pereActuelle.getListDirection();//rajouter la direction fin
+				//rajoute la direction fin
+				directionList=pereActuelle.getListDirection();
 				dernierSens=pereActuelle.getSens();
 			//Sinon continue de parcourir
 			}else {
 				pereActuelle=creationFils(graph,listAttente.get(0),cout,heur);
-				System.out.println(pereActuelle.getNom());//Debug
-				//System.out.println("\nList fils:");
-				if(!listVu.contains(pereActuelle))
-					listVu.add(pereActuelle);
-				//System.out.println();
 				listAttente.remove(0);
+				listVu.add(pereActuelle);
 				listAttente=insererLesFils(listAttente , pereActuelle.getFilsList(),listVu);
 			}
 		}
@@ -97,16 +104,34 @@ public class AEtoile {
 	
 	public static List <Integer> mainProgram (int numDepart,int numFin,Graph graph, Heuristique hb){
 		//Initialisation necessaire pour l'initialisation de AEtoile
+		List <Integer> listA,listB;
+		List <Integer> listFinal=new ArrayList<Integer>();
 		Sommet depart=new Sommet(numDepart,0,2,dernierSens);
+		int dernierSensOppose=(dernierSens+1)%2;
+		Sommet departOppose=new Sommet(numDepart,0,2,dernierSensOppose);
 		List <Sommet> sommetPetitFils=new ArrayList<Sommet>();
+		List <Sommet> sommetPetitFilsOppose=new ArrayList<Sommet>();
+		sommetPetitFilsConstruct(graph, depart, sommetPetitFils);
+		sommetPetitFilsConstruct(graph, departOppose, sommetPetitFilsOppose);
+		depart.setFilsList(sommetPetitFils);
+		departOppose.setFilsList(sommetPetitFilsOppose);
+		listA=initAEtoile(graph,depart,1,numFin,hb);
+		listB=initAEtoile(graph,departOppose,1,numFin,hb);
+		if(listA.size()>listB.size()) {
+			listFinal.add(2);//Pour le demi-tour
+			listFinal.addAll(listB);
+	    }else {
+	    	listFinal=listA;
+		}
+		return listA;
+	}
+
+	private static void sommetPetitFilsConstruct(Graph graph, Sommet depart, List<Sommet> sommetPetitFils) {
 		int j=1;
 		for(int i:graph.voisin(depart.getNom(),dernierSens)) {
 			sommetPetitFils.add(new Sommet(i,0,j,graph.whereDoYouCome(depart.getNom(), i)));
 			j--;
 		}
-		depart.setFilsList(sommetPetitFils);
-		//System.out.println("List Sommet traité:");//Debug
-		return initAEtoile(graph,depart,numDepart,numFin,hb);
 	}
 	
 	//Fonction Test
