@@ -1,13 +1,13 @@
-ProblËme -> Solution apportÈe
+Probl√®me -> Solution apport√©e
 
-Robot non equilibrÈ -> Remontage de faÁon plus equilibrÈ du robot
+Robot non equilibr√© -> Remontage de fa√ßon plus √©quilibr√© du robot
 
-Equilibre qui ne tiens que quelques secondes -> Ajustement des coefficient PID
+Equilibre qui ne tiens que quelques secondes -> Ajustement des coefficients PID
 
 Suiveur de ligne qui sort lors des virages -> Ajustement de la vitesse et de la puissance de rotation
 
-Carrefour qui refuse de se terminer du a une sortie de circuit ->
+Carrefour qui refuse de se terminer d√ª a une sortie de circuit ->
 	-> Cause : Robot incapable d'aller parfaitement droit
 
-Robot qui ne peut pas se deplacer parfaitement en ligne droite ->
-	-> Cause : Leger decallage lorsque la puissance est donnÈe au moteur
+Robot qui ne peut pas se d√©placer parfaitement en ligne droite ->
+	-> Cause : L√©ger d√©calage lorsque la puissance est donn√©e au moteur
