@@ -12,9 +12,9 @@ public class ColorSensor {
 	public ColorSensor(int i){
 		Port port;
 		if(i==0)
-			port=SensorPort.S1;
-		else
 			port=SensorPort.S4;
+		else
+			port=SensorPort.S1;
 		sensor = new EV3ColorSensor(port);
 	}
 	
