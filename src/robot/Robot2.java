@@ -241,7 +241,7 @@ public class Robot2 {
 		int nbIterations = 0;
 		
 		//Correction appliqué pour la direction
-		int direction = 11;
+		int direction = 12;
 		
 		if (x==0 || x==1){
 			while(!(sortieCarrefour(nbPassage,etatPrev,etatCour)) && !Button.ENTER.isDown()){
@@ -319,9 +319,13 @@ public class Robot2 {
 			}
 			
 			//Une fois sur l'embranchement final on laisse avancer le robot pour qu'il sorte de la double ligne
-			eq.setDirection(0);
+			if (x==0){
+				eq.setDirection(4);
+			}else{
+				eq.setDirection(-4);
+			}
 			//eq.setVitesse(5);
-			Delay.msDelay(420);
+			Delay.msDelay(450);
 			
 		}else{
 			Sound.playTone(800, 10, 10);
