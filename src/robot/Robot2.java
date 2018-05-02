@@ -21,7 +21,7 @@ public class Robot2 {
 	//liste d'entier indiquant les direction a prendre
 	static List<Integer> listDirection;
 	
-	//Fonction permettant de savoir si le capteur de lumiï¿½re est sur la ligne
+	//Fonction permettant de savoir si le capteur de lumiére est sur la ligne
 	/*public static boolean lightSurLigne(){
 		return 0.4f<light.getModeRouge();
 	}*/
@@ -74,10 +74,10 @@ public class Robot2 {
 		//x = 0 on ne cherche pas a depacer, ligne droite
 		//x = 1 on depace
 		
-		//  /!\ /!\ CODE NON SIMPLIFIE : Le code ci dessous est volontairement non simplifiï¿½. Ne pouvant pas le testï¿½ j'ai dï¿½cidï¿½ de le laisser
-		//								 non simplifï¿½ afin de faciliter le debuggage et la lecture de celui ci.
+		//  /!\ /!\ CODE NON SIMPLIFIE : Le code ci dessous est volontairement non simplifié. Ne pouvant pas le testé j'ai décidé de le laisser
+		//								 non simplifé afin de faciliter le debuggage et la lecture de celui ci.
 		
-		//J'utilise trop de variable ici volontairement, ce code etant experimentale j'ai besoin d'un maximum de clartï¿½ et de partitionnement
+		//J'utilise trop de variable ici volontairement, ce code etant experimentale j'ai besoin d'un maximum de clarté et de partitionnement
 		int nbPassage = 0;
 		int nbIterations = 0;
 		int coul = -1;
@@ -94,7 +94,7 @@ public class Robot2 {
 		int etatCour = -1;
 		int etatPrev = -1;
 		
-		//Correction appliquï¿½ pour la direction
+		//Correction appliqué pour la direction
 		int direction = 9;
 		int directionR = 4;
 		
@@ -102,14 +102,14 @@ public class Robot2 {
 			//On ne cherche pas a depacer
 			eq.setVitesse(5);
 			while(!finDepacement(x,etatPrevL,etatCourL,nbPassageL,etatPrevR,etatCourR,nbPassageR)){
-				//On va faire un comptage d'etat du cotï¿½ droit puis du cotï¿½ gauche
-				//Comptage du cotï¿½ gauche
+				//On va faire un comptage d'etat du coté droit puis du coté gauche
+				//Comptage du coté gauche
 				if(colorSurLigne(GAUCHE)){
 					coulL = 1;
 				}else{
 					coulL = 0;
 				}
-				//Si la couleur captï¿½ est diffï¿½rente de la couleur courante alors on met a jour
+				//Si la couleur capté est différente de la couleur courante alors on met a jour
 				if(coulL != etatCourL && nbPassageL <= 5){
 					if(nbIterationsL >= 3 && nbPassageL <=6){
 						nbPassageL++;
@@ -127,13 +127,13 @@ public class Robot2 {
 						}
 					}
 				}
-				//Comptage cotï¿½ droit
+				//Comptage coté droit
 				if(colorSurLigne(DROITE)){
 					coulR = 1;
 				}else{
 					coulR = 0;
 				}
-				//Si la couleur captï¿½ est diffï¿½rente de la couleur courante alors on met a jour
+				//Si la couleur capté est différente de la couleur courante alors on met a jour
 				if(coulR != etatCourR && nbPassageR <= 5){
 					if(nbIterationsR >= 3 && nbPassageR <=6){
 						nbPassageR++;
@@ -173,7 +173,7 @@ public class Robot2 {
 					}else{
 						coul = 0;
 					}
-					//Si  la couleur captï¿½ est diffï¿½rente de la couleur courante alors on met a jour
+					//Si  la couleur capté est différente de la couleur courante alors on met a jour
 					if(coul != etatCour && nbPassage <=7){
 						if(nbIterations >= 3 && nbPassage <=6){
 							nbPassage++;
@@ -241,7 +241,7 @@ public class Robot2 {
 		int nbIterations = 0;
 		int nbCorrection = 0;
 		
-		//Correction appliquï¿½ pour la direction
+		//Correction appliqué pour la direction
 		int direction = 12;
 		int directionACor = direction;
 		
@@ -256,7 +256,7 @@ public class Robot2 {
 					}else{
 						coul = 0;
 					}
-					//Si la couleur captï¿½ est differente de la couleur courante alors on met a jour
+					//Si la couleur capté est differente de la couleur courante alors on met a jour
 					if(coul != etatCour && nbPassage <=6){
 						//nbIteration limiteur pour eviter de prendre en compte les corrections de trajetoire comme changement d'etat
 						if(nbIterations >=3 && nbPassage<=5){
@@ -276,15 +276,21 @@ public class Robot2 {
 						}
 					}
 					//On fait maintenant les correctif de suivie de ligne
-					if(colorSurLigne(GAUCHE)){
+					/*if(colorSurLigne(GAUCHE)){
 						if(nbCorrection >0){
 							directionACor++;
 						}
+						nbCorrection++;
 						eq.setDirection(-directionACor);
 					}else{
 						eq.setDirection(0);
 						nbCorrection = 0;
 						directionACor = direction;
+					}*/
+					if(colorSurLigne(GAUCHE)){
+						eq.setDirection(-direction);
+					}else{
+						eq.setDirection(0);
 					}
 				}else{
 					//Si on tourne a droite
@@ -294,7 +300,7 @@ public class Robot2 {
 					}else{
 						coul = 0;
 					}
-					//Si  la couleur captï¿½ est diffï¿½rente de la couleur courante alors on met a jour
+					//Si  la couleur capté est différente de la couleur courante alors on met a jour
 					if(coul != etatCour && nbPassage <=6){
 						if(nbIterations >= 3 && nbPassage <=5){
 							nbPassage++;
@@ -313,15 +319,21 @@ public class Robot2 {
 						}
 					}
 					//On fait maintenant les correctif de suivie de ligne
-					if(colorSurLigne(DROITE)){
+					/*if(colorSurLigne(DROITE)){
 						if(nbCorrection >0){
 							directionACor++;
 						}
+						nbCorrection++;
 						eq.setDirection(directionACor);
 					}else{
 						eq.setDirection(0);
 						nbCorrection = 0;
 						directionACor = direction;
+					}*/
+					if(colorSurLigne(DROITE)){
+						eq.setDirection(direction);
+					}else{
+						eq.setDirection(0);
 					}
 				}
 				Delay.msDelay(100);
@@ -329,12 +341,13 @@ public class Robot2 {
 			
 			//Une fois sur l'embranchement final on laisse avancer le robot pour qu'il sorte de la double ligne
 			if (x==0){
-				eq.setDirection(4);
+				eq.setDirection(6);
 			}else{
-				eq.setDirection(-4);
+				eq.setDirection(-6);
 			}
-			//eq.setVitesse(5);
-			Delay.msDelay(400);
+			Delay.msDelay(25);
+			eq.setVitesse(5);
+			Delay.msDelay(360);
 			
 		}else{
 			Sound.playTone(800, 10, 10);
@@ -343,7 +356,7 @@ public class Robot2 {
 		
 	}
 	
-	//TODO Passage a niveau : Si jamais on a deux double lignes, passage a niveau est appelï¿½ via carefour et il faut choisir ce qu'on fait.
+	//TODO Passage a niveau : Si jamais on a deux double lignes, passage a niveau est appelé via carefour et il faut choisir ce qu'on fait.
 	//Aller tout droit ou eviter un robot
 	
 	public static void suiveurDeLigne(){
@@ -368,7 +381,7 @@ public class Robot2 {
 		//Booleen d'arret
 		boolean onContinu = true;
 		
-		//Lancement de l'ï¿½quilibre avec une vitesse initiale pour dï¿½marrer le circuit
+		//Lancement de l'équilibre avec une vitesse initiale pour démarrer le circuit
 		eq.start();
 		eq.setVitesse(3.2);
 		
@@ -381,11 +394,11 @@ public class Robot2 {
 						nbPassageVirageDroite = 0;
 						nbPassageVirageGauche = 0;
 						direction=0;
-						//Vitesse fixï¿½ a 3.4 au depart
+						//Vitesse fixé a 3.4 au depart
 						if(nbPassageLigneDroite == 0) {
 							vitesse = 3.4;
 						}
-						//Vitesse incrï¿½mentale pour augmenter la fluiditï¿½ du dï¿½placement
+						//Vitesse incrémentale pour augmenter la fluidité du déplacement
 						nbPassageLigneDroite++;
 						if(nbPassageLigneDroite<=10){
 							vitesse+=0.2;
@@ -398,12 +411,12 @@ public class Robot2 {
 						//Remise a 0 des compteur
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
-						//Vitesse fixï¿½ a 2.2 pour les virages et direction a 8
+						//Vitesse fixé a 2.2 pour les virages et direction a 8
 						vitesse = 2.6;
 						if(nbPassageVirageGauche == 0){
 							direction = 9;
 						}
-						//Augmentation incrï¿½mentale de la direction
+						//Augmentation incrémentale de la direction
 						nbPassageVirageGauche++;
 						if(nbPassageVirageGauche<=10){
 							direction++;
@@ -417,12 +430,12 @@ public class Robot2 {
 						//Remise a 0 des compteur
 						nbPassageVirageGauche = 0;
 						nbPassageLigneDroite = 0;
-						//Vitesse fixï¿½ a 2.2 pour les virage et direction a 8
+						//Vitesse fixé a 2.2 pour les virage et direction a 8
 						vitesse = 2.6;
 						if(nbPassageVirageDroite == 0){
 							direction = 9;
 						}
-						//Augmentation incrï¿½mentale de la direction
+						//Augmentation incrémentale de la direction
 						nbPassageVirageDroite++;
 						if(nbPassageVirageDroite<=10){
 							direction++;
@@ -440,7 +453,7 @@ public class Robot2 {
 						leftright = listDirection.get(par).intValue();
 						par++;
 						if(leftright!=-1){
-							//Marqueur sonor pour indiquï¿½ l'entrï¿½e dans un carrefour
+							//Marqueur sonor pour indiqué l'entrée dans un carrefour
 							Sound.buzz();
 							carrefour(leftright,eq);
 							Sound.buzz();
@@ -467,7 +480,7 @@ public class Robot2 {
 						  Delay.msDelay(50); 
 			}
 			
-			//Frequence d'ï¿½chantillonage fixï¿½ pour les capteurs
+			//Frequence d'échantillonage fixé pour les capteurs
 			Delay.msDelay(75);
 		}
 		
@@ -499,7 +512,7 @@ public class Robot2 {
 		return list;
 	}
 	
-	//Permet d'instancier une liste de direction permettant de nous rendre de faï¿½on optimisï¿½ d'un point A a un point B
+	//Permet d'instancier une liste de direction permettant de nous rendre de faéon optimisé d'un point A a un point B
 	public static List<Integer> instanceAEtoile(){
 		//AEtoile aetoile = new AEtoile();
 		List<Integer> list = new ArrayList<>();
