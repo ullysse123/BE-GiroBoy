@@ -242,8 +242,10 @@ public class Robot2 {
 		int nbCorrection = 0;
 		
 		//Correction appliqué pour la direction
-		int direction = 12;
+		int direction = 13;
 		int directionACor = direction;
+		
+		Delay.msDelay(50);
 		
 		if (x==0 || x==1){
 			while(!(sortieCarrefour(nbPassage,etatPrev,etatCour)) && !Button.ENTER.isDown()){
@@ -341,13 +343,13 @@ public class Robot2 {
 			
 			//Une fois sur l'embranchement final on laisse avancer le robot pour qu'il sorte de la double ligne
 			if (x==0){
-				eq.setDirection(6);
+				eq.setDirection(4);
 			}else{
-				eq.setDirection(-6);
+				eq.setDirection(-4);
 			}
 			Delay.msDelay(25);
-			eq.setVitesse(5);
-			Delay.msDelay(360);
+			eq.setVitesse(3.8);
+			Delay.msDelay(300);
 			
 		}else{
 			Sound.playTone(800, 10, 10);
@@ -396,7 +398,7 @@ public class Robot2 {
 						direction=0;
 						//Vitesse fixé a 3.4 au depart
 						if(nbPassageLigneDroite == 0) {
-							vitesse = 3.4;
+							vitesse = 3.6;
 						}
 						//Vitesse incrémentale pour augmenter la fluidité du déplacement
 						nbPassageLigneDroite++;
@@ -412,7 +414,7 @@ public class Robot2 {
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
 						//Vitesse fixé a 2.2 pour les virages et direction a 8
-						vitesse = 2.6;
+						vitesse = 3;
 						if(nbPassageVirageGauche == 0){
 							direction = 9;
 						}
@@ -431,7 +433,7 @@ public class Robot2 {
 						nbPassageVirageGauche = 0;
 						nbPassageLigneDroite = 0;
 						//Vitesse fixé a 2.2 pour les virage et direction a 8
-						vitesse = 2.6;
+						vitesse = 3;
 						if(nbPassageVirageDroite == 0){
 							direction = 9;
 						}
