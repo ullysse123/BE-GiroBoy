@@ -241,7 +241,7 @@ public class Robot2 {
 		int nbIterations = 0;
 		
 		//Correction appliqué pour la direction
-		int direction = 12;
+		int direction = 11;
 		
 		if (x==0 || x==1){
 			while(!(sortieCarrefour(nbPassage,etatPrev,etatCour)) && !Button.ENTER.isDown()){
