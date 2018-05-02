@@ -41,10 +41,10 @@ public class Robot2 {
 		
 		int i = 0;
 		
-		if(colorSurLigne(DROITE)){
+		if(colorSurLigne(GAUCHE)){
 			i++;
 		}
-		if(colorSurLigne(GAUCHE)){
+		if(colorSurLigne(DROITE)){
 			i+=2;
 		}
 		return i;	
@@ -104,7 +104,7 @@ public class Robot2 {
 			while(!finDepacement(x,etatPrevL,etatCourL,nbPassageL,etatPrevR,etatCourR,nbPassageR)){
 				//On va faire un comptage d'etat du coté droit puis du coté gauche
 				//Comptage du coté gauche
-				if(colorSurLigne(DROITE)){
+				if(colorSurLigne(GAUCHE)){
 					coulL = 1;
 				}else{
 					coulL = 0;
@@ -128,7 +128,7 @@ public class Robot2 {
 					}
 				}
 				//Comptage coté droit
-				if(colorSurLigne(GAUCHE)){
+				if(colorSurLigne(DROITE)){
 					coulR = 1;
 				}else{
 					coulR = 0;
@@ -152,10 +152,10 @@ public class Robot2 {
 					}
 				}
 				//On fait maintenant les correctifs de trajectoire
-				if(colorSurLigne(GAUCHE)){
+				if(colorSurLigne(DROITE)){
 					eq.setDirection(directionR);
 				}else{
-					if(colorSurLigne(DROITE))
+					if(colorSurLigne(GAUCHE))
 						eq.setDirection(-directionR);
 					else
 						eq.setDirection(0);
@@ -168,7 +168,7 @@ public class Robot2 {
 				eq.setVitesse(5);
 				while(!finDepacement(x,etatPrev,etatCour,nbPassage,0,0,0)){
 					//On regarde sur quel couleur est notre capteur gauche
-					if(colorSurLigne(DROITE)){
+					if(colorSurLigne(GAUCHE)){
 						coul = 1;
 					}else{
 						coul = 0;
@@ -192,10 +192,10 @@ public class Robot2 {
 						}
 					}
 					//On fait maintenant les correctif de suivie de ligne
-					if(colorSurLigne(GAUCHE)){
+					if(colorSurLigne(DROITE)){
 						eq.setDirection(direction);
 					}else{
-						if(colorSurLigne(DROITE))
+						if(colorSurLigne(GAUCHE))
 							eq.setDirection(-directionR);
 						else
 							eq.setDirection(0);
@@ -249,7 +249,7 @@ public class Robot2 {
 				if (x==0){
 					//Si on tourne a gauche
 					//On regarde sur quel couleur est notre capteur droit
-					if(colorSurLigne(GAUCHE)){
+					if(colorSurLigne(DROITE)){
 						coul = 1;
 					}else{
 						coul = 0;
@@ -275,7 +275,7 @@ public class Robot2 {
 						}
 					}
 					//On fait maintenant les correctif de suivie de ligne
-					if(colorSurLigne(DROITE)){
+					if(colorSurLigne(GAUCHE)){
 						eq.setDirection(-direction);
 					}else{
 						eq.setDirection(0);
@@ -283,7 +283,7 @@ public class Robot2 {
 				}else{
 					//Si on tourne a droite
 					//On regarde sur quel couleur est notre capteur gauche
-					if(colorSurLigne(DROITE)){
+					if(colorSurLigne(GAUCHE)){
 						coul = 1;
 					}else{
 						coul = 0;
@@ -308,7 +308,7 @@ public class Robot2 {
 						}
 					}
 					//On fait maintenant les correctif de suivie de ligne
-					if(colorSurLigne(GAUCHE)){
+					if(colorSurLigne(DROITE)){
 						eq.setDirection(direction);
 					}else{
 						eq.setDirection(0);
