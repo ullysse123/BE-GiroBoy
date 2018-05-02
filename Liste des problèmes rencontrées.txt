@@ -12,4 +12,4 @@ Carrefour qui refuse de se terminer dû a une sortie de circuit -> Ajustement de
 Robot qui ne peut pas se déplacer parfaitement en ligne droite -> Dans equilibre ajout d'un ajustement de trajectoire a chaque deplacement
 	-> Cause : Léger décalage lorsque la puissance est donnée au moteur
 
-Enchainement des carrefour qui a du mal,quand plus de 2 carrefours s'enchainent le robot n'arrive pas a passer le 3eme -> 
+Enchainement des carrefour qui a du mal,quand plus de 2 carrefours s'enchainent le robot n'arrive pas a passer le 3eme -> Ajustement des valeurs + mise en place d'un correcteur de trajectoire a la sortie d'un carrefour
