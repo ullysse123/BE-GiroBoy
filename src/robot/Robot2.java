@@ -424,10 +424,14 @@ public class Robot2 {
 						leftright = listDirection.get(par).intValue();
 						par++;
 						if(leftright!=-1){
-							//Marqueur sonor pour indiqué l'entrée dans un carrefour
-							Sound.buzz();
-							carrefour(leftright,eq);
-							Sound.buzz();
+							if(leftright == 2){
+								demiTour(eq);
+							}else{
+								//Marqueur sonor pour indiqué l'entrée dans un carrefour
+								Sound.buzz();
+								carrefour(leftright,eq);
+								Sound.buzz();
+							}
 						}else{
 							eq.setVitesse(0);
 							eq.setDirection(0);
