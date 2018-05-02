@@ -12,29 +12,28 @@ import java.util.ArrayList;
 
 public class Robot2 {
 
-	static ColorSensor colorGauche;
+	static int DROITE = 0;
+	static int GAUCHE = 1;
+	
 	static ColorSensor colorDroite;
-	//static LightSensor light;
-	static final int GAUCHE = 0; 
-	static final int DROITE = 1; 
+	static ColorSensor colorGauche;
 	
 	//liste d'entier indiquant les direction a prendre
 	static List<Integer> listDirection;
 	
-	//Fonction permettant de savoir si le capteur de lumiére est sur la ligne
+	//Fonction permettant de savoir si le capteur de lumière est sur la ligne
 	/*public static boolean lightSurLigne(){
 		return 0.4f<light.getModeRouge();
 	}*/
 	
 	//Fonction permettant de savoir si le capteur de couleur est sur la ligne
 	public static boolean colorSurLigne(int i){
-		if (i==GAUCHE)
-				return 0.0385f<colorGauche.getRedMode();
-		else
-				return 0.0385f<colorDroite.getRedMode();
+		if (i==DROITE){
+			return 0.0385f<colorDroite.getRedMode();
+		}else{
+			return 0.0385f<colorGauche.getRedMode();
+		}
 	}
-	
-	
 	
 	//Fonction permettant de savoir si on capteur la ligne sur le capteur droit, ou gauche ou les deux
 	public static int sensLigne(){
@@ -155,10 +154,7 @@ public class Robot2 {
 				if(colorSurLigne(DROITE)){
 					eq.setDirection(directionR);
 				}else{
-					if(colorSurLigne(GAUCHE))
-						eq.setDirection(-directionR);
-					else
-						eq.setDirection(0);
+					eq.setDirection(0);
 				}
 				Delay.msDelay(100);
 			}
@@ -195,10 +191,7 @@ public class Robot2 {
 					if(colorSurLigne(DROITE)){
 						eq.setDirection(direction);
 					}else{
-						if(colorSurLigne(GAUCHE))
-							eq.setDirection(-directionR);
-						else
-							eq.setDirection(0);
+						eq.setDirection(0);
 					}
 					Delay.msDelay(100);
 				}
@@ -239,13 +232,9 @@ public class Robot2 {
 		int coul = -1;
 		int nbPassage = 0;
 		int nbIterations = 0;
-		int nbCorrection = 0;
 		
 		//Correction appliqué pour la direction
-		int direction = 13;
-		int directionACor = direction;
-		
-		Delay.msDelay(50);
+		int direction = 12;
 		
 		if (x==0 || x==1){
 			while(!(sortieCarrefour(nbPassage,etatPrev,etatCour)) && !Button.ENTER.isDown()){
@@ -267,6 +256,7 @@ public class Robot2 {
 							etatCour = coul;
 							nbIterations = 0;
 						}else{
+							// /!\ LAST MODIF
 							if(nbIterations >= 1){
 								nbPassage++;
 								etatPrev = etatCour;
@@ -278,17 +268,6 @@ public class Robot2 {
 						}
 					}
 					//On fait maintenant les correctif de suivie de ligne
-					/*if(colorSurLigne(GAUCHE)){
-						if(nbCorrection >0){
-							directionACor++;
-						}
-						nbCorrection++;
-						eq.setDirection(-directionACor);
-					}else{
-						eq.setDirection(0);
-						nbCorrection = 0;
-						directionACor = direction;
-					}*/
 					if(colorSurLigne(GAUCHE)){
 						eq.setDirection(-direction);
 					}else{
@@ -310,6 +289,7 @@ public class Robot2 {
 							etatCour = coul;
 							nbIterations = 0;
 						}else{
+							// /!\ LAST MODIF
 							if(nbIterations >= 1){
 								nbPassage++;
 								etatPrev = etatCour;
@@ -321,35 +301,20 @@ public class Robot2 {
 						}
 					}
 					//On fait maintenant les correctif de suivie de ligne
-					/*if(colorSurLigne(DROITE)){
-						if(nbCorrection >0){
-							directionACor++;
-						}
-						nbCorrection++;
-						eq.setDirection(directionACor);
-					}else{
-						eq.setDirection(0);
-						nbCorrection = 0;
-						directionACor = direction;
-					}*/
 					if(colorSurLigne(DROITE)){
 						eq.setDirection(direction);
 					}else{
 						eq.setDirection(0);
 					}
+					
 				}
 				Delay.msDelay(100);
 			}
 			
 			//Une fois sur l'embranchement final on laisse avancer le robot pour qu'il sorte de la double ligne
-			if (x==0){
-				eq.setDirection(4);
-			}else{
-				eq.setDirection(-4);
-			}
-			Delay.msDelay(25);
-			eq.setVitesse(3.8);
-			Delay.msDelay(300);
+			eq.setDirection(0);
+			eq.setVitesse(5);
+			Delay.msDelay(500);
 			
 		}else{
 			Sound.playTone(800, 10, 10);
@@ -365,9 +330,8 @@ public class Robot2 {
 		
 		//Initialisation de nos objets
 		Equilibre eq = new Equilibre();
+		colorDroite = new ColorSensor(DROITE);
 		colorGauche = new ColorSensor(GAUCHE);
-		colorDroite= new ColorSensor(DROITE);
-		//light = new LightSensor();
 		
 		//Ensemble de nos variables permettant de fixer la vitesse et la direction
 		double vitesse = 3;
@@ -385,7 +349,7 @@ public class Robot2 {
 		
 		//Lancement de l'équilibre avec une vitesse initiale pour démarrer le circuit
 		eq.start();
-		eq.setVitesse(3.2);
+		eq.setVitesse(3);
 		
 		while(!Button.ESCAPE.isDown() && onContinu){
 			
@@ -398,7 +362,7 @@ public class Robot2 {
 						direction=0;
 						//Vitesse fixé a 3.4 au depart
 						if(nbPassageLigneDroite == 0) {
-							vitesse = 3.6;
+							vitesse = 3.4;
 						}
 						//Vitesse incrémentale pour augmenter la fluidité du déplacement
 						nbPassageLigneDroite++;
@@ -414,7 +378,7 @@ public class Robot2 {
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
 						//Vitesse fixé a 2.2 pour les virages et direction a 8
-						vitesse = 3;
+						vitesse = 2.6;
 						if(nbPassageVirageGauche == 0){
 							direction = 9;
 						}
@@ -433,7 +397,7 @@ public class Robot2 {
 						nbPassageVirageGauche = 0;
 						nbPassageLigneDroite = 0;
 						//Vitesse fixé a 2.2 pour les virage et direction a 8
-						vitesse = 3;
+						vitesse = 2.6;
 						if(nbPassageVirageDroite == 0){
 							direction = 9;
 						}
@@ -514,11 +478,11 @@ public class Robot2 {
 		return list;
 	}
 	
-	//Permet d'instancier une liste de direction permettant de nous rendre de faéon optimisé d'un point A a un point B
+	//Permet d'instancier une liste de direction permettant de nous rendre de façon optimisé d'un point A a un point B
 	public static List<Integer> instanceAEtoile(){
 		//AEtoile aetoile = new AEtoile();
 		List<Integer> list = new ArrayList<>();
-		//list = aetoile.mainProgram(1,6,new Graph(),new HeuristiqueBase());
+		//list = aetoile.fonction(new Graph(), new Sommet(1,0,2), 1, 5, new HeuristiqueBase());
 		return list;
 	}
 	
