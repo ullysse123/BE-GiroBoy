@@ -312,9 +312,14 @@ public class Robot2 {
 			}
 			
 			//Une fois sur l'embranchement final on laisse avancer le robot pour qu'il sorte de la double ligne
-			eq.setDirection(0);
-			eq.setVitesse(5);
-			Delay.msDelay(500);
+			if(x==0){
+				eq.setDirection(3);
+			}else{
+				eq.setDirection(-3);
+			}
+			Delay.msDelay(25);
+			eq.setVitesse(4);
+			Delay.msDelay(400);
 			
 		}else{
 			Sound.playTone(800, 10, 10);
@@ -380,7 +385,7 @@ public class Robot2 {
 						//Vitesse fixé a 2.2 pour les virages et direction a 8
 						vitesse = 2.6;
 						if(nbPassageVirageGauche == 0){
-							direction = 9;
+							direction = 11;
 						}
 						//Augmentation incrémentale de la direction
 						nbPassageVirageGauche++;
@@ -399,7 +404,7 @@ public class Robot2 {
 						//Vitesse fixé a 2.2 pour les virage et direction a 8
 						vitesse = 2.6;
 						if(nbPassageVirageDroite == 0){
-							direction = 9;
+							direction = 11;
 						}
 						//Augmentation incrémentale de la direction
 						nbPassageVirageDroite++;
