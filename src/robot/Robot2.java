@@ -4,39 +4,47 @@ import lejos.hardware.Button;
 import lejos.hardware.Sound;
 import lejos.utility.Delay;
 import modules.ColorSensor;
-import modules.LightSensor;
+//import modules.LightSensor;
 import java.util.List;
 import java.util.Random;
 import java.util.ArrayList;
-import ia.*;
+//import ia.*;
 
 public class Robot2 {
 
-	static ColorSensor color;
-	static LightSensor light;
+	static ColorSensor colorGauche;
+	static ColorSensor colorDroite;
+	//static LightSensor light;
+	static final int GAUCHE = 0; 
+	static final int DROITE = 1; 
 	
 	//liste d'entier indiquant les direction a prendre
 	static List<Integer> listDirection;
 	
 	//Fonction permettant de savoir si le capteur de lumière est sur la ligne
-	public static boolean lightSurLigne(){
+	/*public static boolean lightSurLigne(){
 		return 0.4f<light.getModeRouge();
-	}
+	}*/
 	
 	//Fonction permettant de savoir si le capteur de couleur est sur la ligne
-	public static boolean colorSurLigne(){
-		return 0.0385f<color.getRedMode();
+	public static boolean colorSurLigne(int i){
+		if (i==GAUCHE)
+				return 0.0385f<colorGauche.getRedMode();
+		else
+				return 0.0385f<colorDroite.getRedMode();
 	}
+	
+	
 	
 	//Fonction permettant de savoir si on capteur la ligne sur le capteur droit, ou gauche ou les deux
 	public static int sensLigne(){
 		
 		int i = 0;
 		
-		if(lightSurLigne()){
+		if(colorSurLigne(DROITE)){
 			i++;
 		}
-		if(colorSurLigne()){
+		if(colorSurLigne(GAUCHE)){
 			i+=2;
 		}
 		return i;	
@@ -96,7 +104,7 @@ public class Robot2 {
 			while(!finDepacement(x,etatPrevL,etatCourL,nbPassageL,etatPrevR,etatCourR,nbPassageR)){
 				//On va faire un comptage d'etat du coté droit puis du coté gauche
 				//Comptage du coté gauche
-				if(lightSurLigne()){
+				if(colorSurLigne(DROITE)){
 					coulL = 1;
 				}else{
 					coulL = 0;
@@ -120,7 +128,7 @@ public class Robot2 {
 					}
 				}
 				//Comptage coté droit
-				if(colorSurLigne()){
+				if(colorSurLigne(GAUCHE)){
 					coulR = 1;
 				}else{
 					coulR = 0;
@@ -144,10 +152,10 @@ public class Robot2 {
 					}
 				}
 				//On fait maintenant les correctifs de trajectoire
-				if(colorSurLigne()){
+				if(colorSurLigne(GAUCHE)){
 					eq.setDirection(directionR);
 				}else{
-					if(lightSurLigne())
+					if(colorSurLigne(DROITE))
 						eq.setDirection(-directionR);
 					else
 						eq.setDirection(0);
@@ -160,7 +168,7 @@ public class Robot2 {
 				eq.setVitesse(5);
 				while(!finDepacement(x,etatPrev,etatCour,nbPassage,0,0,0)){
 					//On regarde sur quel couleur est notre capteur gauche
-					if(lightSurLigne()){
+					if(colorSurLigne(DROITE)){
 						coul = 1;
 					}else{
 						coul = 0;
@@ -184,10 +192,10 @@ public class Robot2 {
 						}
 					}
 					//On fait maintenant les correctif de suivie de ligne
-					if(colorSurLigne()){
+					if(colorSurLigne(GAUCHE)){
 						eq.setDirection(direction);
 					}else{
-						if(lightSurLigne())
+						if(colorSurLigne(DROITE))
 							eq.setDirection(-directionR);
 						else
 							eq.setDirection(0);
@@ -241,7 +249,7 @@ public class Robot2 {
 				if (x==0){
 					//Si on tourne a gauche
 					//On regarde sur quel couleur est notre capteur droit
-					if(colorSurLigne()){
+					if(colorSurLigne(GAUCHE)){
 						coul = 1;
 					}else{
 						coul = 0;
@@ -267,7 +275,7 @@ public class Robot2 {
 						}
 					}
 					//On fait maintenant les correctif de suivie de ligne
-					if(lightSurLigne()){
+					if(colorSurLigne(DROITE)){
 						eq.setDirection(-direction);
 					}else{
 						eq.setDirection(0);
@@ -275,7 +283,7 @@ public class Robot2 {
 				}else{
 					//Si on tourne a droite
 					//On regarde sur quel couleur est notre capteur gauche
-					if(lightSurLigne()){
+					if(colorSurLigne(DROITE)){
 						coul = 1;
 					}else{
 						coul = 0;
@@ -300,7 +308,7 @@ public class Robot2 {
 						}
 					}
 					//On fait maintenant les correctif de suivie de ligne
-					if(colorSurLigne()){
+					if(colorSurLigne(GAUCHE)){
 						eq.setDirection(direction);
 					}else{
 						eq.setDirection(0);
@@ -329,8 +337,9 @@ public class Robot2 {
 		
 		//Initialisation de nos objets
 		Equilibre eq = new Equilibre();
-		color = new ColorSensor();
-		light = new LightSensor();
+		colorGauche = new ColorSensor(GAUCHE);
+		colorDroite= new ColorSensor(DROITE);
+		//light = new LightSensor();
 		
 		//Ensemble de nos variables permettant de fixer la vitesse et la direction
 		double vitesse = 3;
@@ -479,9 +488,9 @@ public class Robot2 {
 	
 	//Permet d'instancier une liste de direction permettant de nous rendre de façon optimisé d'un point A a un point B
 	public static List<Integer> instanceAEtoile(){
-		AEtoile aetoile = new AEtoile();
+		//AEtoile aetoile = new AEtoile();
 		List<Integer> list = new ArrayList<>();
-		//list = aetoile.fonction(new Graph(), new Sommet(1,0,2), 1, 5, new HeuristiqueBase());
+		//list = aetoile.mainProgram(1,6,new Graph(),new HeuristiqueBase());
 		return list;
 	}
 	
