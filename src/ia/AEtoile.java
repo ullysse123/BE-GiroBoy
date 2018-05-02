@@ -139,7 +139,7 @@ public class AEtoile {
 		
 		Heuristique hb=new HeuristiqueBase();
 		Heuristique hb2=new HeuristiqueBase2();
-		Graph graph=new Graph();
+		Graph graph=new Graph1();
 		List <Integer> list=mainProgram(1,6,graph,hb);
 		List <Integer> list2=mainProgram(6,1,graph,hb2);;
 		list.addAll(list2);
