@@ -6,7 +6,7 @@ import java.util.List;
 
 public class AEtoile {
 	
-	private static int dernierSens=0;
+	private static int dernierSens=1;
 	
 	private static List <Sommet> insererLesFils (List <Sommet> listAttentePrec, List <Sommet> listFils, List<Sommet> listVu) {
 		List <Sommet> listAttente= listAttentePrec;
@@ -73,6 +73,7 @@ public class AEtoile {
 		List <Sommet> listVu=new ArrayList<Sommet>();
 		Boolean estBut=false;
 		List <Sommet> listAttente=new ArrayList <Sommet>();
+		dernierSens=sommetDepart.getSens();
 		directionList = aEtoile(graph, sommetDepart, cout, but, heur, directionList, listVu, estBut, listAttente);
 		return directionList;
 	}
@@ -91,6 +92,7 @@ public class AEtoile {
 				//rajoute la direction fin
 				directionList=pereActuelle.getListDirection();
 				dernierSens=pereActuelle.getSens();
+				//System.out.println("Dernier Sens Pere:" +dernierSens +"\n");
 			//Sinon continue de parcourir
 			}else {
 				pereActuelle=creationFils(graph,listAttente.get(0),cout,heur);
@@ -106,29 +108,41 @@ public class AEtoile {
 		//Initialisation necessaire pour l'initialisation de AEtoile
 		List <Integer> listA,listB;
 		List <Integer> listFinal=new ArrayList<Integer>();
+		
 		Sommet depart=new Sommet(numDepart,0,2,dernierSens);
 		int dernierSensOppose=(dernierSens+1)%2;
+		
 		Sommet departOppose=new Sommet(numDepart,0,2,dernierSensOppose);
+		
 		List <Sommet> sommetPetitFils=new ArrayList<Sommet>();
 		List <Sommet> sommetPetitFilsOppose=new ArrayList<Sommet>();
+		
 		sommetPetitFilsConstruct(graph, depart, sommetPetitFils);
 		sommetPetitFilsConstruct(graph, departOppose, sommetPetitFilsOppose);
+		
 		depart.setFilsList(sommetPetitFils);
 		departOppose.setFilsList(sommetPetitFilsOppose);
 		listA=initAEtoile(graph,depart,1,numFin,hb);
+		int dernierSensA=dernierSens;
 		listB=initAEtoile(graph,departOppose,1,numFin,hb);
+		int dernierSensB=dernierSens;
+		//System.out.println("ListA:" + listA.size()+ "\nListB:" + listB.size() + "\n");
 		if(listA.size()>listB.size()) {
+			//System.out.println("Demi-tour\n");
 			listFinal.add(2);//Pour le demi-tour
 			listFinal.addAll(listB);
+			dernierSens=dernierSensB;
 	    }else {
 	    	listFinal=listA;
+	    	dernierSens=dernierSensA;
 		}
-		return listA;
+		return listFinal;
 	}
 
 	private static void sommetPetitFilsConstruct(Graph graph, Sommet depart, List<Sommet> sommetPetitFils) {
 		int j=1;
-		for(int i:graph.voisin(depart.getNom(),dernierSens)) {
+		//System.out.println("Direction:"+depart.getSens()+"\n");
+		for(int i:graph.voisin(depart.getNom(),depart.getSens())) {
 			sommetPetitFils.add(new Sommet(i,0,j,graph.whereDoYouCome(depart.getNom(), i)));
 			j--;
 		}
@@ -137,12 +151,33 @@ public class AEtoile {
 	//Fonction Test
 	public static void main(String[] args) {
 		
-		Heuristique hb=new HeuristiqueBase();
-		Heuristique hb2=new HeuristiqueBase2();
-		Graph graph=new Graph1();
-		List <Integer> list=mainProgram(1,6,graph,hb);
-		List <Integer> list2=mainProgram(6,1,graph,hb2);;
+		Heuristique hb=new HeuristiqueVictime1();
+		Heuristique hb2=new HeuristiqueVictime2();
+		Heuristique hh=new HeuristiqueHopital();
+		Graph graph=new Graph2();
+		List <Integer> list=mainProgram(1,3,graph,hb);
+		System.out.println("List 1 direction:");
+		for(int i:list) {
+			System.out.println(i);
+		}
+		List <Integer> list2=mainProgram(3,6,graph,hh);
+		System.out.println("List 2 direction:");
+		for(int i:list2) {
+			System.out.println(i);
+		}
+		List <Integer> list3=mainProgram(6,12,graph,hb2);
+		System.out.println("List 3 direction:");
+		for(int i:list3) {
+			System.out.println(i);
+		}
+		List <Integer> list4=mainProgram(12,6,graph,hh);
+		System.out.println("List 4 direction:");
+		for(int i:list4) {
+			System.out.println(i);
+		}
 		list.addAll(list2);
+		list.addAll(list3);
+		list.addAll(list4);
 		list.add(-1);
 		System.out.println("List direction:");
 		for(int i:list) {

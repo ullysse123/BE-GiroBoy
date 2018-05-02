@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Graph2 implements Graph {
 
-	int directionEnregistre=0;
+	int directionEnregistre=2;
 	@Override
 	public int whereDoYouCome(int numGrandPere, int numPere) {
 		int direction=0;
@@ -20,7 +20,7 @@ public class Graph2 implements Graph {
 				}
 				break;
 			case 3:
-				if(numGrandPere == 4 || (numGrandPere==2 && directionEnregistre==1)) {
+				if(numGrandPere == 4 || (numGrandPere==2 && directionEnregistre==0)) {
 					direction=1;
 				}
 			break;
@@ -33,8 +33,8 @@ public class Graph2 implements Graph {
 					direction=1;
 				break;
 			case 6:
-				if(numGrandPere!=7 && numGrandPere != 5)
-					direction=1;
+				if(numGrandPere!=7 && numGrandPere != 5)//problème à resoudre
+					direction=0;
 				break;
 			case 7:
 				if(numGrandPere!=6 && numGrandPere != 5)
@@ -57,8 +57,8 @@ public class Graph2 implements Graph {
 					direction=1;
 				break;
 			default:
-				if(numGrandPere!=4 && numGrandPere != 5)
-					direction=1;
+				if(numGrandPere!=4 && numGrandPere != 5)//problème à resoudre
+					direction=0;
 				break;
 		}
 		if(numPere==2 || numPere==3)directionEnregistre=direction;
