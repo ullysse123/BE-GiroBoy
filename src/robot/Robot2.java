@@ -239,9 +239,11 @@ public class Robot2 {
 		int coul = -1;
 		int nbPassage = 0;
 		int nbIterations = 0;
+		int nbCorrection = 0;
 		
 		//Correction appliqué pour la direction
 		int direction = 12;
+		int directionACor = direction;
 		
 		if (x==0 || x==1){
 			while(!(sortieCarrefour(nbPassage,etatPrev,etatCour)) && !Button.ENTER.isDown()){
@@ -275,10 +277,15 @@ public class Robot2 {
 						}
 					}
 					//On fait maintenant les correctif de suivie de ligne
-					if(colorSurLigne(GAUCHE)){
-						eq.setDirection(-direction);
+					if(colorSurLigne(DROITE)){
+						if(nbCorrection >0){
+							directionACor++;
+						}
+						eq.setDirection(-directionACor);
 					}else{
 						eq.setDirection(0);
+						nbCorrection = 0;
+						directionACor = direction;
 					}
 				}else{
 					//Si on tourne a droite
@@ -309,9 +316,14 @@ public class Robot2 {
 					}
 					//On fait maintenant les correctif de suivie de ligne
 					if(colorSurLigne(DROITE)){
-						eq.setDirection(direction);
+						if(nbCorrection >0){
+							directionACor++;
+						}
+						eq.setDirection(directionACor);
 					}else{
 						eq.setDirection(0);
+						nbCorrection = 0;
+						directionACor = direction;
 					}
 					
 				}
@@ -325,7 +337,7 @@ public class Robot2 {
 				eq.setDirection(-4);
 			}
 			//eq.setVitesse(5);
-			Delay.msDelay(450);
+			Delay.msDelay(400);
 			
 		}else{
 			Sound.playTone(800, 10, 10);
@@ -361,7 +373,7 @@ public class Robot2 {
 		
 		//Lancement de l'équilibre avec une vitesse initiale pour démarrer le circuit
 		eq.start();
-		eq.setVitesse(3);
+		eq.setVitesse(3.2);
 		
 		while(!Button.ESCAPE.isDown() && onContinu){
 			
@@ -432,9 +444,7 @@ public class Robot2 {
 						par++;
 						if(leftright!=-1){
 							//Marqueur sonor pour indiqué l'entrée dans un carrefour
-							Sound.buzz();
 							carrefour(leftright,eq);
-							Sound.buzz();
 						}else{
 							eq.setVitesse(0);
 							eq.setDirection(0);
