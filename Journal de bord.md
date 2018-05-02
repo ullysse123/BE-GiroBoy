@@ -31,3 +31,5 @@ Jour 12 : Ajout de la fonction de demi-tour et de depacement ( incomplete ) + De
 Jour 13 : Bug de carrefour enfin corrigé + Code de depacement fini
 
 Jour 14 : Ajustement paramètres carrefour + Nettoyage du code + Amelioration du AEtoile + Implementation de l'utilisation du AEtoile + Choix direction aleatoires
+
+Jour 15: Amelioration de AEtoile (Prend en compte le demi-tour si necessaire)
