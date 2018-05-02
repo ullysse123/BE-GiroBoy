@@ -320,8 +320,8 @@ public class Robot2 {
 			
 			//Une fois sur l'embranchement final on laisse avancer le robot pour qu'il sorte de la double ligne
 			eq.setDirection(0);
-			eq.setVitesse(5);
-			Delay.msDelay(500);
+			//eq.setVitesse(5);
+			Delay.msDelay(420);
 			
 		}else{
 			Sound.playTone(800, 10, 10);
