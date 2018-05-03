@@ -8,12 +8,13 @@ import modules.ColorSensor;
 import java.util.List;
 import java.util.Random;
 import java.util.ArrayList;
-//import ia.*;
+import ia.*;
 
 public class Robot2 {
 
-	static int DROITE = 0;
-	static int GAUCHE = 1;
+	static final int DROITE = 0;
+	static final int GAUCHE = 1;
+	static final float SEUIL = 0.03585f;
 	
 	static ColorSensor colorDroite;
 	static ColorSensor colorGauche;
@@ -29,9 +30,9 @@ public class Robot2 {
 	//Fonction permettant de savoir si le capteur de couleur est sur la ligne
 	public static boolean colorSurLigne(int i){
 		if (i==DROITE){
-			return 0.0385f<colorDroite.getRedMode();
+			return SEUIL<colorDroite.getRedMode();
 		}else{
-			return 0.0385f<colorGauche.getRedMode();
+			return SEUIL<colorGauche.getRedMode();
 		}
 	}
 	
@@ -210,6 +211,9 @@ public class Robot2 {
 		eq.setDirection(50);
 		Delay.msDelay(950);
 		eq.setDirection(0);
+		Delay.msDelay(25);
+		eq.setVitesse(2);
+		Delay.msDelay(75);
 	}
 	
 	//Attention : fort risque d'erreur. Si carrefour marche pas revoir cette fonction
@@ -341,6 +345,7 @@ public class Robot2 {
 		//Ensemble de nos variables permettant de fixer la vitesse et la direction
 		double vitesse = 3;
 		int direction = 0;
+		int directionVirage = 15;
 		int nbPassageVirageDroite = 0;
 		int nbPassageVirageGauche = 0;
 		int nbPassageLigneDroite = 0;
@@ -385,7 +390,7 @@ public class Robot2 {
 						//Vitesse fixé a 2.2 pour les virages et direction a 8
 						vitesse = 2.6;
 						if(nbPassageVirageGauche == 0){
-							direction = 11;
+							direction = directionVirage;
 						}
 						//Augmentation incrémentale de la direction
 						nbPassageVirageGauche++;
@@ -404,7 +409,7 @@ public class Robot2 {
 						//Vitesse fixé a 2.2 pour les virage et direction a 8
 						vitesse = 2.6;
 						if(nbPassageVirageDroite == 0){
-							direction = 11;
+							direction = directionVirage;
 						}
 						//Augmentation incrémentale de la direction
 						nbPassageVirageDroite++;
@@ -489,14 +494,23 @@ public class Robot2 {
 	
 	//Permet d'instancier une liste de direction permettant de nous rendre de façon optimisé d'un point A a un point B
 	public static List<Integer> instanceAEtoile(){
-		//AEtoile aetoile = new AEtoile();
-		List<Integer> list = new ArrayList<>();
-		//list = aetoile.fonction(new Graph(), new Sommet(1,0,2), 1, 5, new HeuristiqueBase());
+		Heuristique hb=new HeuristiqueVictime1();
+		Heuristique hb2=new HeuristiqueVictime2();
+		Heuristique hh=new HeuristiqueHopital();
+		Graph graph=new Graph2();
+		List <Integer> list=AEtoile.mainProgram(1,3,graph,hb);
+		List <Integer> list2=AEtoile.mainProgram(3,6,graph,hh);
+		List <Integer> list3=AEtoile.mainProgram(6,12,graph,hb2);
+		List <Integer> list4=AEtoile.mainProgram(12,6,graph,hh);
+		list.addAll(list2);
+		list.addAll(list3);
+		list.addAll(list4);
+		list.add(-1);
 		return list;
 	}
-	
+	 
 	public static void main(String[] args) {
-		listDirection = instanceListDirectionCompet();
+		listDirection = instanceAEtoile();
 		suiveurDeLigne();
 
 	}
