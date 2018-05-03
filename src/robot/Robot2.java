@@ -260,7 +260,6 @@ public class Robot2 {
 							etatCour = coul;
 							nbIterations = 0;
 						}else{
-							// /!\ LAST MODIF
 							if(nbIterations >= 1){
 								nbPassage++;
 								etatPrev = etatCour;
@@ -293,7 +292,6 @@ public class Robot2 {
 							etatCour = coul;
 							nbIterations = 0;
 						}else{
-							// /!\ LAST MODIF
 							if(nbIterations >= 1){
 								nbPassage++;
 								etatPrev = etatCour;
@@ -430,7 +428,9 @@ public class Robot2 {
 						par++;
 						if(leftright!=-1){
 							if(leftright == 2){
+								Sound.beep();
 								demiTour(eq);
+								Sound.beep();
 							}else{
 								//Marqueur sonor pour indiqué l'entrée dans un carrefour
 								Sound.buzz();
