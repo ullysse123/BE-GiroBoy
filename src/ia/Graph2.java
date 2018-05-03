@@ -5,64 +5,64 @@ import java.util.List;
 
 public class Graph2 implements Graph {
 
-	int directionEnregistre=2;
+	int sensEnregistre=2;
 	@Override
 	public int whereDoYouCome(int numGrandPere, int numPere) {
-		int direction=0;
+		int sens=0;
 		switch (numPere) {//Convention: 0 si Nord ou Ouest , 1 sinon (si confusion interpretation selon le chemin)
 			case 1:
 				if(numGrandPere!=9 && numGrandPere != 11)
-					direction=1;
+					sens=1;
 				break;
 			case 2://TODO test sur 2 et 3
-				if(numGrandPere == 4 || (numGrandPere==3 && directionEnregistre==0)) {
-						direction=1;
+				if(numGrandPere == 4 || (numGrandPere==3 && sensEnregistre==0)) {
+						sens=1;
 				}
 				break;
 			case 3:
-				if(numGrandPere == 4 || (numGrandPere==2 && directionEnregistre==0)) {
-					direction=1;
+				if(numGrandPere == 4 || (numGrandPere==2 && sensEnregistre==0)) {
+					sens=1;
 				}
-			break;
+				break;
 			case 4:
 				if(numGrandPere!=12 && numGrandPere != 5)
-					direction=1;
+					sens=1;
 				break;
 			case 5:
 				if(numGrandPere!=7 && numGrandPere != 6)
-					direction=1;
+					sens=1;
 				break;
 			case 6:
-				if(numGrandPere!=7 && numGrandPere != 5)//problème à resoudre
-					direction=0;
+				if(numGrandPere!=7 && numGrandPere !=5)//problème à resoudre
+					sens=1;
 				break;
 			case 7:
 				if(numGrandPere!=6 && numGrandPere != 5)
-					direction=1;
+					sens=1;
 				break;
 			case 8:
 				if(numGrandPere!=10 && numGrandPere != 7)
-					direction=1;
+					sens=1;
 				break;
 			case 9:
 				if(numGrandPere!=10 && numGrandPere != 6)
-					direction=1;
+					sens=1;
 				break;
 			case 10:
 				if(numGrandPere!=8 && numGrandPere != 7)
-					direction=1;
+					sens=1;
 				break;
 			case 11:
 				if(numGrandPere!=8 && numGrandPere != 12)
-					direction=1;
+					sens=1;
 				break;
 			default:
 				if(numGrandPere!=4 && numGrandPere != 5)//problème à resoudre
-					direction=0;
+					sens=1;
 				break;
 		}
-		if(numPere==2 || numPere==3)directionEnregistre=direction;
-		return direction;
+		if(numPere==2 || numPere==3)sensEnregistre=sens;
+		return sens;
 	}
 	
 	private Boolean directionIs0 (int direction) {

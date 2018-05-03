@@ -48,7 +48,8 @@ public class AEtoile {
 			//Direction:1er j=1 droite, 2nd j=0 gauche, 3nd j=2 demi-tour (dans la liste)
 			dernierSens=graph.whereDoYouCome(pere.getNom(),fils.getNom());
 			for(int i:graph.voisin(fils.getNom(),dernierSens)) {
-				sommetPetitFils.add(new Sommet(i,0,j,graph.whereDoYouCome(sommetPere.getNom(), i)));
+				//Le sens du petit fils est determiné par le nom du fils et du nom du petit fils
+				sommetPetitFils.add(new Sommet(i,0,j,graph.whereDoYouCome(fils.getNom(), i)));
 				j--;
 			}
 			fils.setFilsList(sommetPetitFils);
