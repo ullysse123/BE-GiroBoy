@@ -37,3 +37,10 @@ Jour 15: Amelioration de AEtoile (Prend en compte le demi-tour si necessaire)
 #Semaine 4
 
 Jour 16 : Ajout du nouveau graphe du circuit + modifications capteurs robot + ajustement des carrefour pour pouvoir en passer plusieurs a la suite sans deviation de trajectoire + correction passage des virages
+
+Jour 17 : Correction virage sur nouveau circuit + Correction demiTour nouveau circuit + Correction carrefour nouveau circuit
+
+Jour 18 : 
+
+#Semaine 5
+
