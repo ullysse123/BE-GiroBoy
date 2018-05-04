@@ -40,7 +40,7 @@ Jour 16 : Ajout du nouveau graphe du circuit + modifications capteurs robot + aj
 
 Jour 17 : Correction virage sur nouveau circuit + Correction demiTour nouveau circuit + Correction carrefour nouveau circuit
 
-Jour 18 : 
+Jour 18 : Insersion d'un menu pour améliorer l'utilisation du robot dans des cas spécifique + Correction du suivi de ligne avec le carrefour (changement en vitesse constante pour les virages et lignes droite) + Essai de correction du début de l'intersection part dans la direction où on veut aller au début (problème si la direction est juste une ligne droite) 
 
 # Semaine 5
 
