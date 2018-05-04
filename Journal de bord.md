@@ -1,4 +1,4 @@
-#Semaine 1
+# Semaine 1
 
 Jour 1 : Montage du robot
 
@@ -10,7 +10,7 @@ Jour 4 : Premier tentative d'algorithme suiveur de ligne
 
 Jour 5 : Test de nouveau algorithmes suiveur de ligne + calibrage 
 
-#Semaine 2
+# Semaine 2
 
 Jour 6 : Test sur l'equilibrage du robot à l'aide de la vitesse + remontage du robot
 
@@ -22,7 +22,7 @@ Jour 9 : Tentative de resolutions de bug pour carrefour
 
 Jour 10 : Réecriture du carrefour, tentative d'implémentation différente.
 
-#Semaine 3
+# Semaine 3
 
 Jour 11 : Debug de l'equilibre pour enlever l'erreur faisant que le robot parte à droite + Reecriture de carrefour
 
@@ -34,7 +34,7 @@ Jour 14 : Ajustement paramètres carrefour + Nettoyage du code + Amelioration du
 
 Jour 15: Amelioration de AEtoile (Prend en compte le demi-tour si necessaire)
 
-#Semaine 4
+# Semaine 4
 
 Jour 16 : Ajout du nouveau graphe du circuit + modifications capteurs robot + ajustement des carrefour pour pouvoir en passer plusieurs a la suite sans deviation de trajectoire + correction passage des virages
 
@@ -42,5 +42,5 @@ Jour 17 : Correction virage sur nouveau circuit + Correction demiTour nouveau ci
 
 Jour 18 : 
 
-#Semaine 5
+# Semaine 5
 
