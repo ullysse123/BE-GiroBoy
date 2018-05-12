@@ -5,6 +5,7 @@ import lejos.hardware.Sound;
 import lejos.hardware.lcd.LCD;
 import lejos.utility.Delay;
 import modules.ColorSensor;
+
 //import modules.LightSensor;
 import java.util.List;
 import java.util.Random;
@@ -13,7 +14,7 @@ import java.util.Random;
 import java.util.ArrayList;
 import ia.*;
 
-public class Robot2 {
+public class RobotV3{
 
 	static final int DROITE = 0;
 	static final int GAUCHE = 1;
@@ -535,6 +536,8 @@ public class Robot2 {
 			}
 		}
 	}
+	
+	//Partie Menu
 
 	private static Boolean choixDirection() {
 		int choix=1;
@@ -589,6 +592,7 @@ public class Robot2 {
 				listDirection = instanceListDirectionCompetInverse();
 				
 		}
+		Delay.msDelay(150);
 		return abort;
 	}
 
@@ -596,26 +600,35 @@ public class Robot2 {
 	private static Boolean waitToStart() {
 		Boolean retour=false;
 		int i=5;
-		LCD.drawString("Choisir timer:",2,0);
-		LCD.drawString(i+"s",7,1);
+		eq.getAngleReset();
+		LCD.drawString("Angle:"+ eq.getAngle(),4,0);
+		LCD.drawString("Timer:"+i+"s",5,1);
 		LCD.drawString("Haut/Bas",5,2);
 		LCD.drawString("pour changer.",2,3);
-		LCD.drawString("Appuyer ENTER",2,4);
-		LCD.drawString("si pret,",4,5);
-		LCD.drawString("ESCAPE retour.",2,6);
+		LCD.drawString("Rig:Reset Angle.",1,4);
+		LCD.drawString("Appuyer ENTER",2,5);
+		LCD.drawString("si pret,",4,6);
+		LCD.drawString("ESCAPE retour.",2,7);
 		Delay.msDelay(100);
 		while(!Button.ENTER.isDown() && !(retour=Button.ESCAPE.isDown())) {
-			if(Button.UP.isDown()) {
-				i++;
-				LCD.clear(1);
-				LCD.drawString(i+"s",7,1);
-			}else {
-				if(Button.DOWN.isDown()) {
+			switch(Button.readButtons()) {
+				case Button.ID_UP:
+					i++;
+					LCD.clear(1);
+					LCD.drawString(i+"s",7,1);
+					break;
+				case Button.ID_DOWN:
 					if(i-1>=1)i--;
 					LCD.clear(1);
 					LCD.drawString(i+"s",7,1);
-				}
+					break;
+				case Button.ID_RIGHT:
+					eq.getAngleReset();
+					break;
+				default:;
 			}
+			LCD.clear(0);
+			LCD.drawString("Angle:"+ eq.getAngle(),4,0);
 			Delay.msDelay(150);
 		}
 		if(!retour) {
@@ -631,6 +644,7 @@ public class Robot2 {
 			}
 			Sound.beep();
 		}
+		Delay.msDelay(150);
 		return retour;
 	}
 

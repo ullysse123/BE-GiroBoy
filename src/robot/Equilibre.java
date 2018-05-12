@@ -18,6 +18,14 @@ public class Equilibre extends Thread{
 	static UnregulatedLegMotor gauche = new UnregulatedLegMotor(1);
 	static UnregulatedLegMotor droite = new UnregulatedLegMotor(0);
 	
+	public float getAngle() {
+		return gyro.getAngle();
+	}
+	
+	public void getAngleReset() {
+		gyro.reset();
+	}
+	
 	//Applique un angle limite que ne doit pas dépasser le robot ( non utilisé actuellement )
 	public void setAngleLimite(int angle){
 		Equilibre.angleLimite = angle;
@@ -128,7 +136,7 @@ public class Equilibre extends Thread{
 			//Application de la puissance aux moteurs
 			if(pret){
 				if(differenceCourante<0 && compteur%2==0)
-					directionC=direction-2;
+					directionC=direction-3;
 				else
 					directionC=direction;
 				//Micro correction de la trajectoire afin de permettre au robot de se deplacer droit
