@@ -336,7 +336,7 @@ public class RobotV3{
 			}
 			/*Delay.msDelay(25);
 			eq.setVitesse(3.4);*/
-			Delay.msDelay(800);
+			Delay.msDelay(700); //800
 			
 		}else{
 			Sound.playTone(800, 10, 10);
@@ -388,9 +388,9 @@ public class RobotV3{
 						/*nbPassageLigneDroite++;
 						if(nbPassageLigneDroite<=10){
 							vitesse+=0.2;
-						}
+						}*/
 						eq.setVitesse(vitesse);
-						Delay.msDelay(15);*/
+						Delay.msDelay(15);
 						eq.setDirection(direction);
 						break;
 				case 1: //Cas ou seul le capteur gauche capte la ligne
@@ -407,8 +407,8 @@ public class RobotV3{
 						if(nbPassageVirageGauche<=10){
 							direction+=2;
 						}
-						//eq.setVitesse(vitesse);
-						//Delay.msDelay(15);
+						eq.setVitesse(vitesse);
+						Delay.msDelay(15);
 						eq.setDirection(-direction);
 						break;
 						
@@ -426,8 +426,8 @@ public class RobotV3{
 						if(nbPassageVirageDroite<=10){
 							direction+=2;
 						}
-						//eq.setVitesse(vitesse);
-						//Delay.msDelay(15);
+						eq.setVitesse(vitesse);
+						Delay.msDelay(15);
 						eq.setDirection(direction);
 						break;
 						
