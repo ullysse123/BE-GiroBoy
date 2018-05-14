@@ -19,5 +19,5 @@ Perte d'equilibre a l'arrivée de carrefour situé après un virage -> Correctio
 Defaut materiel 
 	-> Gyroscope a l'etat de depart qui augmente de façon incrementale
 
-Robot passe en mode carrefour sans raisons apparente par moment ->
+Robot passe en mode carrefour sans raisons apparente par moment -> Seuil de detection de blanc qui est trop bas
 
