@@ -27,7 +27,7 @@ public class RobotV3{
 	//liste d'entier indiquant les direction a prendre
 	static List<Integer> listDirection;
 	
-	//Fonction permettant de savoir si le capteur de lumi�re est sur la ligne
+	//Fonction permettant de savoir si le capteur de lumiere est sur la ligne
 	/*public static boolean lightSurLigne(){
 		return 0.4f<light.getModeRouge();
 	}*/
@@ -232,7 +232,7 @@ public class RobotV3{
 	public static void carrefour(int x, Equilibre eq){
 		
 		//On fixe la vitesse a 3.5 et la direction a 0
-		eq.setVitesse(3.4);
+		//eq.setVitesse(3.4);
 		eq.setDirection(0);
 		
 		//Etat noir = 0 || Etat blanc = 1
@@ -241,9 +241,11 @@ public class RobotV3{
 		int coul = -1;
 		int nbPassage = 0;
 		int nbIterations = 0;
+		int compteur=0;
+		int nbMaxCompteur=3;
 		
-		//Correction appliqu� pour la direction
-		int direction = 7;
+		//Correction applique pour la direction
+		int direction = 9;
 		
 		Delay.msDelay(700);
 		if (x==0 || x==1){
@@ -257,9 +259,9 @@ public class RobotV3{
 					}else{
 						coul = 0;
 					}
-					//Si la couleur capt� est differente de la couleur courante alors on met a jour
+					//Si la couleur capte est differente de la couleur courante alors on met a jour
 					if(coul != etatCour && nbPassage <=6){
-						//nbIteration limiteur pour eviter de prendre en compte les corrections de trajetoire comme changement d'etat
+						//nbIteration limiteur pour eviter de prendre en compte les corrections de trajectoire comme changement d'etat
 						if(nbIterations >=3 && nbPassage<=5){
 							nbPassage++;
 							etatPrev = etatCour;
@@ -277,11 +279,14 @@ public class RobotV3{
 							}
 						}
 					}
+					
 					//On fait maintenant les correctif de suivie de ligne
-					if(colorSurLigne(GAUCHE)){
+					if((colorSurLigne(GAUCHE) && compteur==0)||(compteur>=1 && compteur<nbMaxCompteur)){
 						eq.setDirection(-direction);
+						compteur++;
 					}else{
 						eq.setDirection(0);
+						compteur=0;
 					}
 				}else{
 					//Si on tourne a droite
@@ -311,10 +316,12 @@ public class RobotV3{
 						}
 					}
 					//On fait maintenant les correctif de suivie de ligne
-					if(colorSurLigne(DROITE)){
+					if((colorSurLigne(DROITE) && compteur==0)||(compteur>=1 && compteur<nbMaxCompteur)){
 						eq.setDirection(direction);
+						compteur++;
 					}else{
 						eq.setDirection(0);
+						compteur=0;
 					}
 					
 				}
@@ -327,8 +334,8 @@ public class RobotV3{
 			}else{
 				eq.setDirection(-3);
 			}
-			Delay.msDelay(25);
-			eq.setVitesse(3.4);
+			/*Delay.msDelay(25);
+			eq.setVitesse(3.4);*/
 			Delay.msDelay(600);
 			
 		}else{
@@ -401,8 +408,8 @@ public class RobotV3{
 						if(nbPassageVirageGauche<=10){
 							direction+=2;
 						}
-						eq.setVitesse(vitesse);
-						Delay.msDelay(15);
+						//eq.setVitesse(vitesse);
+						//Delay.msDelay(15);
 						eq.setDirection(-direction);
 						break;
 						
@@ -420,8 +427,8 @@ public class RobotV3{
 						if(nbPassageVirageDroite<=10){
 							direction+=2;
 						}
-						eq.setVitesse(vitesse);
-						Delay.msDelay(15);
+						//eq.setVitesse(vitesse);
+						//Delay.msDelay(15);
 						eq.setDirection(direction);
 						break;
 						
@@ -542,14 +549,7 @@ public class RobotV3{
 	private static Boolean choixDirection() {
 		int choix=1;
 		Boolean abort=false;
-		LCD.drawString("Choisir mode:U",1,0);
-		LCD.drawString("-UP(U):AEtoile",0,1);
-		LCD.drawString("-RIGHT(R):Dr/Gau",0,2);
-		LCD.drawString("-LEFT(L):Gau/Dr",0,3);
-		LCD.drawString("-DOWN(D):Aleatoire",0,4);
-		LCD.drawString("Appuyer ENTER",2,5);
-		LCD.drawString("si pret,",4,6);
-		LCD.drawString("ESCAPE annule.",2,7);
+		affichageDirection();
 		while(!Button.ENTER.isDown() && !abort) {
 			abort=Button.ESCAPE.isDown();
 			switch(Button.readButtons()) {
@@ -578,6 +578,12 @@ public class RobotV3{
 			Delay.msDelay(150);
 		}
 		LCD.clear();
+		listDirectionSelonChoix(choix);
+		Delay.msDelay(150);
+		return abort;
+	}
+
+	private static void listDirectionSelonChoix(int choix) {
 		switch(choix) {
 			case 1:
 				listDirection = instanceAEtoile();
@@ -592,8 +598,17 @@ public class RobotV3{
 				listDirection = instanceListDirectionCompetInverse();
 				
 		}
-		Delay.msDelay(150);
-		return abort;
+	}
+
+	private static void affichageDirection() {
+		LCD.drawString("Choisir mode:U",1,0);
+		LCD.drawString("-UP(U):AEtoile",0,1);
+		LCD.drawString("-RIGHT(R):Dr/Gau",0,2);
+		LCD.drawString("-LEFT(L):Gau/Dr",0,3);
+		LCD.drawString("-DOWN(D):Aleatoire",0,4);
+		LCD.drawString("Appuyer ENTER",2,5);
+		LCD.drawString("si pret,",4,6);
+		LCD.drawString("ESCAPE annule.",2,7);
 	}
 
 
@@ -601,26 +616,17 @@ public class RobotV3{
 		Boolean retour=false;
 		int i=5;
 		eq.getAngleReset();
-		LCD.drawString("Angle:"+ eq.getAngle(),4,0);
-		LCD.drawString("Timer:"+i+"s",5,1);
-		LCD.drawString("Haut/Bas",5,2);
-		LCD.drawString("pour changer.",2,3);
-		LCD.drawString("Rig:Reset Angle.",1,4);
-		LCD.drawString("Appuyer ENTER",2,5);
-		LCD.drawString("si pret,",4,6);
-		LCD.drawString("ESCAPE retour.",2,7);
+		affichageWait(i);
 		Delay.msDelay(100);
 		while(!Button.ENTER.isDown() && !(retour=Button.ESCAPE.isDown())) {
 			switch(Button.readButtons()) {
 				case Button.ID_UP:
 					i++;
-					LCD.clear(1);
-					LCD.drawString(i+"s",7,1);
+					remplaceTimer(i);
 					break;
 				case Button.ID_DOWN:
 					if(i-1>=1)i--;
-					LCD.clear(1);
-					LCD.drawString(i+"s",7,1);
+					remplaceTimer(i);
 					break;
 				case Button.ID_RIGHT:
 					eq.getAngleReset();
@@ -632,20 +638,40 @@ public class RobotV3{
 			Delay.msDelay(150);
 		}
 		if(!retour) {
-			LCD.clear();
-			colorDroite = new ColorSensor(DROITE);
-			colorGauche = new ColorSensor(GAUCHE);
-			while(i>=1) {
-				Sound.buzz();
-				i--;
-				LCD.drawString((i+1)+"\n",0,0);
-				Delay.msDelay(1000);
-				LCD.clear();
-			}
-			Sound.beep();
+			initialisation(i);
 		}
 		Delay.msDelay(150);
 		return retour;
+	}
+
+	private static void initialisation(int i) {
+		LCD.clear();
+		colorDroite = new ColorSensor(DROITE);
+		colorGauche = new ColorSensor(GAUCHE);
+		while(i>=1) {
+			Sound.buzz();
+			i--;
+			LCD.drawString((i+1)+"\n",0,0);
+			Delay.msDelay(1000);
+			LCD.clear();
+		}
+		Sound.beep();
+	}
+
+	private static void affichageWait(int i) {
+		LCD.drawString("Angle:"+ eq.getAngle(),4,0);
+		LCD.drawString("Timer:"+i+"s",5,1);
+		LCD.drawString("Haut/Bas",5,2);
+		LCD.drawString("pour changer.",2,3);
+		LCD.drawString("Rig:Reset Angle.",1,4);
+		LCD.drawString("Appuyer ENTER",2,5);
+		LCD.drawString("si pret,",4,6);
+		LCD.drawString("ESCAPE retour.",2,7);
+	}
+
+	private static void remplaceTimer(int i) {
+		LCD.clear(1);
+		LCD.drawString("Timer:"+i+"s",5,1);
 	}
 
 }

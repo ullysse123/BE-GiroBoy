@@ -36,6 +36,7 @@ public class AEtoile {
 		Sommet pere=sommetPere;
 		List <Sommet> sommetFils=new ArrayList<Sommet>();
 		for(Sommet fils:pere.getFilsList()) {
+			int nomFils=fils.getNom();
 			fils.setG(pere.getG()+cout);
 			fils.setGh(heur.fonction(fils)+fils.getG());
 			//Permet de savoir le trajet à la fin
@@ -46,10 +47,10 @@ public class AEtoile {
 			int j=1;
 			//Creation des petits fils pour creer le fils
 			//Direction:1er j=1 droite, 2nd j=0 gauche, 3nd j=2 demi-tour (dans la liste)
-			dernierSens=graph.whereDoYouCome(pere.getNom(),fils.getNom());
-			for(int i:graph.voisin(fils.getNom(),dernierSens)) {
+			dernierSens=graph.whereDoYouCome(pere.getNom(),nomFils);
+			for(int i:graph.voisin(nomFils,dernierSens)) {
 				//Le sens du petit fils est determiné par le nom du fils et du nom du petit fils
-				sommetPetitFils.add(new Sommet(i,0,j,graph.whereDoYouCome(fils.getNom(), i)));
+				sommetPetitFils.add(new Sommet(i,0,j,graph.whereDoYouCome(nomFils, i)));
 				j--;
 			}
 			fils.setFilsList(sommetPetitFils);
