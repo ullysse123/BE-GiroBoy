@@ -44,3 +44,24 @@ Jour 18 : Insersion d'un menu pour améliorer l'utilisation du robot dans des ca
 
 # Semaine 5
 
+Jour 19 : Correction de l'ensemble des valeurs pour se deplacer sur le circuit + Correction des carrefour
+
+Jour 20 : 
+
+Jour 21 : 
+
+Jour 22 : 
+
+Jour 23 : 
+
+# Semaine 6
+
+Jour 24 : 
+
+Jour 25 : 
+
+Jour 26 : 
+
+Jour 27 : 
+
+Jour 28 : 
