@@ -516,14 +516,12 @@ public class RobotV3{
 	
 	//Permet d'instancier une liste de direction permettant de nous rendre de façon optimisé d'un point A a un point B
 	public static List<Integer> instanceAEtoile(){
-		Heuristique hv=new HeuristiqueVictime1();
-		Heuristique hv2=new HeuristiqueVictime2();
-		Heuristique hh=new HeuristiqueHopital();
+		Heuristique h=new HeuristiqueGraph2();
 		Graph graph=new Graph2();
-		List <Integer> list=AEtoile.mainProgram(1,3,graph,hv);
-		List <Integer> list2=AEtoile.mainProgram(3,6,graph,hh);
-		List <Integer> list3=AEtoile.mainProgram(6,12,graph,hv2);
-		List <Integer> list4=AEtoile.mainProgram(12,6,graph,hh);
+		List <Integer> list=AEtoile.mainProgram(1,3,graph,h);
+		List <Integer> list2=AEtoile.mainProgram(3,6,graph,h);
+		List <Integer> list3=AEtoile.mainProgram(6,12,graph,h);
+		List <Integer> list4=AEtoile.mainProgram(12,6,graph,h);
 		list.addAll(list2);
 		list.addAll(list3);
 		list.addAll(list4);
