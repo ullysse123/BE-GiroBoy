@@ -15,3 +15,5 @@ Robot qui ne peut pas se déplacer parfaitement en ligne droite -> Dans equilibr
 Enchainement des carrefour qui a du mal,quand plus de 2 carrefours s'enchainent le robot n'arrive pas a passer le 3eme -> Ajustement des valeurs + mise en place d'un correcteur de trajectoire a la sortie d'un carrefour
 
 Perte d'equilibre a l'arrivée de carrefour situé après un virage ->
+
+Defaut materiel -> Gyroscope a l'etat de depart qui augmente de façon incrementale
