@@ -44,7 +44,7 @@ Jour 18 : Insersion d'un menu pour améliorer l'utilisation du robot dans des ca
 
 # Semaine 5
 
-Jour 19 : Correction de l'ensemble des valeurs pour se deplacer sur le circuit + Correction des carrefour
+Jour 19 : Correction de l'ensemble des valeurs pour se deplacer sur le circuit + Correction des carrefour + Maj de l'heuristique IA
 
 Jour 20 : 
 
