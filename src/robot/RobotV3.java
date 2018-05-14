@@ -18,7 +18,7 @@ public class RobotV3{
 
 	static final int DROITE = 0;
 	static final int GAUCHE = 1;
-	static final float SEUIL = 0.019f;
+	static final float SEUIL = 0.025f;
 	
 	static ColorSensor colorDroite;
 	static ColorSensor colorGauche;//Light Sensor
