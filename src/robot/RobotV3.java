@@ -246,8 +246,8 @@ public class RobotV3{
 		
 		//Correction applique pour la direction
 		int direction = 11;//9
-		//TODO Voir si en changer delai d'entrée on ne reduit pas les correction
-		Delay.msDelay(600);
+
+		Delay.msDelay(700);
 		if (x==0 || x==1){
 			while(!(sortieCarrefour(nbPassage,etatPrev,etatCour)) && !Button.ENTER.isDown()){
 				
@@ -336,13 +336,12 @@ public class RobotV3{
 			}
 			/*Delay.msDelay(25);
 			eq.setVitesse(3.4);*/
-			Delay.msDelay(600);
+			Delay.msDelay(800);
 			
 		}else{
 			Sound.playTone(800, 10, 10);
 			System.out.println("/!\\ ERREUR CARREFOUR /!\\ \n\n\n");
 		}
-		
 	}
 	
 	//TODO Passage a niveau : Si jamais on a deux double lignes, passage a niveau est appelé via carefour et il faut choisir ce qu'on fait.
