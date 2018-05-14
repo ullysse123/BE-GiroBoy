@@ -232,7 +232,7 @@ public class RobotV3{
 	public static void carrefour(int x, Equilibre eq){
 		
 		//On fixe la vitesse a 3.5 et la direction a 0
-		eq.setVitesse(3.4);
+		eq.setVitesse(3.6);
 		eq.setDirection(0);
 		
 		//Etat noir = 0 || Etat blanc = 1
@@ -241,13 +241,13 @@ public class RobotV3{
 		int coul = -1;
 		int nbPassage = 0;
 		int nbIterations = 0;
-		int compteur=0;
-		int nbMaxCompteur=3;
+		//int compteur=0;
+		//int nbMaxCompteur=3;
 		
 		//Correction applique pour la direction
 		int direction = 11;//9
-		
-		Delay.msDelay(700);
+		//TODO Voir si en changer delai d'entrée on ne reduit pas les correction
+		Delay.msDelay(600);
 		if (x==0 || x==1){
 			while(!(sortieCarrefour(nbPassage,etatPrev,etatCour)) && !Button.ENTER.isDown()){
 				
@@ -281,12 +281,12 @@ public class RobotV3{
 					}
 					
 					//On fait maintenant les correctif de suivie de ligne
-					if((colorSurLigne(GAUCHE) && compteur==0)||(compteur>=1 && compteur<nbMaxCompteur)){
+					if(colorSurLigne(GAUCHE)){// && compteur==0)||(compteur>=1 && compteur<nbMaxCompteur)){
 						eq.setDirection(-direction);
-						compteur++;
+						//compteur++;
 					}else{
 						eq.setDirection(0);
-						compteur=0;
+						//compteur=0;
 					}
 				}else{
 					//Si on tourne a droite
@@ -316,12 +316,12 @@ public class RobotV3{
 						}
 					}
 					//On fait maintenant les correctif de suivie de ligne
-					if((colorSurLigne(DROITE) && compteur==0)||(compteur>=1 && compteur<nbMaxCompteur)){
+					if(colorSurLigne(DROITE)){// && compteur==0)||(compteur>=1 && compteur<nbMaxCompteur)){
 						eq.setDirection(direction);
-						compteur++;
+						//compteur++;
 					}else{
 						eq.setDirection(0);
-						compteur=0;
+						//compteur=0;
 					}
 					
 				}
