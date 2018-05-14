@@ -153,26 +153,24 @@ public class AEtoile {
 	//Fonction Test
 	public static void main(String[] args) {
 		
-		Heuristique hb=new HeuristiqueVictime1();
-		Heuristique hb2=new HeuristiqueVictime2();
-		Heuristique hh=new HeuristiqueHopital();
+		Heuristique h=new HeuristiqueGraph2();
 		Graph graph=new Graph2();
-		List <Integer> list=mainProgram(1,3,graph,hb);
+		List <Integer> list=mainProgram(1,3,graph,h);
 		System.out.println("List 1 direction:");
 		for(int i:list) {
 			System.out.println(i);
 		}
-		List <Integer> list2=mainProgram(3,6,graph,hh);
+		List <Integer> list2=mainProgram(3,6,graph,h);
 		System.out.println("List 2 direction:");
 		for(int i:list2) {
 			System.out.println(i);
 		}
-		List <Integer> list3=mainProgram(6,12,graph,hb2);
+		List <Integer> list3=mainProgram(6,12,graph,h);
 		System.out.println("List 3 direction:");
 		for(int i:list3) {
 			System.out.println(i);
 		}
-		List <Integer> list4=mainProgram(12,6,graph,hh);
+		List <Integer> list4=mainProgram(12,6,graph,h);
 		System.out.println("List 4 direction:");
 		for(int i:list4) {
 			System.out.println(i);
