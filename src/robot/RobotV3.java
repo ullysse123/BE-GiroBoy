@@ -241,7 +241,7 @@ public class RobotV3{
 		int coul = -1;
 		int nbPassage = 0;
 		int nbIterations = 0;
-		//int compteur=0;
+		int compteur=0;
 		//int nbMaxCompteur=3;
 		
 		//Correction applique pour la direction
@@ -285,7 +285,10 @@ public class RobotV3{
 						eq.setDirection(-direction);
 						//compteur++;
 					}else{
-						eq.setDirection(0);
+						if(compteur==0)
+							eq.setDirection(0);
+						else
+							eq.setDirection(direction/3);
 						//compteur=0;
 					}
 				}else{
@@ -320,23 +323,27 @@ public class RobotV3{
 						eq.setDirection(direction);
 						//compteur++;
 					}else{
-						eq.setDirection(0);
+						if(compteur==0)
+							eq.setDirection(0);
+						else
+							eq.setDirection(-direction/3);
 						//compteur=0;
 					}
 					
 				}
+				compteur=(compteur+1)%2;
 				Delay.msDelay(100);
 			}
 			
 			//Une fois sur l'embranchement final on laisse avancer le robot pour qu'il sorte de la double ligne
 			if(x==0){
-				eq.setDirection(3);
+				eq.setDirection(direction/4);
 			}else{
-				eq.setDirection(-3);
+				eq.setDirection(-direction/4);
 			}
 			/*Delay.msDelay(25);
 			eq.setVitesse(3.4);*/
-			Delay.msDelay(700);
+			Delay.msDelay(550);
 			
 		}else{
 			Sound.playTone(800, 10, 10);
