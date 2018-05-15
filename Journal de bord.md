@@ -46,7 +46,7 @@ Jour 18 : Insersion d'un menu pour améliorer l'utilisation du robot dans des ca
 
 Jour 19 : Correction de l'ensemble des valeurs pour se deplacer sur le circuit + Correction des carrefour + Maj de l'heuristique IA
 
-Jour 20 : 
+Jour 20 : Resolution du problème de passage des lignes droites sur les carrefour + mise à jour de l'IA
 
 Jour 21 : 
 
