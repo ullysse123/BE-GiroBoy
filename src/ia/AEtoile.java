@@ -93,6 +93,7 @@ public class AEtoile {
 			if(estBut) {
 				//rajoute la direction fin
 				directionList=pereActuelle.getListDirection();
+				directionList.add(0,pereActuelle.getGH());
 				dernierSens=pereActuelle.getSens();
 				//System.out.println("Dernier Sens Pere:" +dernierSens +"\n");
 			//Sinon continue de parcourir
@@ -106,7 +107,7 @@ public class AEtoile {
 		return directionList;
 	}
 	
-	public static List <Integer> mainProgram (int numDepart,int numFin,Graph graph, Heuristique hb){
+	public static List <Integer> chemin (int numDepart,int numFin,Graph graph, Heuristique hb){
 		//Initialisation necessaire pour l'initialisation de AEtoile
 		List <Integer> listA,listB;
 		List <Integer> listFinal=new ArrayList<Integer>();
@@ -128,17 +129,89 @@ public class AEtoile {
 		int dernierSensA=dernierSens;
 		listB=initAEtoile(graph,departOppose,1,numFin,hb);
 		int dernierSensB=dernierSens;
-		//System.out.println("ListA:" + listA.size()+ "\nListB:" + listB.size() + "\n");
-		if(listA.size()>listB.size()) {
-			//System.out.println("Demi-tour\n");
+		int coutA=listA.get(0);
+		int coutB=listB.get(0);
+		if(coutA>coutB) {
+			listB.remove(0);
 			listFinal.add(2);//Pour le demi-tour
 			listFinal.addAll(listB);
 			dernierSens=dernierSensB;
 	    }else {
+	    	listA.remove(0);
 	    	listFinal=listA;
 	    	dernierSens=dernierSensA;
 		}
 		return listFinal;
+	}
+	
+	public static List <Integer> mainProgram (int nbVictimeTransportable,int debut, List <Integer> hopitaux, List<Integer> victimes,Graph graph, Heuristique h){
+		int pointDeDepart=debut;
+		int pointDeDepartSuivant,indexVictimeSauve;
+		int meilleurCout,coutActuelle;
+		List <Integer> retour=new ArrayList<Integer>();
+		List <Integer >listSave=new ArrayList<Integer>();
+		List <Integer> listActuelle;
+		while(!victimes.isEmpty()) {
+			pointDeDepartSuivant=-1;
+			//Permet le transport de plusieurs victimes
+			for(int i=0;i<nbVictimeTransportable && !victimes.isEmpty();i++) {
+				meilleurCout=-1;
+				indexVictimeSauve=0;
+				//Parcours des victimes à sauver
+				for(int j=0;j<victimes.size();j++) {
+					int victime=victimes.get(j);
+					listActuelle=chemin(pointDeDepart,victime,graph,h);
+					//Le premier nombre de la liste est le cout
+					coutActuelle=listActuelle.get(0);
+					listActuelle.remove(0);
+					//La premiere victime est l'initialisateur
+					if(meilleurCout==-1) {
+						meilleurCout=coutActuelle;
+						listSave=listActuelle;
+						pointDeDepartSuivant=victime;
+					}else {
+						//Sinon on compare et on change si le cout actuelle est meilleur
+						if(meilleurCout>coutActuelle) {
+							meilleurCout=coutActuelle;
+							listSave=listActuelle;
+							pointDeDepartSuivant=victime;
+							indexVictimeSauve=j;
+						}
+					}
+				}
+				//Rajoute la liste sur la list de direction retourne
+				retour.addAll(listSave);
+				victimes.remove(indexVictimeSauve);
+				//Le point de depart est le point de la victime sauve
+				pointDeDepart=pointDeDepartSuivant;
+			}
+			meilleurCout=-1;
+			//On parcours les hopitaux
+			for(int hopital:hopitaux) {
+				listActuelle=chemin(pointDeDepart,hopital,graph,h);
+				coutActuelle=listActuelle.get(0);
+				listActuelle.remove(0);
+				//Le premier initialise
+				if(meilleurCout==-1) {
+					meilleurCout=coutActuelle;
+					listSave=listActuelle;
+					pointDeDepartSuivant=hopital;
+				}else {
+					//Sinon on compare et on change si le cout actuelle est meilleur
+					if(meilleurCout>coutActuelle) {
+						meilleurCout=coutActuelle;
+						listSave=listActuelle;
+						pointDeDepartSuivant=hopital;
+					}
+				}
+			}
+			//On rajoute le parcours jusqu'a l'hopital qui devient le point de depart suivant
+			retour.addAll(listSave);
+			pointDeDepart=pointDeDepartSuivant;
+		}
+		//-1 pour dire la fin
+		retour.add(-1);
+		return retour;
 	}
 
 	private static void sommetPetitFilsConstruct(Graph graph, Sommet depart, List<Sommet> sommetPetitFils) {
@@ -155,22 +228,29 @@ public class AEtoile {
 		
 		Heuristique h=new HeuristiqueGraph2();
 		Graph graph=new Graph2();
-		List <Integer> list=mainProgram(1,3,graph,h);
+		List<Integer>list;
+		List<Integer>victimes=new ArrayList<>();
+		List<Integer>hopitaux=new ArrayList<>();
+		victimes.add(3);
+		victimes.add(12);
+		hopitaux.add(6);
+		list=mainProgram(1,1,hopitaux,victimes,graph,h);/*
+		List <Integer> list=chemin(1,3,graph,h);
 		System.out.println("List 1 direction:");
 		for(int i:list) {
 			System.out.println(i);
 		}
-		List <Integer> list2=mainProgram(3,6,graph,h);
+		List <Integer> list2=chemin(3,6,graph,h);
 		System.out.println("List 2 direction:");
 		for(int i:list2) {
 			System.out.println(i);
 		}
-		List <Integer> list3=mainProgram(6,12,graph,h);
+		List <Integer> list3=chemin(6,12,graph,h);
 		System.out.println("List 3 direction:");
 		for(int i:list3) {
 			System.out.println(i);
 		}
-		List <Integer> list4=mainProgram(12,6,graph,h);
+		List <Integer> list4=chemin(12,6,graph,h);
 		System.out.println("List 4 direction:");
 		for(int i:list4) {
 			System.out.println(i);
@@ -178,7 +258,7 @@ public class AEtoile {
 		list.addAll(list2);
 		list.addAll(list3);
 		list.addAll(list4);
-		list.add(-1);
+		*/
 		System.out.println("List direction:");
 		for(int i:list) {
 			System.out.println(i);
