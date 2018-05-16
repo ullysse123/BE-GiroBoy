@@ -512,7 +512,7 @@ public class RobotV3{
 		List<Integer> list = new ArrayList<>();
 		Random rand = new Random();
 		for(int i = 0;i<25;i++){
-			if(rand.nextInt(1) >= 0.5f){
+			if((rand.nextInt(2)%2) == 1){
 				list.add(1);
 			}else{
 				list.add(0);
