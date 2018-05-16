@@ -285,7 +285,7 @@ public class RobotV3{
 						eq.setDirection(-direction);
 						//compteur++;
 					}else{
-						if(compteur==0)
+						if(compteur<2)
 							eq.setDirection(0);
 						else
 							eq.setDirection(direction/3);
@@ -323,7 +323,7 @@ public class RobotV3{
 						eq.setDirection(direction);
 						//compteur++;
 					}else{
-						if(compteur==0)
+						if(compteur<2)
 							eq.setDirection(0);
 						else
 							eq.setDirection(-direction/3);
@@ -331,8 +331,8 @@ public class RobotV3{
 					}
 					
 				}
-				compteur=(compteur+1)%2;
-				Delay.msDelay(100);
+				compteur=(compteur+1)%3;
+				Delay.msDelay(75);
 			}
 			
 			//Une fois sur l'embranchement final on laisse avancer le robot pour qu'il sorte de la double ligne
@@ -343,7 +343,7 @@ public class RobotV3{
 			}
 			/*Delay.msDelay(25);
 			eq.setVitesse(3.4);*/
-			Delay.msDelay(550);
+			Delay.msDelay(700);
 			
 		}else{
 			Sound.playTone(800, 10, 10);
@@ -360,8 +360,8 @@ public class RobotV3{
 		
 		//Ensemble de nos variables permettant de fixer la vitesse et la direction
 		double vitesse = 3.4;
-		double vitesseVirage = 3.7;
-		double vitesseLigne = 3.7;
+		double vitesseVirage = 3.6;
+		double vitesseLigne = 3.6;
 		int direction = 0;
 		int directionVirage = 6;
 		int nbPassageVirageDroite = 0;
@@ -526,14 +526,14 @@ public class RobotV3{
 	public static List<Integer> instanceAEtoile(){
 		Heuristique h=new HeuristiqueGraph2();
 		Graph graph=new Graph2();
-		List <Integer> list=AEtoile.chemin(1,3,graph,h);
-		List <Integer> list2=AEtoile.chemin(3,6,graph,h);
-		List <Integer> list3=AEtoile.chemin(6,12,graph,h);
-		List <Integer> list4=AEtoile.chemin(12,6,graph,h);
-		list.addAll(list2);
-		list.addAll(list3);
-		list.addAll(list4);
-		list.add(-1);
+		int sens=1;
+		List<Integer>list;
+		List<Integer>victimes=new ArrayList<>();
+		List<Integer>hopitaux=new ArrayList<>();
+		victimes.add(3);
+		victimes.add(12);
+		hopitaux.add(6);
+		list=AEtoile.mainProgram(1,1,hopitaux,victimes,graph,h,sens);
 		return list;
 	}
 	
