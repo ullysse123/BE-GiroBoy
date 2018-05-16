@@ -48,7 +48,7 @@ Jour 19 : Correction de l'ensemble des valeurs pour se deplacer sur le circuit +
 
 Jour 20 : Resolution du problème de passage des lignes droites sur les carrefour + mise à jour de l'IA
 
-Jour 21 : 
+Jour 21 : Ajout du nouveau graphe pour l'IA + Debut de la redaction de la documentation du robot + debuggage des carrefours en ligne droite
 
 Jour 22 : 
 
