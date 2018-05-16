@@ -14,7 +14,7 @@ public class Graph3 implements Graph {
 					sens=1;
 				break;
 			case 2:
-				if(numGrandPere!=1 && numGrandPere != 6) 
+				if(numGrandPere!=3 && numGrandPere != 5) 
 					sens=1;
 				break;
 			case 3:
@@ -34,11 +34,11 @@ public class Graph3 implements Graph {
 					sens=1;
 				break;
 			case 7:
-				if(numGrandPere!=1 && numGrandPere != 4)
+				if(numGrandPere!=8 && numGrandPere != 9)
 					sens=1;
 				break;
 			case 8:
-				if(numGrandPere!=4 && numGrandPere != 3)
+				if(numGrandPere!=7 && numGrandPere != 9)
 					sens=1;
 				break;
 			case 9:
@@ -50,7 +50,7 @@ public class Graph3 implements Graph {
 					sens=1;
 				break;
 			case 11:
-				if(numGrandPere!=5 && numGrandPere != 6)
+				if(numGrandPere!=10 && numGrandPere != 12)
 					sens=1;
 				break;
 			default:
@@ -186,17 +186,6 @@ public class Graph3 implements Graph {
 
 	private void voisinCase4(int direction, List<Integer> v) {
 		if(directionIs0(direction)) {
-			v.add(3);
-			v.add(2);
-		}else {
-			v.add(12);
-			v.add(5);
-		}
-		
-	}
-
-	private void voisinCase3(int direction, List<Integer> v) {
-		if(directionIs0(direction)) {
 			v.add(1);
 			v.add(7);
 		}else {
@@ -206,13 +195,24 @@ public class Graph3 implements Graph {
 		
 	}
 
+	private void voisinCase3(int direction, List<Integer> v) {
+		if(directionIs0(direction)) {
+			v.add(4);
+			v.add(8);
+		}else {
+			v.add(5);
+			v.add(2);
+		}
+		
+	}
+
 	private void voisinCase2(int direction, List<Integer> v) {
 		if(directionIs0(direction)) {
+			v.add(1);
+			v.add(6);
+		}else {
 			v.add(3);
 			v.add(5);
-		}else {
-			v.add(6);
-			v.add(1);
 		}
 		
 	}

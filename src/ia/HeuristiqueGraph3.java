@@ -11,7 +11,7 @@ public class HeuristiqueGraph3 implements Heuristique {
 		int virage=2;
 		int ligne=1;
 		switch(nom) {
-			case 1:h=3*ligne+intersection;
+			case 1:h=3*ligne+2*virage+intersection;
 			break;
 			case 2:h=1*virage+intersection;
 			break;
