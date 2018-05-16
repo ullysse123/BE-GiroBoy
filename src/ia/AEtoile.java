@@ -196,10 +196,6 @@ public class AEtoile {
 					}
 				}
 				if(listSave.get(0)>2)listSave.remove(0);
-				/*System.out.println("List save Victime:");
-				for(int j:listSave) {
-					System.out.println(j);
-				}*/
 				//Rajoute la liste sur la list de direction retourne
 				retour.addAll(listSave);
 				victimes.remove(indexVictimeSauve);
@@ -233,10 +229,6 @@ public class AEtoile {
 				}
 			}
 			if(listSave.get(0)>2)listSave.remove(0);
-			/*System.out.println("List save Hopital:");
-			for(int j:listSave) {
-				System.out.println(j);
-			}*/
 			//On rajoute le parcours jusqu'a l'hopital qui devient le point de depart suivant
 			retour.addAll(listSave);
 			pointDeDepart=pointDeDepartSuivant;
@@ -249,7 +241,6 @@ public class AEtoile {
 
 	private static void sommetPetitFilsConstruct(Graph graph, Sommet depart, List<Sommet> sommetPetitFils) {
 		int j=1;
-		//System.out.println("Direction:"+depart.getSens()+"\n");
 		for(int i:graph.voisin(depart.getNom(),depart.getSens())) {
 			sommetPetitFils.add(new Sommet(i,0,j,graph.whereDoYouCome(depart.getNom(), i)));
 			j--;
@@ -269,30 +260,6 @@ public class AEtoile {
 		victimes.add(12);
 		hopitaux.add(6);
 		list=mainProgram(1,1,hopitaux,victimes,graph,h,sens);
-		/*List <Integer> list=chemin(1,3,graph,h);
-		System.out.println("List 1 direction:");
-		for(int i:list) {
-			System.out.println(i);
-		}
-		List <Integer> list2=chemin(3,6,graph,h);
-		System.out.println("List 2 direction:");
-		for(int i:list2) {
-			System.out.println(i);
-		}
-		List <Integer> list3=chemin(6,12,graph,h);
-		System.out.println("List 3 direction:");
-		for(int i:list3) {
-			System.out.println(i);
-		}
-		List <Integer> list4=chemin(12,6,graph,h);
-		System.out.println("List 4 direction:");
-		for(int i:list4) {
-			System.out.println(i);
-		}
-		list.addAll(list2);
-		list.addAll(list3);
-		list.addAll(list4);*/
-		
 		System.out.println("List direction:");
 		for(int i:list) {
 			System.out.println(i);

@@ -20,69 +20,41 @@ public class Sommet {
 		this.sens=sens;
 	}
 	
-	
-
-
 	public int getSens() {
 		return sens;
 	}
-
-	
-
-
 
 	public int getG() {
 		return g;
 	}
 
-
-
-
 	public void setG(int g) {
 		this.g = g;
 	}
-
-
-
 
 	public void setSens(int sens) {
 		this.sens = sens;
 	}
 
-
-
-
 	public void setListDirection(List<Integer> listDirection) {
 		this.listDirection = listDirection;
 	}
-
-
-
 
 	public void setGh(int gh) {
 		this.gh = gh;
 	}
 
-
-
 	public void setFilsList(List<Sommet> filsList) {
 		this.filsList = filsList;
 	}
-
 
 	public int getDirection() {
 		return direction;
 	}
 
-
-
-
 	public List<Integer> getListDirection() {
 		return listDirection;
 	}
-
-
-
 
 	public int getNom() {
 		return nom;
@@ -95,8 +67,5 @@ public class Sommet {
 	public List <Sommet> getFilsList() {
 		return filsList;
 	}
-	
-	
-	
-	
+		
 }
