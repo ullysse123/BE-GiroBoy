@@ -6,7 +6,7 @@ import java.util.List;
 
 public class AEtoile {
 	
-	private static int dernierSens=1;
+	private static int dernierSens=1;//Sens de depart toujours à l'est ou sud
 	
 	private static List <Sommet> insererLesFils (List <Sommet> listAttentePrec, List <Sommet> listFils, List<Sommet> listVu) {
 		List <Sommet> listAttente= listAttentePrec;
@@ -107,13 +107,16 @@ public class AEtoile {
 		return directionList;
 	}
 	
-	public static List <Integer> chemin (int numDepart,int numFin,Graph graph, Heuristique hb){
+	
+	//TODO:Mettre le sens en parametre et remplacer les derniers sens
+	//mettre le sens en premier dans la liste pour pouvoir le sauvegarder
+	public static List <Integer> chemin (int numDepart,int numFin,Graph graph, Heuristique hb,int sens){
 		//Initialisation necessaire pour l'initialisation de AEtoile
 		List <Integer> listA,listB;
 		List <Integer> listFinal=new ArrayList<Integer>();
 		
-		Sommet depart=new Sommet(numDepart,0,2,dernierSens);
-		int dernierSensOppose=(dernierSens+1)%2;
+		Sommet depart=new Sommet(numDepart,0,2,sens);//sens
+		int dernierSensOppose=(sens+1)%2;//sens
 		
 		Sommet departOppose=new Sommet(numDepart,0,2,dernierSensOppose);
 		
@@ -133,24 +136,31 @@ public class AEtoile {
 		int coutB=listB.get(0);
 		if(coutA>coutB) {
 			listB.remove(0);
+			listFinal.add(dernierSensB);
+			listFinal.add(coutB);
 			listFinal.add(2);//Pour le demi-tour
 			listFinal.addAll(listB);
-			dernierSens=dernierSensB;
+			dernierSens=dernierSensB;//supprimer
 	    }else {
-	    	listA.remove(0);
-	    	listFinal=listA;
-	    	dernierSens=dernierSensA;
+	    	listFinal.add(dernierSensA);
+	    	listFinal.add(coutA);
+	    	listFinal.addAll(listA);
+	    	dernierSens=dernierSensA;//supprimer
 		}
 		return listFinal;
 	}
 	
-	public static List <Integer> mainProgram (int nbVictimeTransportable,int debut, List <Integer> hopitaux, List<Integer> victimes,Graph graph, Heuristique h){
+	//TODO: Sens à entrer en paramètre
+	public static List <Integer> mainProgram (int nbVictimeTransportable,int debut, List <Integer> hopitaux, List<Integer> victimes,Graph graph, Heuristique h,int sens){
 		int pointDeDepart=debut;
 		int pointDeDepartSuivant,indexVictimeSauve;
 		int meilleurCout,coutActuelle;
+		int sensActuelle,sensFils;
+		int meilleurSens=0;
 		List <Integer> retour=new ArrayList<Integer>();
 		List <Integer >listSave=new ArrayList<Integer>();
 		List <Integer> listActuelle;
+		sensActuelle=sens;
 		while(!victimes.isEmpty()) {
 			pointDeDepartSuivant=-1;
 			//Permet le transport de plusieurs victimes
@@ -160,7 +170,10 @@ public class AEtoile {
 				//Parcours des victimes à sauver
 				for(int j=0;j<victimes.size();j++) {
 					int victime=victimes.get(j);
-					listActuelle=chemin(pointDeDepart,victime,graph,h);
+					listActuelle=chemin(pointDeDepart,victime,graph,h,sensActuelle);
+					//Recuperer le sens
+					sensFils=listActuelle.get(0);
+					listActuelle.remove(0);
 					//Le premier nombre de la liste est le cout
 					coutActuelle=listActuelle.get(0);
 					listActuelle.remove(0);
@@ -169,6 +182,8 @@ public class AEtoile {
 						meilleurCout=coutActuelle;
 						listSave=listActuelle;
 						pointDeDepartSuivant=victime;
+						indexVictimeSauve=j;
+						meilleurSens=sensFils;
 					}else {
 						//Sinon on compare et on change si le cout actuelle est meilleur
 						if(meilleurCout>coutActuelle) {
@@ -176,19 +191,29 @@ public class AEtoile {
 							listSave=listActuelle;
 							pointDeDepartSuivant=victime;
 							indexVictimeSauve=j;
+							meilleurSens=sensFils;
 						}
 					}
 				}
+				if(listSave.get(0)>2)listSave.remove(0);
+				/*System.out.println("List save Victime:");
+				for(int j:listSave) {
+					System.out.println(j);
+				}*/
 				//Rajoute la liste sur la list de direction retourne
 				retour.addAll(listSave);
 				victimes.remove(indexVictimeSauve);
 				//Le point de depart est le point de la victime sauve
 				pointDeDepart=pointDeDepartSuivant;
+				sensActuelle=meilleurSens;
 			}
 			meilleurCout=-1;
 			//On parcours les hopitaux
 			for(int hopital:hopitaux) {
-				listActuelle=chemin(pointDeDepart,hopital,graph,h);
+				listActuelle=chemin(pointDeDepart,hopital,graph,h,sensActuelle);
+				//Recuperer le sens
+				sensFils=listActuelle.get(0);
+				listActuelle.remove(0);
 				coutActuelle=listActuelle.get(0);
 				listActuelle.remove(0);
 				//Le premier initialise
@@ -196,18 +221,26 @@ public class AEtoile {
 					meilleurCout=coutActuelle;
 					listSave=listActuelle;
 					pointDeDepartSuivant=hopital;
+					meilleurSens=sensFils;
 				}else {
 					//Sinon on compare et on change si le cout actuelle est meilleur
 					if(meilleurCout>coutActuelle) {
 						meilleurCout=coutActuelle;
 						listSave=listActuelle;
 						pointDeDepartSuivant=hopital;
+						meilleurSens=sensFils;
 					}
 				}
 			}
+			if(listSave.get(0)>2)listSave.remove(0);
+			/*System.out.println("List save Hopital:");
+			for(int j:listSave) {
+				System.out.println(j);
+			}*/
 			//On rajoute le parcours jusqu'a l'hopital qui devient le point de depart suivant
 			retour.addAll(listSave);
 			pointDeDepart=pointDeDepartSuivant;
+			sensActuelle=meilleurSens;
 		}
 		//-1 pour dire la fin
 		retour.add(-1);
@@ -228,14 +261,15 @@ public class AEtoile {
 		
 		Heuristique h=new HeuristiqueGraph2();
 		Graph graph=new Graph2();
+		int sens=1;
 		List<Integer>list;
 		List<Integer>victimes=new ArrayList<>();
 		List<Integer>hopitaux=new ArrayList<>();
 		victimes.add(3);
 		victimes.add(12);
 		hopitaux.add(6);
-		list=mainProgram(1,1,hopitaux,victimes,graph,h);/*
-		List <Integer> list=chemin(1,3,graph,h);
+		list=mainProgram(1,1,hopitaux,victimes,graph,h,sens);
+		/*List <Integer> list=chemin(1,3,graph,h);
 		System.out.println("List 1 direction:");
 		for(int i:list) {
 			System.out.println(i);
@@ -257,8 +291,8 @@ public class AEtoile {
 		}
 		list.addAll(list2);
 		list.addAll(list3);
-		list.addAll(list4);
-		*/
+		list.addAll(list4);*/
+		
 		System.out.println("List direction:");
 		for(int i:list) {
 			System.out.println(i);
