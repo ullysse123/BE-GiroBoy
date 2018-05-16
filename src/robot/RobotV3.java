@@ -5,8 +5,6 @@ import lejos.hardware.Sound;
 import lejos.hardware.lcd.LCD;
 import lejos.utility.Delay;
 import modules.ColorSensor;
-
-//import modules.LightSensor;
 import java.util.List;
 import java.util.Random;
 
@@ -26,11 +24,6 @@ public class RobotV3{
 	
 	//liste d'entier indiquant les direction a prendre
 	static List<Integer> listDirection;
-	
-	//Fonction permettant de savoir si le capteur de lumiere est sur la ligne
-	/*public static boolean lightSurLigne(){
-		return 0.4f<light.getModeRouge();
-	}*/
 	
 	//Fonction permettant de savoir si le capteur de couleur est sur la ligne
 	public static boolean colorSurLigne(int i){
@@ -242,7 +235,6 @@ public class RobotV3{
 		int nbPassage = 0;
 		int nbIterations = 0;
 		int compteur=0;
-		//int nbMaxCompteur=3;
 		
 		//Correction applique pour la direction
 		int direction = 11;
@@ -268,7 +260,6 @@ public class RobotV3{
 							etatCour = coul;
 							nbIterations = 0;
 						}else{
-							// /!\ LAST MODIF
 							if(nbIterations >= 1){
 								nbPassage++;
 								etatPrev = etatCour;
@@ -281,15 +272,13 @@ public class RobotV3{
 					}
 					
 					//On fait maintenant les correctif de suivie de ligne
-					if(colorSurLigne(GAUCHE)){// && compteur==0)||(compteur>=1 && compteur<nbMaxCompteur)){
+					if(colorSurLigne(GAUCHE)){
 						eq.setDirection(-direction);
-						//compteur++;
 					}else{
 						if(compteur<2)
 							eq.setDirection(0);
 						else
 							eq.setDirection(direction/3);
-						//compteur=0;
 					}
 				}else{
 					//Si on tourne a droite
@@ -307,7 +296,6 @@ public class RobotV3{
 							etatCour = coul;
 							nbIterations = 0;
 						}else{
-							// /!\ LAST MODIF
 							if(nbIterations >= 1){
 								nbPassage++;
 								etatPrev = etatCour;
@@ -319,15 +307,13 @@ public class RobotV3{
 						}
 					}
 					//On fait maintenant les correctif de suivie de ligne
-					if(colorSurLigne(DROITE)) {// && compteur==0)||(compteur>=1 && compteur<nbMaxCompteur)){
+					if(colorSurLigne(DROITE)) {
 						eq.setDirection(direction);
-						//compteur++;
 					}else{
 						if(compteur<2)
 							eq.setDirection(0);
 						else
 							eq.setDirection(-direction/3);
-						//compteur=0;
 					}
 					
 				}
@@ -341,8 +327,6 @@ public class RobotV3{
 			}else{
 				eq.setDirection(-direction/4);
 			}
-			/*Delay.msDelay(25);
-			eq.setVitesse(3.4);*/
 			Delay.msDelay(700);
 			
 		}else{
@@ -392,11 +376,6 @@ public class RobotV3{
 						if(nbPassageLigneDroite == 0) {
 							vitesse = vitesseLigne;
 						}
-						//Vitesse incr�mentale pour augmenter la fluidit� du d�placement
-						/*nbPassageLigneDroite++;
-						if(nbPassageLigneDroite<=10){
-							vitesse+=0.2;
-						}*/
 						eq.setVitesse(vitesse);
 						Delay.msDelay(15);
 						eq.setDirection(direction);
