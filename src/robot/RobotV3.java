@@ -278,7 +278,7 @@ public class RobotV3{
 						if(compteur<2)
 							eq.setDirection(0);
 						else
-							eq.setDirection(direction/3);//div 3
+							eq.setDirection(direction);
 					}
 				}else{
 					//Si on tourne a droite
@@ -313,7 +313,7 @@ public class RobotV3{
 						if(compteur<2)
 							eq.setDirection(0);
 						else
-							eq.setDirection(-direction/3);//div 3
+							eq.setDirection(-direction);
 					}
 					
 				}
@@ -505,15 +505,15 @@ public class RobotV3{
 	
 	//Permet d'instancier une liste de direction permettant de nous rendre de fa�on optimis� d'un point A a un point B
 	public static List<Integer> instanceAEtoile(){
-		Heuristique h=new HeuristiqueGraph2();
-		Graph graph=new Graph2();
+		Heuristique h=new HeuristiqueGraph3();
+		Graph graph=new Graph3();
 		int sens=1;
 		List<Integer>list;
 		List<Integer>victimes=new ArrayList<>();
 		List<Integer>hopitaux=new ArrayList<>();
-		victimes.add(3);
+		victimes.add(7);
 		victimes.add(12);
-		hopitaux.add(6);
+		hopitaux.add(8);
 		list=AEtoile.mainProgram(1,1,hopitaux,victimes,graph,h,sens);
 		return list;
 	}
