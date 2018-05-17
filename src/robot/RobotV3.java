@@ -278,7 +278,7 @@ public class RobotV3{
 						if(compteur<2)
 							eq.setDirection(0);
 						else
-							eq.setDirection(direction/3);
+							eq.setDirection(direction/3);//div 3
 					}
 				}else{
 					//Si on tourne a droite
@@ -313,7 +313,7 @@ public class RobotV3{
 						if(compteur<2)
 							eq.setDirection(0);
 						else
-							eq.setDirection(-direction/3);
+							eq.setDirection(-direction/3);//div 3
 					}
 					
 				}
@@ -422,6 +422,8 @@ public class RobotV3{
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
 						nbPassageVirageGauche = 0;
+						//Reinitialisation de la direction
+						eq.setDirection(0);
 						//Recuperation de la direction
 						leftright = listDirection.get(par).intValue();
 						par++;
