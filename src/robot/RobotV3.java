@@ -344,8 +344,8 @@ public class RobotV3{
 		
 		//Ensemble de nos variables permettant de fixer la vitesse et la direction
 		double vitesse = 3.4;
-		double vitesseVirage = 3.6;
-		double vitesseLigne = 3.6;
+		double vitesseVirage = 3.7;
+		double vitesseLigne = 3.7;
 		int direction = 0;
 		int directionVirage = 6;
 		int nbPassageVirageDroite = 0;
