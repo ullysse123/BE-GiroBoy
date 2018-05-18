@@ -13,10 +13,9 @@ public class Sommet {
 	private int direction;
 	private int sens;
 	
-	public Sommet(int nom, int gh, int direction,int sens) {
+	public Sommet(int nom,int direction,int sens) {
 		this.nom = nom;
-		this.gh = gh;
-		this.direction=direction;
+		this.direction = direction;
 		this.sens=sens;
 	}
 	
