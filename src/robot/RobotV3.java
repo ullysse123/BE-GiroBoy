@@ -229,12 +229,14 @@ public class RobotV3{
 		eq.setDirection(0);
 		
 		//Etat noir = 0 || Etat blanc = 1
+		Boolean passageLong=false;
 		int etatPrev = -1;
 		int etatCour = -1;
 		int coul = -1;
 		int nbPassage = 0;
 		int nbIterations = 0;
 		int compteur=0;
+		int nbReste=0;
 		
 		//Correction applique pour la direction
 		int direction = 11;
@@ -269,16 +271,25 @@ public class RobotV3{
 								nbIterations++;
 							}
 						}
+						nbReste=0;
+					}else {
+						if(coul==etatCour) {
+							nbReste++;
+							passageLong=nbReste>=5;
+						}
 					}
+
 					
 					//On fait maintenant les correctif de suivie de ligne
-					if(colorSurLigne(GAUCHE)){
+					if(colorSurLigne(GAUCHE) && !(sortieCarrefour(nbPassage,etatPrev,etatCour))){
 						eq.setDirection(-direction);
 					}else{
-						if(compteur<2)
+						if(!passageLong)
 							eq.setDirection(0);
-						else
+						else {
 							eq.setDirection(direction);
+							if(nbReste>=6)nbReste=0;
+						}
 					}
 				}else{
 					//Si on tourne a droite
@@ -305,15 +316,23 @@ public class RobotV3{
 								nbIterations++;
 							}
 						}
+						nbReste=0;
+					}else {
+						if(coul==etatCour) {
+							nbReste++;
+							passageLong=nbReste>=5;
+						}
 					}
 					//On fait maintenant les correctif de suivie de ligne
-					if(colorSurLigne(DROITE)) {
+					if(colorSurLigne(DROITE) && !(sortieCarrefour(nbPassage,etatPrev,etatCour))) {
 						eq.setDirection(direction);
 					}else{
-						if(compteur<2)
+						if(!passageLong)
 							eq.setDirection(0);
-						else
+						else {
 							eq.setDirection(-direction);
+							if(nbReste>=7)nbReste=0;
+						}
 					}
 					
 				}
@@ -323,11 +342,13 @@ public class RobotV3{
 			
 			//Une fois sur l'embranchement final on laisse avancer le robot pour qu'il sorte de la double ligne
 			if(x==0){
-				eq.setDirection(direction/4);
+				eq.setDirection(direction);
 			}else{
-				eq.setDirection(-direction/4);
+				eq.setDirection(-direction);
 			}
-			Delay.msDelay(700);
+			Delay.msDelay(150);
+			eq.setDirection(0);
+			Delay.msDelay(550);
 			
 		}else{
 			Sound.playTone(800, 10, 10);
