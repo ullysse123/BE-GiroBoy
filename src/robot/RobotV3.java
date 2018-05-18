@@ -658,13 +658,12 @@ public class RobotV3{
 		colorDroite = new ColorSensor(DROITE);
 		colorGauche = new ColorSensor(GAUCHE);
 		while(i>=1) {
-			Sound.buzz();
+			Sound.beep();
 			i--;
-			LCD.drawString((i+1)+"\n",0,0);
+			LCD.drawString((i+1)+"\n",7,4);
 			Delay.msDelay(1000);
 			LCD.clear();
 		}
-		Sound.beep();
 	}
 
 	private static void affichageWait(int i) {
