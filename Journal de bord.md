@@ -50,9 +50,9 @@ Jour 20 : Resolution du problème de passage des lignes droites sur les carrefou
 
 Jour 21 : Ajout du nouveau graphe pour l'IA + Debut de la redaction de la documentation du robot + debuggage des carrefours en ligne droite
 
-Jour 22 : 
+Jour 22 : Ajustement correction carrefour + documentation du robot
 
-Jour 23 : 
+Jour 23 : Amelioration du AEtoile + documentation du robot + ajustement correction carrefour
 
 # Semaine 6
 
