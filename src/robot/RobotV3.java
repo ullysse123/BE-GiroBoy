@@ -273,9 +273,10 @@ public class RobotV3{
 						}
 						nbReste=0;
 					}else {
+						//Si coul constant
 						if(coul==etatCour) {
-							nbReste++;
-							passageLong=nbReste>=15;
+							nbReste++;//On compte depuis combien de temps on est
+							passageLong=nbReste>=15;//On est sur un passage long si on depasse un certain seuil
 						}else
 							nbReste=0;
 					}
@@ -288,7 +289,7 @@ public class RobotV3{
 					}else{
 						if(!passageLong && compteur==0)
 							eq.setDirection(0);
-						else {
+						else {//Si on est sur un passage long, correction de trajectoire
 							compteur++;
 							eq.setDirection(direction/2);
 							if(compteur>=2) {
@@ -324,9 +325,10 @@ public class RobotV3{
 						}
 						nbReste=0;
 					}else {
+						//Si coul constant
 						if(coul==etatCour) {
-							nbReste++;
-							passageLong=nbReste>=15;
+							nbReste++;//On compte depuis combien de temps on est
+							passageLong=nbReste>=15;//On est sur un passage long si on depasse un certain seuil
 						}else
 							nbReste=0;
 					}
@@ -337,7 +339,7 @@ public class RobotV3{
 					}else{
 						if(!passageLong && compteur==0)
 							eq.setDirection(0);
-						else {
+						else {//Si on est sur un passage long, correction de trajectoire
 							compteur++;
 							eq.setDirection(-direction/2);
 							if(compteur>=2) {
@@ -348,7 +350,6 @@ public class RobotV3{
 					}
 					
 				}
-				compteur=(compteur+1)%3;
 				Delay.msDelay(75);
 			}
 			
