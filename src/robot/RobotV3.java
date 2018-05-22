@@ -276,7 +276,7 @@ public class RobotV3{
 						//Si coul constant
 						if(coul==etatCour) {
 							nbReste++;//On compte depuis combien de temps on est
-							passageLong=nbReste>=15;//On est sur un passage long si on depasse un certain seuil
+							passageLong=nbReste>=5;//On est sur un passage long si on depasse un certain seuil
 						}else
 							nbReste=0;
 					}
@@ -291,7 +291,7 @@ public class RobotV3{
 							eq.setDirection(0);
 						else {//Si on est sur un passage long, correction de trajectoire
 							compteur++;
-							eq.setDirection(direction/2);
+							eq.setDirection(7);
 							if(compteur>=2) {
 								nbReste=0;
 								compteur=0;
@@ -328,7 +328,7 @@ public class RobotV3{
 						//Si coul constant
 						if(coul==etatCour) {
 							nbReste++;//On compte depuis combien de temps on est
-							passageLong=nbReste>=15;//On est sur un passage long si on depasse un certain seuil
+							passageLong=nbReste>=5;//On est sur un passage long si on depasse un certain seuil
 						}else
 							nbReste=0;
 					}
@@ -341,7 +341,7 @@ public class RobotV3{
 							eq.setDirection(0);
 						else {//Si on est sur un passage long, correction de trajectoire
 							compteur++;
-							eq.setDirection(-direction/2);
+							eq.setDirection(-7);
 							if(compteur>=2) {
 								nbReste=0;
 								compteur=0;
@@ -351,6 +351,7 @@ public class RobotV3{
 					
 				}
 				Delay.msDelay(75);
+				compteur=(compteur+1)%3;
 			}
 			
 			//Une fois sur l'embranchement final on laisse avancer le robot pour qu'il sorte de la double ligne
