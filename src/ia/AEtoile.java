@@ -121,7 +121,7 @@ public class AEtoile {
 	
 	
 	
-	public static List <Integer> chemin (int numDepart,int numFin,Graph graph, Heuristique h,int sens){
+	private static List <Integer> chemin (int numDepart,int numFin,Graph graph, Heuristique h,int sens){
 		//Initialisation necessaire pour l'initialisation de AEtoile
 		List <Integer> listA,listB;
 		List <Integer> listFinal=new ArrayList<Integer>();
