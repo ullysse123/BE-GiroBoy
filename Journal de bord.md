@@ -56,12 +56,10 @@ Jour 23 : Amelioration du AEtoile + documentation du robot + ajustement correcti
 
 # Semaine 6
 
-Jour 24 : 
+Jour 24 : Ajustement carrefour + Correction AEtoile + Documentation robot
 
 Jour 25 : 
 
 Jour 26 : 
 
-Jour 27 : 
-
-Jour 28 : 
+Jour 27 :  
