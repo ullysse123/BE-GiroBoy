@@ -273,22 +273,29 @@ public class RobotV3{
 						}
 						nbReste=0;
 					}else {
+						//Si coul constant
 						if(coul==etatCour) {
-							nbReste++;
-							passageLong=nbReste>=5;
-						}
+							nbReste++;//On compte depuis combien de temps on est
+							passageLong=nbReste>=15;//On est sur un passage long si on depasse un certain seuil
+						}else
+							nbReste=0;
 					}
 
 					
 					//On fait maintenant les correctif de suivie de ligne
 					if(colorSurLigne(GAUCHE) && !(sortieCarrefour(nbPassage,etatPrev,etatCour))){
 						eq.setDirection(-direction);
+						nbReste=0;
 					}else{
-						if(!passageLong)
+						if(!passageLong && compteur==0)
 							eq.setDirection(0);
-						else {
-							eq.setDirection(direction);
-							if(nbReste>=6)nbReste=0;
+						else {//Si on est sur un passage long, correction de trajectoire
+							compteur++;
+							eq.setDirection(direction/2);
+							if(compteur>=2) {
+								nbReste=0;
+								compteur=0;
+							}
 						}
 					}
 				}else{
@@ -318,35 +325,41 @@ public class RobotV3{
 						}
 						nbReste=0;
 					}else {
+						//Si coul constant
 						if(coul==etatCour) {
-							nbReste++;
-							passageLong=nbReste>=5;
-						}
+							nbReste++;//On compte depuis combien de temps on est
+							passageLong=nbReste>=15;//On est sur un passage long si on depasse un certain seuil
+						}else
+							nbReste=0;
 					}
 					//On fait maintenant les correctif de suivie de ligne
 					if(colorSurLigne(DROITE) && !(sortieCarrefour(nbPassage,etatPrev,etatCour))) {
 						eq.setDirection(direction);
+						nbReste=0;
 					}else{
-						if(!passageLong)
+						if(!passageLong && compteur==0)
 							eq.setDirection(0);
-						else {
-							eq.setDirection(-direction);
-							if(nbReste>=7)nbReste=0;
+						else {//Si on est sur un passage long, correction de trajectoire
+							compteur++;
+							eq.setDirection(-direction/2);
+							if(compteur>=2) {
+								nbReste=0;
+								compteur=0;
+							}
 						}
 					}
 					
 				}
-				compteur=(compteur+1)%3;
 				Delay.msDelay(75);
 			}
 			
 			//Une fois sur l'embranchement final on laisse avancer le robot pour qu'il sorte de la double ligne
-			if(x==0){
+			/*if(x==0){
 				eq.setDirection(direction);
 			}else{
 				eq.setDirection(-direction);
 			}
-			Delay.msDelay(150);
+			Delay.msDelay(150);*/
 			eq.setDirection(0);
 			Delay.msDelay(550);
 			
