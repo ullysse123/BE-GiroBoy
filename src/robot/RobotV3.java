@@ -19,7 +19,7 @@ public class RobotV3{
 	static final float SEUIL = 0.020f;
 	
 	static ColorSensor colorDroite;
-	static ColorSensor colorGauche;//Light Sensor
+	static ColorSensor colorGauche;//Remplacer par Light Sensor si pas de color sensor
 	static Equilibre eq= new Equilibre();
 	
 	//liste d'entier indiquant les direction a prendre
@@ -69,13 +69,13 @@ public class RobotV3{
 	}
 		
 	public static void depacement(int x, Equilibre eq){
-		//x = 0 on ne cherche pas a depacer, ligne droite
+		//x = 0 on ne cherche pas a depasser, ligne droite
 		//x = 1 on depace
 		
-		//  /!\ /!\ CODE NON SIMPLIFIE : Le code ci dessous est volontairement non simplifi�. Ne pouvant pas le test� j'ai d�cid� de le laisser
-		//								 non simplif� afin de faciliter le debuggage et la lecture de celui ci.
+		//  /!\ /!\ CODE NON SIMPLIFIE : Le code ci dessous est volontairement non simplifie. Ne pouvant pas le tester j'ai decide de le laisser
+		//								 non simplife afin de faciliter le debuggage et la lecture de celui ci.
 		
-		//J'utilise trop de variable ici volontairement, ce code etant experimentale j'ai besoin d'un maximum de clart� et de partitionnement
+		//J'utilise trop de variable ici volontairement, ce code etant experimental j'ai besoin d'un maximum de clarte et de partitionnement
 		int nbPassage = 0;
 		int nbIterations = 0;
 		int coul = -1;
@@ -92,7 +92,7 @@ public class RobotV3{
 		int etatCour = -1;
 		int etatPrev = -1;
 		
-		//Correction appliqu� pour la direction
+		//Correction applique pour la direction
 		int direction = 9;
 		int directionR = 4;
 		
@@ -100,14 +100,14 @@ public class RobotV3{
 			//On ne cherche pas a depacer
 			eq.setVitesse(5);
 			while(!finDepacement(x,etatPrevL,etatCourL,nbPassageL,etatPrevR,etatCourR,nbPassageR)){
-				//On va faire un comptage d'etat du cot� droit puis du cot� gauche
-				//Comptage du cot� gauche
+				//On va faire un comptage d'etat du cote droit puis du cote gauche
+				//Comptage du cote gauche
 				if(colorSurLigne(GAUCHE)){
 					coulL = 1;
 				}else{
 					coulL = 0;
 				}
-				//Si la couleur capt� est diff�rente de la couleur courante alors on met a jour
+				//Si la couleur capte est differente de la couleur courante alors on met a jour
 				if(coulL != etatCourL && nbPassageL <= 5){
 					if(nbIterationsL >= 3 && nbPassageL <=6){
 						nbPassageL++;
@@ -125,13 +125,13 @@ public class RobotV3{
 						}
 					}
 				}
-				//Comptage cot� droit
+				//Comptage cote droit
 				if(colorSurLigne(DROITE)){
 					coulR = 1;
 				}else{
 					coulR = 0;
 				}
-				//Si la couleur capt� est diff�rente de la couleur courante alors on met a jour
+				//Si la couleur capte est differente de la couleur courante alors on met a jour
 				if(coulR != etatCourR && nbPassageR <= 5){
 					if(nbIterationsR >= 3 && nbPassageR <=6){
 						nbPassageR++;
@@ -159,7 +159,7 @@ public class RobotV3{
 			}
 		}else{
 			if (x == 1){
-				//On cherche a depacer par la droite. --> Meme problematique que pour tourner a droite sur une intersection
+				//On cherche a depasser par la droite. --> Meme problematique que pour tourner a droite sur une intersection
 				eq.setVitesse(5);
 				while(!finDepacement(x,etatPrev,etatCour,nbPassage,0,0,0)){
 					//On regarde sur quel couleur est notre capteur gauche
@@ -168,7 +168,7 @@ public class RobotV3{
 					}else{
 						coul = 0;
 					}
-					//Si  la couleur capt� est diff�rente de la couleur courante alors on met a jour
+					//Si  la couleur capte est differente de la couleur courante alors on met a jour
 					if(coul != etatCour && nbPassage <=7){
 						if(nbIterations >= 3 && nbPassage <=6){
 							nbPassage++;
@@ -200,7 +200,6 @@ public class RobotV3{
 		
 	}
 		
-	//TODO : demi-tour
 	//Objectif de la fonction : Envoyer la suite de sequence permettant au robot de faire
 	//un demi tour.
 	public static void demiTour(Equilibre eq){
@@ -221,10 +220,10 @@ public class RobotV3{
 	}
 	
 	//Fonction permettant au robot de franchir un carrefour
-	//x = 1 prendre la branche droite du carrefour || x = 0 brandre la branche gauche du carrefour
+	//x = 1 prendre la branche droite du carrefour || x = 0 prendre la branche gauche du carrefour
 	public static void carrefour(int x, Equilibre eq){
 		
-		//On fixe la vitesse a 3.5 et la direction a 0
+		//On fixe la vitesse a 3.6 et la direction a 0
 		eq.setVitesse(3.6);
 		eq.setDirection(0);
 		
@@ -306,7 +305,7 @@ public class RobotV3{
 					}else{
 						coul = 0;
 					}
-					//Si  la couleur capt� est diff�rente de la couleur courante alors on met a jour
+					//Si  la couleur capte est differente de la couleur courante alors on met a jour
 					if(coul != etatCour && nbPassage <=6){
 						if(nbIterations >= 3 && nbPassage <=5){
 							nbPassage++;
@@ -371,7 +370,7 @@ public class RobotV3{
 		
 	}
 	
-	//TODO Passage a niveau : Si jamais on a deux double lignes, passage a niveau est appel� via carefour et il faut choisir ce qu'on fait.
+	//TODO Passage a niveau : Si jamais on a deux double lignes, passage a niveau est appele via carefour et il faut choisir ce qu'on fait.
 	//Aller tout droit ou eviter un robot
 	
 	public static void suiveurDeLigne(){
@@ -407,7 +406,7 @@ public class RobotV3{
 						nbPassageVirageDroite = 0;
 						nbPassageVirageGauche = 0;
 						direction=0;
-						//Vitesse fix� a 3.4 au depart
+						//Vitesse fixe a 3.7 au depart
 						if(nbPassageLigneDroite == 0) {
 							vitesse = vitesseLigne;
 						}
@@ -419,12 +418,12 @@ public class RobotV3{
 						//Remise a 0 des compteur
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
-						//Vitesse fix� a 2.2 pour les virages et direction a 8
+						//Vitesse fixe a 3.7 pour les virages et direction a 6
 						vitesse = vitesseVirage;
 						if(nbPassageVirageGauche == 0){
 							direction = directionVirage;
 						}
-						//Augmentation incr�mentale de la direction
+						//Augmentation incrementale de la direction
 						nbPassageVirageGauche++;
 						if(nbPassageVirageGauche<=10){
 							direction+=2;
@@ -438,12 +437,12 @@ public class RobotV3{
 						//Remise a 0 des compteur
 						nbPassageVirageGauche = 0;
 						nbPassageLigneDroite = 0;
-						//Vitesse fix� a 2.2 pour les virage et direction a 8
+						//Vitesse fixe a 3.7 pour les virage et direction a 6
 						vitesse = vitesseVirage;
 						if(nbPassageVirageDroite == 0){
 							direction = directionVirage;
 						}
-						//Augmentation incr�mentale de la direction
+						//Augmentation incrementale de la direction
 						nbPassageVirageDroite++;
 						if(nbPassageVirageDroite<=10){
 							direction+=2;
@@ -453,7 +452,7 @@ public class RobotV3{
 						eq.setDirection(direction);
 						break;
 						
-				case 3: //Cas ou es deux capteur captent la ligne on s'arrette	
+				case 3: //Cas ou les deux capteur captent la ligne on s'arrette	
 						nbPassageLigneDroite = 0;
 						nbPassageVirageDroite = 0;
 						nbPassageVirageGauche = 0;
@@ -466,7 +465,7 @@ public class RobotV3{
 							if(leftright == 2){
 								demiTour(eq);
 							}else{
-								//Marqueur sonor pour indiqu� l'entr�e dans un carrefour
+								//Marqueur sonor pour indique l'entree dans un carrefour
 								Sound.buzz();
 								carrefour(leftright,eq);
 								Sound.buzz();
@@ -494,7 +493,7 @@ public class RobotV3{
 						  Delay.msDelay(50); 
 			}
 			
-			//Frequence d'�chantillonage fix� pour les capteurs
+			//Frequence d'echantillonage fixe pour les capteurs
 			Delay.msDelay(75);
 		}
 		
@@ -538,7 +537,7 @@ public class RobotV3{
 		return list;
 	}
 	
-	//Permet d'instancier une liste de direction permettant de nous rendre de fa�on optimis� d'un point A a un point B
+	//Permet d'instancier une liste de direction permettant de nous rendre de facon optimise d'un point A a un point B
 	public static List<Integer> instanceAEtoile(){
 		Heuristique h=new HeuristiqueGraph3();
 		Graph graph=new Graph3();
