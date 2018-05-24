@@ -165,11 +165,9 @@ public class AEtoile {
 	    	listFinal.add(coutA);
 	    	listFinal.addAll(listA);
 		}
-		
 		return listFinal;
 	}
 	
-	//TODO: Sens à entrer en paramètre
 	public static List <Integer> mainProgram (int nbVictimeTransportable,int debut, List <Integer> hopitaux, List<Integer> victimes,Graph graph, Heuristique h,int sens){
 		int pointDeDepart=debut;
 		int sensActuelle;
@@ -191,6 +189,7 @@ public class AEtoile {
 		int meilleurCout;
 		int coutActuelle;
 		int sensFils;
+		int nbVictimeSauve=0;
 		List<Integer> listActuelle;
 		
 		//Tant qu'on n'a pas sauve tous les victimes
@@ -223,6 +222,7 @@ public class AEtoile {
 						pointDeDepartSuivant=victime;
 						indexVictimeSauve=j;
 						meilleurSens=sensFils;
+						listSave.add(-1);
 					}else {
 						//Sinon on compare et on change si le cout actuelle est meilleur
 						if(meilleurCout>coutActuelle) {
@@ -231,10 +231,11 @@ public class AEtoile {
 							pointDeDepartSuivant=victime;
 							indexVictimeSauve=j;
 							meilleurSens=sensFils;
+							listSave.add(-1);
 						}
 					}
 				}
-				
+				nbVictimeSauve++;
 				//Si il reste une victime et qu'il peut transporter ou que c'est la premiere victime (debut ou apres un hopital)
 				if(victimes.size()==1 && (i+1)==nbVictimeTransportable || i==0) {
 					//Le sauvegarde
@@ -267,6 +268,7 @@ public class AEtoile {
 							listSave=listActuelle;
 							pointDeDepartSuivant=hopital;
 							meilleurSens=sensFils;
+							listSave.add(-2*nbVictimeSauve);
 						}else {
 							
 							//Sinon on compare et on change si le cout actuelle est meilleur (victime ou hopital)
@@ -275,9 +277,13 @@ public class AEtoile {
 								listSave=listActuelle;
 								pointDeDepartSuivant=hopital;
 								meilleurSens=sensFils;
+								listSave.add(-2*nbVictimeSauve);
 							}
 						}
 					}
+					
+					if(hopitalPlusProche)
+						nbVictimeSauve=0;
 					
 					//Si ce n'est pas un hopital le plus proche dans le cas ou il n'a pas atteint le nombre de victime max (les autres sont la en cas d'erreur)
 					if(!hopitalPlusProche && (i+1)!=nbVictimeTransportable && !victimes.isEmpty() && !(victimes.size()==indexVictimeSauve)) 
@@ -290,8 +296,8 @@ public class AEtoile {
 				
 		}
 		
-		//-1 pour dire la fin
-		retour.add(-1);
+		//-5 pour dire la fin
+		retour.add(-5);
 	}
 
 	//Constructeur des petits fils d'un sommet
