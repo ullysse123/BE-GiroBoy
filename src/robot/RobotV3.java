@@ -399,6 +399,15 @@ public class RobotV3{
 		
 		while(!Button.ESCAPE.isDown() && onContinu){
 			
+			//Nb negatif >5 utilise pour les beeps
+			leftright = listDirection.get(par).intValue();
+			if(leftright<0 && leftright!=-5) {
+				for(int i=leftright;i<0;i++) {
+					Sound.beepSequenceUp();
+					Delay.msDelay(10);
+				}
+				par++;
+			}
 			switch(sensLigne()){
 				
 				case 0: //Case ou aucun des capteur ne capte la ligne on avance
@@ -461,7 +470,7 @@ public class RobotV3{
 						//Recuperation de la direction
 						leftright = listDirection.get(par).intValue();
 						par++;
-						if(leftright!=-1){
+						if(leftright!=-5){
 							if(leftright == 2){
 								demiTour(eq);
 							}else{
@@ -507,7 +516,7 @@ public class RobotV3{
 			list.add(i);
 			i=(i+1)%2;
 		}
-		list.add(-1);
+		list.add(-5);
 		return list;
 	}
 	
@@ -518,7 +527,7 @@ public class RobotV3{
 			list.add(i);
 			i=(i+1)%2;
 		}
-		list.add(-1);
+		list.add(-5);
 		return list;
 	}
 	
@@ -533,7 +542,7 @@ public class RobotV3{
 				list.add(0);
 			}
 		}
-		list.add(-1);
+		list.add(-5);
 		return list;
 	}
 	
