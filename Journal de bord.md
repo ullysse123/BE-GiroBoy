@@ -60,6 +60,6 @@ Jour 24 : Ajustement carrefour + Correction AEtoile + Documentation robot
 
 Jour 25 : Finition documentation robot
 
-Jour 26 : 
+Jour 26 : Mise a jour du code pour coller à la compétition
 
 Jour 27 :  
