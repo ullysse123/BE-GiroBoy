@@ -214,7 +214,6 @@ public class AEtoile {
 						//Le second nombre de la liste est le cout
 						coutActuelle=listActuelle.get(0);
 						listActuelle.remove(0);
-						System.out.println("Cout Actuelle: " +coutActuelle);
 						//La premiere victime est l'initialisateur
 						if(meilleurCout==-1) {
 							meilleurCout=coutActuelle;
@@ -234,9 +233,8 @@ public class AEtoile {
 								listSave.add(-1);
 							}
 						}
+					}
 				}
-				}
-				System.out.println(pointDeDepartSuivant);
 				//Si il reste une victime et qu'il peut transporter ou que c'est la premiere victime (debut ou apres un hopital)
 				if((victimes.size()==1 && (i+1)<=nbVictimeTransportable) || i==0 || (i+1)>=nbVictimeTransportable) {
 					//Le sauvegarde
@@ -307,7 +305,7 @@ public class AEtoile {
 		}
 	}
 	
-	//Fonction Test pour voir les directions
+	//Fonction Test pour voir les directions pris par le robot
 	public static void main(String[] args) {
 		
 		Heuristique h=new HeuristiqueGraph3();
