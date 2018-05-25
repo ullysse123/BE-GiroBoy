@@ -62,4 +62,4 @@ Jour 25 : Finition documentation robot
 
 Jour 26 : Mise a jour du code pour coller à la compétition
 
-Jour 27 :  
+Jour 27 : Reussite de passage de l'intersection et réglage de l'equilibre
