@@ -189,7 +189,6 @@ public class AEtoile {
 		int meilleurCout;
 		int coutActuelle;
 		int sensFils;
-		int nbVictimeSauve=0;
 		List<Integer> listActuelle;
 		
 		//Tant qu'on n'a pas sauve tous les victimes
@@ -205,39 +204,41 @@ public class AEtoile {
 				//Parcours des victimes à sauver
 				for(int j=0;j<victimes.size();j++) {
 					int victime=victimes.get(j);
-					listActuelle=chemin(pointDeDepart,victime,graph,h,sensActuelle);
-					
-					//Recuperer le sens dans le premier
-					sensFils=listActuelle.get(0);
-					listActuelle.remove(0);
-					
-					//Le second nombre de la liste est le cout
-					coutActuelle=listActuelle.get(0);
-					listActuelle.remove(0);
-					
-					//La premiere victime est l'initialisateur
-					if(meilleurCout==-1) {
-						meilleurCout=coutActuelle;
-						listSave=listActuelle;
-						pointDeDepartSuivant=victime;
-						indexVictimeSauve=j;
-						meilleurSens=sensFils;
-						listSave.add(-1);
-					}else {
-						//Sinon on compare et on change si le cout actuelle est meilleur
-						if(meilleurCout>coutActuelle) {
+					if(victime!=pointDeDepart) {
+						listActuelle=chemin(pointDeDepart,victime,graph,h,sensActuelle);
+						
+						//Recuperer le sens dans le premier
+						sensFils=listActuelle.get(0);
+						listActuelle.remove(0);
+						
+						//Le second nombre de la liste est le cout
+						coutActuelle=listActuelle.get(0);
+						listActuelle.remove(0);
+						System.out.println("Cout Actuelle: " +coutActuelle);
+						//La premiere victime est l'initialisateur
+						if(meilleurCout==-1) {
 							meilleurCout=coutActuelle;
 							listSave=listActuelle;
 							pointDeDepartSuivant=victime;
 							indexVictimeSauve=j;
 							meilleurSens=sensFils;
 							listSave.add(-1);
+						}else {
+							//Sinon on compare et on change si le cout actuelle est meilleur
+							if(meilleurCout>coutActuelle) {
+								meilleurCout=coutActuelle;
+								listSave=listActuelle;
+								pointDeDepartSuivant=victime;
+								indexVictimeSauve=j;
+								meilleurSens=sensFils;
+								listSave.add(-1);
+							}
 						}
-					}
 				}
-				nbVictimeSauve++;
+				}
+				System.out.println(pointDeDepartSuivant);
 				//Si il reste une victime et qu'il peut transporter ou que c'est la premiere victime (debut ou apres un hopital)
-				if(victimes.size()==1 && (i+1)==nbVictimeTransportable || i==0) {
+				if((victimes.size()==1 && (i+1)<=nbVictimeTransportable) || i==0 || (i+1)>=nbVictimeTransportable) {
 					//Le sauvegarde
 					meilleurCout=-1;
 					//Rajoute la liste sur la list de direction retourne
@@ -248,7 +249,7 @@ public class AEtoile {
 				}
 				
 				//Si ce n'est pas le premier ou qu'il a atteint la capacite max de transport
-				if(i!=0 || (i+1)==nbVictimeTransportable) {
+				if(i!=0 || (i+1)>=nbVictimeTransportable || victimes.isEmpty()) {
 					
 					//Regarde l'hopital le plus proche
 					for(int hopital:hopitaux) {
@@ -268,7 +269,7 @@ public class AEtoile {
 							listSave=listActuelle;
 							pointDeDepartSuivant=hopital;
 							meilleurSens=sensFils;
-							listSave.add(-2*nbVictimeSauve);
+							listSave.add(-2*(i+1));
 						}else {
 							
 							//Sinon on compare et on change si le cout actuelle est meilleur (victime ou hopital)
@@ -277,13 +278,10 @@ public class AEtoile {
 								listSave=listActuelle;
 								pointDeDepartSuivant=hopital;
 								meilleurSens=sensFils;
-								listSave.add(-2*nbVictimeSauve);
+								listSave.add(-2*(i+1));
 							}
 						}
 					}
-					
-					if(hopitalPlusProche)
-						nbVictimeSauve=0;
 					
 					//Si ce n'est pas un hopital le plus proche dans le cas ou il n'a pas atteint le nombre de victime max (les autres sont la en cas d'erreur)
 					if(!hopitalPlusProche && (i+1)!=nbVictimeTransportable && !victimes.isEmpty() && !(victimes.size()==indexVictimeSauve)) 
@@ -318,10 +316,15 @@ public class AEtoile {
 		List<Integer>list;
 		List<Integer>victimes=new ArrayList<>();
 		List<Integer>hopitaux=new ArrayList<>();
+		victimes.add(2);
+		victimes.add(4);
+		victimes.add(5);
 		victimes.add(7);
 		victimes.add(12);
-		hopitaux.add(8);
-		list=mainProgram(1,1,hopitaux,victimes,graph,h,sens);
+		hopitaux.add(1);
+		hopitaux.add(3);
+		hopitaux.add(9);
+		list=mainProgram(2,1,hopitaux,victimes,graph,h,sens);
 		System.out.println("List direction:");
 		for(int i:list) {
 			System.out.println(i);
