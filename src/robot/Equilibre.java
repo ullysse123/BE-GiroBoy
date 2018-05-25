@@ -131,14 +131,14 @@ public class Equilibre extends Thread{
 			if (puissance<-100){
 				puissance = -100;
 			}
-			int differenceCourante=droite.getTacho()-gauche.getTacho();
+			//int differenceCourante=droite.getTacho()-gauche.getTacho();
 			
 			//Application de la puissance aux moteurs
 			if(pret){
-				if(differenceCourante<0 && compteur%2==0)
-					directionC=direction-3;
-				else
-					directionC=direction;
+				/*if(differenceCourante<0 && compteur%3==0)
+					directionC=direction+3;
+				else*/
+					directionC=direction+1;
 				//Micro correction de la trajectoire afin de permettre au robot de se deplacer droit
 				droite.setPower((int)(puissance)-directionC);
 				gauche.setPower((int)(puissance)+directionC);

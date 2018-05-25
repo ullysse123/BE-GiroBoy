@@ -210,7 +210,7 @@ public class RobotV3{
 		eq.setDirection(0);
 		Delay.msDelay(25);
 		eq.setVitesse(2);
-		Delay.msDelay(75);
+		Delay.msDelay(25);
 	}
 	
 	//Attention : fort risque d'erreur. Si carrefour marche pas revoir cette fonction
@@ -350,19 +350,33 @@ public class RobotV3{
 					
 				}
 				Delay.msDelay(75);
-				compteur=(compteur+1)%3;
+				//compteur=(compteur+1)%3;
 			}
 			
 			//Une fois sur l'embranchement final on laisse avancer le robot pour qu'il sorte de la double ligne
-			if(x==0){
-				eq.setDirection(-direction);
-			}else{
-				eq.setDirection(direction);
+			compteur=0;
+			while(compteur<=8) {
+				switch(sensLigne()) {
+					case 0: //Case ou aucun des capteur ne capte la ligne on avance
+						eq.setDirection(0);
+						break;
+					case 1: //Cas ou seul le capteur gauche capte la ligne
+							eq.setDirection(-direction);
+							break;
+							
+					case 2: //Cas ou seul le capteur droite capte la ligne 
+							eq.setDirection(direction);
+							break;
+							
+					case 3: //Cas ou les deux capteur captent la ligne 
+							eq.setDirection(0);
+							break;
+							
+					default:
+				}
+				Delay.msDelay(100);
+				compteur++;
 			}
-			Delay.msDelay(150);
-			eq.setDirection(0);
-			Delay.msDelay(550);
-			
 		}else{
 			Sound.playTone(800, 10, 10);
 			System.out.println("/!\\ ERREUR CARREFOUR /!\\ \n\n\n");
@@ -535,6 +549,7 @@ public class RobotV3{
 	public static List<Integer> instanceListDirectionRandom(){
 		List<Integer> list = new ArrayList<>();
 		Random rand = new Random();
+		list.add(2);
 		for(int i = 0;i<25;i++){
 			if((rand.nextInt(2)%2) == 1){
 				list.add(1);
@@ -554,15 +569,20 @@ public class RobotV3{
 		List<Integer>list;
 		List<Integer>victimes=new ArrayList<>();
 		List<Integer>hopitaux=new ArrayList<>();
-		victimes.add(2);
+		//Test
+		victimes.add(7);
+		victimes.add(12);
+		hopitaux.add(8);
+		//Competition
+		/*victimes.add(2);
 		victimes.add(4);
 		victimes.add(5);
 		victimes.add(7);
 		victimes.add(12);
 		hopitaux.add(1);
 		hopitaux.add(3);
-		hopitaux.add(9);
-		list=AEtoile.mainProgram(2,1,hopitaux,victimes,graph,h,sens);
+		hopitaux.add(9);*/
+		list=AEtoile.mainProgram(1,1,hopitaux,victimes,graph,h,sens);
 		return list;
 	}
 	
@@ -613,7 +633,7 @@ public class RobotV3{
 			Delay.msDelay(150);
 		}
 		LCD.clear();
-		listDirectionSelonChoix(choix);
+		if(!abort)listDirectionSelonChoix(choix);
 		Delay.msDelay(150);
 		return abort;
 	}
