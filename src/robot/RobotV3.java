@@ -354,12 +354,12 @@ public class RobotV3{
 			}
 			
 			//Une fois sur l'embranchement final on laisse avancer le robot pour qu'il sorte de la double ligne
-			/*if(x==0){
-				eq.setDirection(direction);
-			}else{
+			if(x==0){
 				eq.setDirection(-direction);
+			}else{
+				eq.setDirection(direction);
 			}
-			Delay.msDelay(150);*/
+			Delay.msDelay(150);
 			eq.setDirection(0);
 			Delay.msDelay(550);
 			
@@ -554,10 +554,15 @@ public class RobotV3{
 		List<Integer>list;
 		List<Integer>victimes=new ArrayList<>();
 		List<Integer>hopitaux=new ArrayList<>();
+		victimes.add(2);
+		victimes.add(4);
+		victimes.add(5);
 		victimes.add(7);
 		victimes.add(12);
-		hopitaux.add(8);
-		list=AEtoile.mainProgram(1,1,hopitaux,victimes,graph,h,sens);
+		hopitaux.add(1);
+		hopitaux.add(3);
+		hopitaux.add(9);
+		list=AEtoile.mainProgram(2,1,hopitaux,victimes,graph,h,sens);
 		return list;
 	}
 	
