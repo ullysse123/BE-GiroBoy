@@ -22,3 +22,5 @@ Defaut materiel
 Robot passe en mode carrefour sans raisons apparente par moment -> Seuil de detection de blanc qui est trop bas
 
 Robot a du mal a passer les lignes droites des carrefours -> Ajout d'un compteur qui reajuste la trajectoire toutes les X iterations
+
+CLOTURE DE LA LISTE DES PROBLEMES LE 28/05/2018
