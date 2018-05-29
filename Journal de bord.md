@@ -67,3 +67,5 @@ Jour 27 : Reussite de passage de l'intersection et réglage de l'equilibre
 # Semaine 7
 
 Jour 28 : Rédaction du rapport de BE
+
+Jour 29 : Rédaction du rapport de BE + PRéparation du support de présentation oral
